@@ -17,10 +17,10 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->date('birth_date');
-            $table->string('gender');
-            $table->string('identity_type');
-            $table->integer('identity_num')->unique();
-            $table->integer('phone_num');
+            $table->enum('gender',['male','female']);
+            $table->enum('identity_type',['KTP','KTM']);
+            $table->string('identity_num')->unique();
+            $table->string('phone_num')->unique();
             $table->string('email')->unique();
             $table->string('address');
             $table->string('role');

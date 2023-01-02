@@ -1,0 +1,184 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    padding-top: 30px;
+    background: #CCAFE6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+ .container {
+    width: 1200px;
+    margin-top: 15px;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+.indicator {
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    margin: 24px 30px;
+}
+.indicator .line {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 4px;
+    background: #ddd;
+    width: 100%;
+    left: 0;
+    z-index: 10;
+    
+}
+.indicator .line span {
+    position: absolute;
+    height: 100%;
+    top: 0;
+    left: 0;
+    width: 25%;
+    background: #010326;
+}
+
+.indicator p {
+    position: relative;
+    z-index: 20;
+    width: 40px;
+    height: 40px;
+    border: 4px solid#ddd;
+    background: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600px;
+    border-radius: 50%;
+    transition: .35;
+}
+
+.indicator p.active {
+
+    border-color: #010326;
+    color: black;
+
+}
+
+.tab {
+    display: none;
+}
+.tab.show{
+    display: block;
+}
+.tab p {
+    margin: 5px 30px 10px;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 15px;
+}
+.tab h1 {
+
+    margin: 20px 30px 5px;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 35px;
+    line-height: 52px;
+
+    color: #010326;
+}
+
+form .tab .form {
+    margin-bottom: 18px;
+    width: 100%;
+}
+
+form label {
+    margin: 30px 28px;
+}
+
+.tab .form input {
+    width: 80%;
+    margin: 10px 30px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+}
+
+form .btn {
+    display: flex;
+    justify-content: flex-end;
+    align-items: left;
+    margin: 25px;
+}
+
+form .btn button {
+    padding: 10px 30px;
+    border: none;
+    outline: none;
+    margin-left: 18px;
+    cursor: pointer;
+    border-radius: 50px;
+}
+
+form .btn button.back {
+    background :white ;
+    border-color: #010326;
+    border-width: 2pt;
+    border-style: solid;
+    outline: #010326;
+    color: #010326;
+}
+
+form .btn button.next {
+    background: #010326;
+    color: white;
+}
+
+.download {
+    margin: 30px;
+}
+
+.download button {
+    background: #010326;
+    color: white;
+    border-radius: 25px;
+    border: none;
+    outline: none;
+    padding: 10px 30px;
+
+}
+
+.form select.dropdn {
+    background-color: gray;
+    color: white;
+    padding: 5px;
+    font-size: 15px;
+    border: none;
+    cursor: pointer;
+    width: 150px;
+    margin-left: auto;
+
+}
+
+.signup {
+    margin: 30px;
+}
+
+.signup button {
+
+    background: orange;
+    color: #010326;
+    border-radius: 25px;
+    border: none;
+    outline: none;
+    padding: 10px 30px;
+}

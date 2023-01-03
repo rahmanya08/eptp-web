@@ -154,7 +154,11 @@ form .btn button.next {
     border: none;
     outline: none;
     padding: 10px 30px;
+    cursor: pointer;
+}
 
+.signup button{
+    cursor: pointer;
 }
 
 .form select.dropdn {
@@ -181,4 +185,12 @@ form .btn button.next {
     border: none;
     outline: none;
     padding: 10px 30px;
+}
+
+.form-check {
+    margin: 10px 38px;
+}
+
+.form .form-label{
+    margin: 30px;
 }

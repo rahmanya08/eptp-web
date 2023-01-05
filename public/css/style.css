@@ -101,7 +101,7 @@ form .tab .form {
 }
 
 form label {
-    margin: 30px 28px;
+    margin: 30px;
 }
 
 .tab .form input {
@@ -187,10 +187,24 @@ form .btn button.next {
     padding: 10px 30px;
 }
 
-.form-check {
-    margin: 10px 38px;
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
 }
 
-.form .form-label{
-    margin: 30px;
+.col{
+    width: calc(100% / 2 - 20px);
+}
+
+.form-check {
+    margin-left: 30px;
+}
+
+.col .form-check{
+    padding: 10px;
+}
+
+.col .form-check .form-check-input{
+    margin: 0;
 }

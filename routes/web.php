@@ -20,10 +20,12 @@ Route::get('/', function () {
    return view('welcome');
 });
 
-Route::get('/register',function(){
-    return view('register');
+Route::get('/test-register',function(){
+    return view('test-register');
 });
 
 Route::get('/login', [UserController::class, 'login'])->name('login');
 
 Route::get('/signup', [UserController::class, 'signup'])->name('signup');
+
+Route::get('/test-card', [UserController::class, 'card'])->name('card');

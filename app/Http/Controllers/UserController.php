@@ -17,4 +17,9 @@ class UserController extends Controller
     {
         return view('login');
     }
+
+    public function card ()
+    {
+        return view('test-card');
+    }
 }

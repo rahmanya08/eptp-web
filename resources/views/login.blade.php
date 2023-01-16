@@ -15,11 +15,11 @@
                 <h1>Welcome Back</h1>
                 <p>Login with your email address</p>
                 @csrf
-                <div class="form">
+                <div class="form mrgn">
                     <label for="email" class="form-label">Email</label>
                     <input type="email" name="email" placeholder="Email">
                 </div>
-                <div class="form">
+                <div class="form mrgn">
                     <label for="password" class="form-label">Password</label>
                     <input type="password" name="password" placeholder="Password">
                 </div>

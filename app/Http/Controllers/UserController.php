@@ -22,4 +22,8 @@ class UserController extends Controller
     {
         return view('test-card');
     }
+    public function dashboard ()
+    {
+        return view('dashboard');
+    }
 }

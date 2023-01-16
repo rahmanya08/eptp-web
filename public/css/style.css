@@ -1,8 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 
 *{
-    margin: 0;
     padding: 0;
+    margin: 0;
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
 }
@@ -95,17 +95,32 @@ body {
     color: #010326;
 }
 
+.tab h2 {
+
+    margin: 20px 30px 5px;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 35px;
+    line-height: 52px;
+    text-align: center;
+
+    color: #010326;
+}
+
 form .tab .form {
-    margin-bottom: 18px;
+    margin-bottom: 20px;
     width: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 form label {
-    margin: 30px;
+    margin-left: 30px;
 }
 
 .tab .form input {
-    width: 80%;
+    width: 91%;;
     margin: 10px 30px;
     padding: 10px;
     border: 1px solid #ccc;
@@ -120,7 +135,7 @@ form .btn {
     margin: 25px;
 }
 
-form .btn button {
+.btn button {
     padding: 10px 30px;
     border: none;
     outline: none;
@@ -129,7 +144,7 @@ form .btn button {
     border-radius: 50px;
 }
 
-form .btn button.back {
+ .btn button.back {
     background :white ;
     border-color: #010326;
     border-width: 2pt;
@@ -138,7 +153,7 @@ form .btn button.back {
     color: #010326;
 }
 
-form .btn button.next {
+.btn button.next {
     background: #010326;
     color: white;
 }
@@ -191,20 +206,171 @@ form .btn button.next {
 .row {
     display: flex;
     flex-wrap: wrap;
+    margin-bottom: 20px;
+    width: 100%;
 }
 
-.col{
-    width: calc(100% / 2 - 20px);
+.row-select {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
 }
 
-.form-check {
+.col {
+    width: 50%;
+}
+.col-form {
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+}
+
+.col-select {
+    display: flex;
+    flex-direction: column;
+    width: 25%;
+}
+
+form label {
     margin-left: 30px;
 }
 
-.col .form-check{
+input.form-control {
+    border-radius: 4px;
+    box-sizing: border-box;
+    border: 1px solid;
+    border-color: #CCC;
+    width: 100%;
+    margin: 10px 40px;
     padding: 10px;
 }
 
-.col .form-check .form-check-input{
-    margin: 0;
+.mt-1{
+    margin: 10px 40px;
+}
+
+
+label.form-check-label {
+    margin-right: 20px;
+    margin-left: 5px;
+}
+
+.form-outer {
+    display: flex;
+    align-items: center;
+    margin-left: 30px;
+}
+
+button#upload-btn {
+    padding: 8px;
+    background: navy;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    margin-left: 5px;
+    cursor: pointer;
+    width: 30%;
+}
+
+.container-upload {
+    margin: 30px;
+    box-sizing: border-box;
+    border: dashed;
+    border-color: darkblue;
+    border-radius: 15px;
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+.container-upload .upload {
+    padding: 10px;
+    width: 30%;
+}
+
+.container-upload .upload {
+    padding: 10px;
+    background: white;
+    width: 30%;
+    position: relative;
+}
+.container-upload .img-area {
+    position: relative;
+    width: 12%;
+    height: 140px;
+    background: gray;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.img-area .icon{
+    font-size: 80px;
+}
+
+
+.img-area img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+
+}
+
+input#accept {
+    margin-left: 30px;
+}
+
+.container-img {
+    margin-left: 30px;
+    box-sizing: border-box;
+    border: solid;
+    width: 100px;
+    height: 140px;
+    border-width: thin;
+}
+
+.container-img .img-show {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: gray;
+    margin-bottom: 10px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+i.bx.bx-image-alt.img {
+    font-size: 40px;
+}
+
+.fill-in {
+    margin-top: 10px;
+    box-sizing: border-box;
+    border: solid;
+    margin-left: 30px;
+    border-width: thin;
+    width: 50%;
+    height: 30px;
+}
+
+.mrgn {
+    margin-left: 30px;
+}
+
+select.form-select {
+    width: 60%;
+    margin: 10px 10px 10px 40px;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
 }

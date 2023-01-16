@@ -29,3 +29,5 @@ Route::get('/login', [UserController::class, 'login'])->name('login');
 Route::get('/signup', [UserController::class, 'signup'])->name('signup');
 
 Route::get('/test-card', [UserController::class, 'card'])->name('card');
+
+Route::get('/dashboard', [UserController::class, 'dashboard'])->name('dashboard');

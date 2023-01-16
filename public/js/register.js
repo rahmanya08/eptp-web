@@ -4,6 +4,11 @@ const indicator = document.querySelector('.indicator .line span');
 const indicatorItems = document.querySelectorAll('.indicator p');
 const form = document.querySelector('form');
 const allTab = document.querySelectorAll('form .tab');
+const filebtn = document.getElementById("file");
+const customBtn = document.getElementById("upload-btn");
+const customTxt = document.getElementById("custom-msg");
+const imgArea = document.querySelector('.img-area');
+var checkBox = document.getElementById('accept')
 let i = 0;
 
 
@@ -38,8 +43,6 @@ btnNext.addEventListener('click', function() {
             allInputPerTab[j].style.borderColor = '#ddd';
         }
     }
-
-
 
     i += 1;
 
@@ -77,7 +80,6 @@ btnNext.addEventListener('click', function() {
     {
         btnNext.innerHTML = 'Next';
     }
-
 
 
 });
@@ -118,5 +120,48 @@ btnBack.addEventListener('click', function () {
     
 });
 
+customBtn.addEventListener("click", function(){
+    filebtn.click();
+});
+
+filebtn.addEventListener("change",function(){
+    if(filebtn.value) {
+        
+        const image = this.files[0]
+        console.log(image);
+        const reader = new FileReader();
+        reader.onload = ()=> {
+            const imgUrl = reader.result;
+            const img = document.createElement('img');
+            img.src = imgUrl;
+            imgArea.appendChild(img);
+        }
+        reader.readAsDataURL(image);
+
+        
+        
+        customTxt.innerHTML = filebtn.value.match(
+            /[\/\\]([\w\d\s\.\-\(\)]+)$/
+        )[1]
+
+    }
+    else
+    {
+        customTxt.innerHTML = "No File Chosen";
+    }
+})
+
+checkBox.onchange = function(){
+    if(this.checked){
+        
+        btnNext.innerHTML = 'Submit';
+        btnNext.disabled = false;
+    }
+    else
+    {
+        btnNext.innerHTML = 'Submit';
+        btnNext.disabled = true;
+    }
+}
 
 

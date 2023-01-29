@@ -1,15 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+@extends('layouts.master-auth')
+
+@section('title', 'Signup')
+
+@push('custom-css')
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-    <title>SignUp</title>
-</head>
-<body>
-   
-    <div class="container">
+@endpush
+
+@section('container')
         <div class="tab show">
             <img src="#" alt="">
                 <h1>Create Account</h1>
@@ -32,9 +30,8 @@
                 </div>
                 <p>Already have a account ? <a href="{{ route('login') }}">Login </a></p>
         </div>
-    </div>
+@endsection
 
-
-    <script src="{{ asset('js/register.js') }}"></script>
-</body>
-</html>
+@push('child-js')
+    <script src="{{ asset('js/auth.js') }}"></script>
+@endpush

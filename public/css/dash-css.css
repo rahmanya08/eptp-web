@@ -175,6 +175,10 @@ main {
     min-width: calc(100vh - 90px);
 }
 
+main .sc {
+    margin-top: 10px;
+}
+
 .cards {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -279,16 +283,16 @@ tr td:last-child{
     align-items: center;
 }
 
-.status.purple {
-    background: violet;
+.status.green {
+    background: rgb(6, 204, 23);
 }
 
-.status.pink {
-    background: pink;
+.status.blue{
+    background: rgb(46, 13, 236);
 }
 
-.status.orange {
-    background: orange;
+.status.red {
+    background: rgb(228, 31, 31);
 }
 
 .table-responsive {

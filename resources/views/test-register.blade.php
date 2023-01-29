@@ -1,7 +1,13 @@
 
 @extends('layouts.master-form')
 
-@push('container')
+@section('title', 'Registration')
+
+@push('custom-css')
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+@endpush
+
+@section('container')
         <div class="indicator">
             <span class="line"><span></span></span>
             <p class="active">1</p>
@@ -41,21 +47,21 @@
                       <label for="birth" class="form-label">Date of Birth</label>
                       <input type="date" class="form-control" placeholder="Last name" aria-label="Last name">
                     </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                  <label for="identity" class="form-label">Identity Type</label><br>
-                <div class="mt-1">
-                    <input class="form-check-input" type="radio" name="ktp" id="inlineRadio1" value="ktp">
-                    <label class="form-check-label" for="inlineRadio1">KTP</label>
-                    <input class="form-check-input" type="radio" name="ktm" id="inlineRadio2" value="ktm">
-                    <label class="form-check-label" for="inlineRadio2">KTM</label> </div>
                 </div>
-                <div class="col-form">
-                  <label for="inumber" class="form-label">Identity Number</label>
-                  <input type="text" class="form-control" name="inumber" placeholder="Number of Identity">
+                <div class="row">
+                    <div class="col">
+                    <label for="identity" class="form-label">Identity Type</label><br>
+                    <div class="mt-1">
+                        <input class="form-check-input" type="radio" name="ktp" id="inlineRadio1" value="ktp">
+                        <label class="form-check-label" for="inlineRadio1">KTP</label>
+                        <input class="form-check-input" type="radio" name="ktm" id="inlineRadio2" value="ktm">
+                        <label class="form-check-label" for="inlineRadio2">KTM</label> </div>
+                    </div>
+                    <div class="col-form">
+                    <label for="inumber" class="form-label">Identity Number</label>
+                    <input type="text" class="form-control" name="inumber" placeholder="Number of Identity">
+                    </div>
                 </div>
-             </div>
             <div class="form">
                 <label for="status" class="form-label">Participant Status</label>
                 <div class="row-select">
@@ -156,11 +162,9 @@
                 <button type="button" class="next">Next</button>
             </div>
         </form>  
-@endpush
+    @endsection
 
 @push('child-js')
-    <script>
-
-    </script>
+    <script src="{{ asset('js/register.js') }}"></script>
 @endpush
 

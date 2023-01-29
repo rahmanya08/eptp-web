@@ -8,7 +8,7 @@ const filebtn = document.getElementById("file");
 const customBtn = document.getElementById("upload-btn");
 const customTxt = document.getElementById("custom-msg");
 const imgArea = document.querySelector('.img-area');
-var checkBox = document.getElementById('accept')
+var checkBox = document.getElementById('accept');
 let i = 0;
 
 

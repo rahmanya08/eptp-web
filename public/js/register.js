@@ -23,6 +23,7 @@ if (i === 0) {
 
 btnNext.addEventListener("click", function () {
     const allInputPerTab = allTab[i].querySelectorAll("input");
+    console.log(allTab[i]);
     for (let j = 0; j < allInputPerTab.length; j++) {
         allInputPerTab[j].addEventListener("input", function () {
             allInputPerTab[j].style.borderColor = "#ddd";

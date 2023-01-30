@@ -115,54 +115,55 @@
                     <input type="text" name="phonenum" placeholder="Phone Number">
                 </div>
             </div>
-            <div class="tab">
-                <h1>Test Details</h1>
-                <div class="form">
-                    <label for="type" class="form-label">Test Type</label>
-                    <select class="form-select" aria-label="Default select example">
-                        <option selected>Choose Test</option>
-                        <option value="1">TOEFL</option>
-                        <option value="2">TOEIC</option>
-                    </select>
-                </div>
-                <div class="form">
-                    <label for="schedule" class="form-label">Schedule</label>
-                    <select class="form-select" aria-label="Default select example">
-                        <option selected>Choose Test</option>
-                        <option value="1">Jadwal 1</option>
-                        <option value="2">Jadwal 2</option>
-                        <option value="2">Jadwal 3</option>
-                    </select>
-                </div>
+        </div>
+        <div class="tab">
+            <h1>Test Details</h1>
+            <div class="form">
+                <label for="type" class="form-label">Test Type</label>
+                <select class="form-select" aria-label="Default select example">
+                    <option selected>Choose Test</option>
+                    <option value="1">TOEFL</option>
+                    <option value="2">TOEIC</option>
+                </select>
             </div>
-            <div class="tab">
-                <h1>Payment</h1>
-                <div class="form">
-                    <input type="file" name="payment" placeholder="Payment" accept="image/jpg,image/png,image/jpeg">
-                </div>
+            <div class="form">
+                <label for="schedule" class="form-label">Schedule</label>
+                <select class="form-select" aria-label="Default select example">
+                    <option selected>Choose Test</option>
+                    <option value="1">Jadwal 1</option>
+                    <option value="2">Jadwal 2</option>
+                    <option value="2">Jadwal 3</option>
+                </select>
             </div>
-            <div class="tab view">
-                <h1>Test Regulation</h1>
-                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                    Aliquam non minus laudantium quae.
-                    Cupiditate et reiciendis libero officia quia,
-                    rem quo modi dolorem totam officiis labore,
-                    tempore perspiciatis quas aspernatur. Lorem,
-                    ipsum dolor sit amet consectetur adipisicing elit.
-                    Perspiciatis reiciendis inventore odio maiores dolorem quos possimus,
-                    aperiam aspernatur illo rem, itaque dolores ipsum labore eaque debitis,
-                    tenetur facere assumenda quam?
-                </p>
-                <div class="test-reg">
-                    <input type="checkbox" name="accept" id="accept">
-                    <label for="check-label">I'll accept the regulation</label>
-                </div>
+        </div>
+        <div class="tab">
+            <h1>Payment</h1>
+            <div class="form">
+                <input type="file" name="payment" placeholder="Payment" accept="image/jpg,image/png,image/jpeg">
             </div>
+        </div>
+        <div class="tab view">
+            <h1>Test Regulation</h1>
+            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                Aliquam non minus laudantium quae.
+                Cupiditate et reiciendis libero officia quia,
+                rem quo modi dolorem totam officiis labore,
+                tempore perspiciatis quas aspernatur. Lorem,
+                ipsum dolor sit amet consectetur adipisicing elit.
+                Perspiciatis reiciendis inventore odio maiores dolorem quos possimus,
+                aperiam aspernatur illo rem, itaque dolores ipsum labore eaque debitis,
+                tenetur facere assumenda quam?
+            </p>
+            <div class="test-reg">
+                <input type="checkbox" name="accept" id="accept">
+                <label for="check-label">I'll accept the regulation</label>
+            </div>
+        </div>
 
-            <div class="btn">
-                <button type="button" class="back">Back</button>
-                <button type="button" class="next">Next</button>
-            </div>
+        <div class="btn">
+            <button type="button" class="back">Back</button>
+            <button type="button" class="next">Next</button>
+        </div>
     </form>
 @endsection
 

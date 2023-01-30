@@ -46,7 +46,7 @@
                 </div>
                 <div class="col-form">
                     <label for="birth" class="form-label">Date of Birth</label>
-                    <input type="date" class="form-control" placeholder="Last name" aria-label="Last name">
+                    <input type="date" class="form-control" placeholder="Date" aria-label="Date">
                 </div>
             </div>
             <div class="row">

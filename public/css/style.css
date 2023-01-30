@@ -38,7 +38,7 @@ body {
     width: 100%;
     left: 0;
     z-index: 10;
-    
+
 }
 .indicator .line span {
     position: absolute;
@@ -373,4 +373,8 @@ select.form-select {
     padding: 10px;
     box-sizing: border-box;
     border: 1px solid #ccc;
+}
+
+.hidden{
+    display: none;
 }

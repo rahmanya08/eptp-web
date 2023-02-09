@@ -1,6 +1,6 @@
 @extends('layouts.master-menu')
 
-@section('title', 'Schedule')
+@section('title', 'User Data')
 
 @push('custom-css')
 <link rel="stylesheet" href="{{ asset('css/dash-css.css') }}">
@@ -11,7 +11,7 @@
         <img src="{{ asset('img/Murat.jpeg') }}" width="40px" height="40px" alt="">
         <div>
             <h4>Murat Boz</h4>
-            <small>Staff</small>
+            <small>Administrator</small>
         </div>
     </div>
 @endpush
@@ -20,21 +20,13 @@
             <main>
                 <!--first-content-->
                 <div class="cards-sc">
-                    <label for="sche_date" class="form-label">Test Schedule</label>
                     <div class="row">
                         <div class="col">
-                            <input type="date" class="selSchedule" placeholder="Last name" aria-label="Last name">
-                        </div>
-                        <div class="col">
-                            <select class="selSchedule" id="testSelect" aria-label="Default select example">
-                                <option selected>Select Type Test</option>
-                                <option value="1">TOEFL</option>
-                                <option value="2">TOEIC</option>
-                                <option value="3">VIERRA</option>
-                            </select>
-                        </div>
-                        <div class="col">
-                            <span><button type="button" class="add-btn">Add List</button></span>
+                            <label for="sche_date" class="form-label">Verification</label>
+                            <div class="col-2">
+                                <span><input type="text" class="form-control" aria-label="filter"></span>
+                                <span><button type="button" class="add-btn">Filter</button></span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -44,7 +36,7 @@
                     <div class="seconds">
                         <div class="card-sc">
                             <div class="card-header">
-                                <h3>Recent Schedules</h3>
+                                <h3>User Data</h3>
                                 <button>See all <span class="las la-arrow-right">
                                 </span></button>
                             </div>
@@ -54,8 +46,8 @@
                                         <thead>
                                             <tr>
                                                 <td>No</td>
-                                                <td>Type</td>
-                                                <td>Test Time</td>
+                                                <td>Email</td>
+                                                <td>Password</td>
                                                 <td>Status</td>
                                                 <td>Action</td>
                                             </tr>
@@ -63,15 +55,14 @@
                                         <tbody>
                                             <tr>
                                                 <td>01</td>
-                                                <td>TOEFL</td>
-                                                <td>23 August</td>
+                                                <td>somerhalder.mr@gmail.com</td>
+                                                <td>mrian08</td>
                                                 <td>
                                                     <span class="status green"></span>
-                                                    On going
+                                                    Verified
                                                 </td>
                                                 <td>
-                                                    <span><button class="btn-act">Start</button></span>
-                                                    <span><button class="btn-act">Done</button></span>
+                                                    <span><button class="btn-act">Verify</button></span>
                                                 </td>
                                             </tr>
                                         </tbody>

@@ -25,11 +25,11 @@
                     <span>Dasboard</span></a>
                 </li>
                 <li>
-                    <a href=""><span class="las la-users"></span>
+                    <a href="{{ route('user_ver') }}"><span class="las la-users"></span>
                     <span>User Data</span></a>
                 </li>
                 <li>
-                    <a href=""><span class="las la-clipboard-list"></span>
+                    <a href="{{ route('registrant') }}"><span class="las la-clipboard-list"></span>
                     <span>Registrant Data</span></a>
                 </li>
                 <li>
@@ -37,15 +37,23 @@
                     <span>Schedule</span></a>
                 </li>
                 <li>
-                    <a href=""><span class="las la-certificate"></span>
-                    <span>Score & Certification</span></a>
+                    <a href="{{ route('announce') }}"><span class="las la-certificate"></span>
+                    <span>Announcment</span></a>
                 </li>
                 <li>
-                    <a href=""><span class=" las la-money-check"></span>
+                    <a href="{{ route('payment') }}"><span class=" las la-money-check"></span>
                     <span>Payment</span></a>
                 </li>
                 <li>
-                    <a href=""><span class="las la-user-circle"></span>
+                    <a href="{{ route('result') }}"><span class=" las la-upload"></span>
+                    <span>Result</span></a>
+                </li>
+                <li>
+                    <a href="{{ route('course') }}"><span class=" las la-desktop"></span>
+                    <span>Course</span></a>
+                </li>
+                <li>
+                    <a href="{{ route('account') }}"><span class="las la-user-circle"></span>
                     <span>Accounts</span></a>
                 </li>
             </ul>

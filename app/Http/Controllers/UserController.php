@@ -18,6 +18,11 @@ class UserController extends Controller
         return view('login');
     }
 
+    public function test_register ()
+    {
+        return view('test-register');
+    }
+
     public function card ()
     {
         return view('test-card');

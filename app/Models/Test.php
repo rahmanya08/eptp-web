@@ -11,7 +11,11 @@ class Test extends Model
 
     protected $fillable = [
         'type',
-        'test_date',
-        'test_time'
+        'test_date'
     ];
+
+    public function payment()
+    {
+        return $this->belongsTo(Payment::class);
+    }
 }

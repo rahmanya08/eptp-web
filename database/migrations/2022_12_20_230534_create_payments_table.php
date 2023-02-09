@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->nullable()->constrained()->nullOnDelete();
-            $table->foreignId('test_id')->constrained();
+            $table->foreignId('test_id')->nullable()->constrained()->nullOnDelete();
             $table->string('payment_doc');
             $table->date('register_date');
             $table->boolean('is_verified')->default(false);

@@ -4,7 +4,7 @@
 @section('title', 'Login')
 
 @push('custom-css')
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/auth-css.css') }}">
 @endpush
 
 @section('container')
@@ -13,15 +13,13 @@
             <h1>Welcome Back</h1>
             <p>Login with your email address</p>
             @csrf
-            <div class="form mrgn">
-                <label for="email" class="form-label">Email</label>
+            <div class="form-auth">
                 <input type="email" name="email" placeholder="Email">
             </div>
-            <div class="form mrgn">
-                <label for="password" class="form-label">Password</label>
+            <div class="form-auth">
                 <input type="password" name="password" placeholder="Password">
             </div>
-            <div class="signup">
+            <div class="auth-btn">
                 <button type="button">Login</button>
             </div>
         <p>Do you haven't a account ? <a href="{{ route('signup') }}">SignUp</a></p>

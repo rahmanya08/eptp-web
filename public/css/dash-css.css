@@ -15,6 +15,8 @@
     font-family: 'Poppins', sans-serif;
 }
 
+/*Main Menu CSS*/
+
 .sidebar {
     width: 345px;
     position: fixed;
@@ -169,14 +171,150 @@ header label span {
 }
 
 main {
-    margin-top: 95px;
+    margin-top: 50px;
     padding: 2rem 1.5rem;
     background: #f1f5f9;
     min-width: calc(100vh - 90px);
 }
 
-main .sc {
+/*Schedule CSS*/
+
+.seconds {
+    margin-left: -2px;
+    display: flex;
+}
+
+.col .selSchedule {
+    width: 15rem;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    border: 1px solid;
+    border-color: #ccc;
+    padding: 5px;
+    background: white;
+}
+
+.row {
+    display: flex;
+    margin-bottom: 10px;
+    width: 94%;
+    justify-content: space-between;
+}
+.col-2 {
     margin-top: 10px;
+}
+
+input.form-control {
+    box-sizing: border-box;
+    border: 1px solid;
+    border-color: #ccc;
+    border-radius: 5px;
+    width: 49.7rem;
+    height: 40px;
+    padding: 5px;
+    margin-right: 10px;
+}
+
+button.add-btn {
+    box-sizing: border-box;
+    width: 5rem;
+    height: 2.3rem;
+    border: 1px solid;
+    border-color: black;
+    border-radius: 8px;
+    background: #010326;
+    color: white;
+}
+
+.card-sc {
+    box-sizing: border-box;
+    border-radius: 5px;
+    border: 1px solid;
+    border-color: #ccc;
+    background: white;
+    width: 56rem;
+    height: 20rem;
+}
+
+button.btn-act {
+    box-sizing: border-box;
+    border-radius: 5px;
+    border: 1px solid;
+    border-color: #010326;
+    background: #010326;
+    color: white;
+    margin-left: 2px;
+    padding: 3px;
+    font-size: smaller;
+}
+
+/*Announcment CSS*/
+.Pins {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+.pin-card {
+    box-sizing: border-box;
+    border: 1px solid;
+    border-color: #1d2231;
+    background: #1d2231;
+    color: white;
+    border-radius: 5px;
+    padding: 20px;
+    width: 50rem;
+    height: 15rem;
+    margin-bottom: 10px;
+}
+
+.pin-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.pin-header h1 {
+    font-size: xxx-large;
+}
+.pin-body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 50px;
+    margin-top: 25px;
+}
+
+/*Account CSS*/
+
+.form-auth input {
+    width: 20rem;
+    box-sizing: border-box;
+    border: 1px solid;
+    border-color: #ccc;
+    background: white;
+    padding: 5px;
+    border-radius: 15px;
+    margin-bottom: 5px;
+}
+
+
+h3 {
+    margin-bottom: 10px;
+}
+
+button.save-btn {
+    margin-left: 14.5rem;
+    margin-top: 5px;
+    box-sizing: border-box;
+    padding: 5px;
+    border: 1px solid;
+    border-color: white;
+    border-radius: 15px;
+    background: white;
+    color: #1d2231;
+    font-size: 10px;
+    font-weight: bold;
+    cursor: pointer;
 }
 
 .cards {
@@ -212,7 +350,6 @@ main .sc {
 .card-single:last-child div:first-child span {
     color: #fff;
 }
-
 
 
 .recent-grid {

@@ -18,4 +18,9 @@ class Test extends Model
     {
         return $this->belongsTo(Payment::class);
     }
+
+    public function certificate()
+    {
+        return $this->hasMany(Test::class);
+    }
 }

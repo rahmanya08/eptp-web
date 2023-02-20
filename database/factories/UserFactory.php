@@ -27,8 +27,8 @@ class UserFactory extends Factory
             'birth_date' =>  fake()->date(),
             'gender' => fake()->randomElement(['male', 'female']),
             'identity_type' => fake()->randomElement(['KTP', 'KTM']),
-            'identity_num' => fake()->randomNumber(12),
-            'phone_num' => fake()->randomNumber(9),
+            'identity_num' => fake()->numerify('################'),
+            'phone_num' => fake()->phoneNumber(12),
 
             'address' => fake()->address(),
             'role' => fake()->randomElement(['Staff', 'Student']),

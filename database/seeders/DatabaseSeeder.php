@@ -22,6 +22,9 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         User::factory(5)->create();
+        Test::factory(10)->create();
+        Payment::factory(8)->create();
+        Certificate::factory(3)->create();
 
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',
@@ -46,17 +49,17 @@ class DatabaseSeeder extends Seeder
         //     'is_accepted' => '1'
         // ]);
 
-        Test::create([
-            'type' => 'TOEFL',
-            'test_date' => '2023-02-02',
-        ]); 
+        // Test::create([
+        //     'type' => 'TOEFL',
+        //     'test_date' => '2023-02-02',
+        // ]); 
 
-        Payment::create([
-            'register_date' => '2023-02-02',
-            'payment_doc' => 'bill.jpg',
-            'is_verified' => '1'
+        // Payment::create([
+        //     'register_date' => '2023-02-02',
+        //     'payment_doc' => 'bill.jpg',
+        //     'is_verified' => '1'
 
-        ]);
+        // ]);
 
 
     }

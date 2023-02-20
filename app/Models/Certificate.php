@@ -15,4 +15,14 @@ class Certificate extends Model
         'certificate_doc',
         'result'
     ];
+
+    public function user()
+    {
+        return $this->hasMany(User::class);
+    }
+
+    public function test()
+    {
+        return $this->belongsTo(Test::class);
+    }
 }

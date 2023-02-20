@@ -59,5 +59,8 @@ class User extends Authenticatable
         return $this->belongsTo(Payment::class);
     }
 
-
+    public function certificate()
+    {
+        return $this->belongsTo(Certificate::class);
+    }
 }

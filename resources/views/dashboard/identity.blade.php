@@ -77,41 +77,49 @@
                 </select>
               </div>
               <div class="input-warp">
-                <div class="row">
-                    <div class="col">
-                        <div class="input_warp hidden student-fields">
-                            <select aria-label="Default select example">
-                                <option selected>Major</option>
-                                <option value="1">T. Infromatika</option>
-                                <option value="2">T. Listrik</option>
-                                <option value="3">T. Elektro</option>
-                                <option value="3">T. Mesin</option>
-                            </select>
+                    <div class="row">
+                        <div class="col">
+                            <div class="input_warp hidden student-fields">
+                                <select aria-label="Default select example">
+                                    <option selected>Major</option>
+                                    <option value="1">T. Infromatika</option>
+                                    <option value="2">T. Listrik</option>
+                                    <option value="3">T. Elektro</option>
+                                    <option value="3">T. Mesin</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="input_warp hidden student-fields">
+                                <select  aria-label="Default select example">
+                                    <option selected>Study Program</option>
+                                    <option value="1">D3-TI</option>
+                                    <option value="2">D3-TL</option>
+                                    <option value="3">D3-TE</option>
+                                    <option value="3">D3-TM</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="input_warp hidden student-fields">
+                                <select aria-label="Default select example">
+                                    <option selected>Semester</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="3">4</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
-                    <div class="col">
-                        <div class="input_warp hidden student-fields">
-                            <select  aria-label="Default select example">
-                                <option selected>Study Program</option>
-                                <option value="1">D3-TI</option>
-                                <option value="2">D3-TL</option>
-                                <option value="3">D3-TE</option>
-                                <option value="3">D3-TM</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="input_warp hidden student-fields">
-                            <select aria-label="Default select example">
-                                <option selected>Semester</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="3">4</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
+              </div>
+              <div class="input-warp">
+                <label for="address">Address</label>
+                <input type="text-area" name="address" id="address">
+              </div>
+              <div class="input-warp">
+                <label for="phonenum">Phone Number</label>
+                <input type="text" name="phonenum" id="phonenum">
               </div>
                  <button type="submit" class="registerbtn">Save</button>
             </div>

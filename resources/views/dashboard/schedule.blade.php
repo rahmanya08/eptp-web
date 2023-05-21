@@ -44,8 +44,10 @@
         </div>
         <div class="col">
             <a href="#" class="btn-add">
-                <i class='bx bx-add-to-queue'></i>
-                <span class="text">Add New</span>
+                <span class="text">Add</span>
+            </a>
+            <a href="#" class="btn-add">
+                <span class="text">Edit</span>
             </a>
         </div>
     </div>
@@ -60,41 +62,45 @@
             <table>
                 <thead>
                     <tr>
+                        <th>ID</th>
                         <th>Date</th>
                         <th>Type</th>
-                        <th>Participant</th>
+                        {{-- <th>Participant</th> --}}
                         <th>Status</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
+                        <td>03</td>
                         <td>10-05-2023</td>
                         <td>TOEFL</td>
-                        <td>
+                        {{-- <td>
                             <div class="animated-progress progress-blue">
                                 <span data-progress="90"></span>
                             </div>
-                        </td>
+                        </td> --}}
                         <td><span class="status completed">Finish</span></td>
                     </tr>
                     <tr>
+                        <td>02</td>
                         <td>20-05-2023</td>
                         <td>TOEFL</td>
-                        <td>
+                        {{-- <td>
                             <div class="animated-progress progress-blue">
                                 <span data-progress="90"></span>
                             </div>
-                        </td>
+                        </td> --}}
                         <td><span class="status almost">Soon</span></td>
                     </tr>
                     <tr>
+                        <td>03</td>
                         <td>10-05-2023</td>
                         <td>TOEIC</td>
-                        <td>
+                        {{-- <td>
                             <div class="animated-progress progress-blue">
                                 <span data-progress="90"></span>
                             </div>
-                        </td>
+                        </td> --}}
                         <td><span class="status un-completed">Start</span></td>
                     </tr>
                     

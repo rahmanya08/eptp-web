@@ -356,7 +356,8 @@ body {
     margin-left: 10px;
 }
 #content main .row-4 .col .btn-upload,
-#content main .row .col .btn-add {
+#content main .row .col .btn-add,
+#content main .row .col .btn-edit {
     height: 30px;
     width: 50%;
     padding: 0 16px;
@@ -402,6 +403,10 @@ body {
     margin-top: 36px;
 }
 
+a.btn-add {
+    margin-right: 5px;
+}
+
 #content main .row-4 {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -411,6 +416,7 @@ body {
 
 #content main .col {
     box-sizing: border-box;
+    display: flex;
 }
 
 #content main .sett-box .text-box input,
@@ -422,6 +428,7 @@ body {
     padding: 8px;
     width: 80%;
     background: lightgrey;
+    margin-left: 20px;
 }
 
 #content main .sett-box .text-box {
@@ -775,15 +782,41 @@ body {
         min-width: 420px;
     }
 }
+.row-from {
+    box-sizing: border-box;
+    margin-top: 50px;
+}
+.column {
+    float: left;
+    padding: 10px;
+    height: 300px; /* Should be removed. Only for demonstration */
+  }
+  
+  .left {
+    width: 25%;
+  }
+  
+  .right {
+    width: 75%;
+    height: 100%;
+  }
+  .row-right {
+    margin-bottom: 0;
+    margin-top: 10px;
+  }
 
+  
+  /* Clear floats after the columns */
+  .row-from:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
 
-
-
-/*FORMULIR*/
 /*IMAGE*/
-
 .upload{
-    top: 25px;
+    top: 0;
+    right: 20px;
     width: 150px;
     position: relative;
     margin: auto;
@@ -820,16 +853,17 @@ input::-webkit-file-upload-button{
 }
 /*IMAGE*/
 
-/* Add padding to containers */
-.container-form {
-  padding: 16px;
-}
 
-/* Full-width input fields */
+/*FORMULIR*/
+
+.input-warp {
+    display: flex;
+    flex-direction: column;
+}
 .input-warp select,
 .input-warp input{
-    width: 100%;
-    padding: 15px;
+    width: 80%;
+    padding: 10px;
     margin: 5px 0 22px 0;
     display: inline-block;
     border: none;
@@ -839,26 +873,45 @@ input::-webkit-file-upload-button{
     border-radius: 5px;
 }
 
+
 .input-warp input:focus{
     background-color: #ddd;
     outline: none;
 }
 
-/* Set a style for the submit/register button */
+
 .save-btn {
     background-color: #0c193d;
     color: white;
     padding: 15px 18px;
-    margin: 0;
+    margin-right: 20%;
     border: none;
     border-radius: 25px;
     cursor: pointer;
     width: 15%;
     opacity: 0.9;
+    float: right;
 }
 
 .save-btn:hover {
   opacity:1;
 }
+
+.hidden{
+    display: none;
+}
+
+.radio_btn {
+    display: inline-flex;
+    padding: 10px;
+}
+
+input#female,
+input#male,
+input#ktm,
+input#ktp {
+    width: 10%;
+}
+
 
 /*FORMULIR*/

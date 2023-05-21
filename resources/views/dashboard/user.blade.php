@@ -42,42 +42,46 @@
             <table>
                 <thead>
                     <tr>
+                        <th>ID</th>
                         <th>Email</th>
                         <th>Password</th>
-                        <th>Role</th>
+                        {{-- <th>Role</th> --}}
                         <th>Status</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
+                        <td>01</td>
                         <td>
                             <p>IanSomerhalder@gmail.com</p>
                         </td>
                         <td>TOEFL</td>
-                        <td>Staff</td>
+                        {{-- <td>Staff</td> --}}
                         <td><span class="status In-Active">Inactive</span></td>
                         <td>
                             <span><button class="btn-act">Disable</button></span>
                         </td>
                     </tr>
                     <tr>
+                        <td>02</td>
                         <td>
                             <p>AkinAkinozu@gmail.com</p>
                         </td>
                         <td>TOEFL</td>
-                        <td>Participant</td>
+                        {{-- <td>Participant</td> --}}
                         <td><span class="status Active"> Active </span></td>
                         <td>
                             <span><button class="btn-act">Disable</button></span>
                         </td>
                     </tr>
                     <tr>
+                        <td>02</td>
                         <td>
                             <p>CanYaman@gmail.com</p>
                         </td>
                         <td>TOEFL</td>
-                        <td>Staff</td>
+                        {{-- <td>Staff</td> --}}
                         <td><span class="status Active">Active</span></td>
                         <td>
                             <span><button class="btn-act">Disable</button></span>

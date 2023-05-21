@@ -55,3 +55,21 @@ window.addEventListener('resize', function () {
 })
 
 //PROGRESS BAR
+
+//Profile Picture
+let profilepic = document.getElementById("profile");
+let inputpic = document.getElementById("file");
+
+inputpic.onchange = function(){
+    profilepic.src = URL.createObjectURL(inputpic.files[0]);
+}
+
+//Status Input
+const roleSelect = document.querySelector("#roleSelect");
+const studentFields = document.querySelectorAll(".student-fields");
+
+roleSelect.addEventListener("change", function () {
+    if (roleSelect.value === "1")
+        studentFields.forEach((el) => el.classList.remove("hidden"));
+    else studentFields.forEach((el) => el.classList.add("hidden"));
+});

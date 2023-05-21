@@ -25,35 +25,45 @@
                     <i class='bx bx-chevron-right'></i>
                 </li>
                 <li>
-                    <a class="active" href="{{ route('identity') }}">User Identity</a>
+                    <a class="active" href="{{ route('identity') }}">Identity</a>
                 </li>
             </ul>
         </div>
     </div>
         <form action="action_page.php">
             @csrf
-            @include("partials.up-profile")
-            <div class="container-form">
-                <p>Please fill in this form to continue the registration</p>
-                <h1>Personal</h1>
-              <div class="input-warp">
-                <label for="name"><b>Name</b></label>
-                <input type="text" placeholder="Enter Name" name="name" id="name" required>
-              </div>
-              <div class="input-warp">
-                <label for="gender"><b>Gender</b></label>
-                <input type="radio" placeholder="Choose Gender" name="gender" id="gender"  value="female" required>
-                <label for="male">Female</label>
-                <input type="radio" placeholder="Choose Gender" name="gender" id="gender" value="male" required>
-                <label for="male">Male</label>
-              </div>
-              <div class="input-warp">
-                <label for="birth"><b>Birth Date</b></label>
-                <input type="date" placeholder="brithdate" name="birth" id="psw-repeat" required>
-              </div>
-              <div class="input-warp">
-                    <div class="row">
-                        <div class="col">
+           
+            <div class="row-from">
+                <div class="column left">
+                    @include("partials.up-profile")
+                </div>
+                <div class="column right">
+                    <h1>Personal</h1>
+                    <div class="row-right">
+                        <div class="input-warp">
+                            <label for="name">Name</label>
+                            <input type="text" placeholder="Enter Name" name="name" id="name" required>
+                        </div>
+                    </div>
+                    <div class="row-right">
+                        <div class="input-warp">
+                            <label for="gender">Gender</label><br>
+                            <div class="radio_btn">
+                                <input type="radio" name="gender" id="male" value="male" required >
+                                <label for="male">Male</label>
+                                <input type="radio" name="gender" id="female" value="female" required>
+                                <label for="female">Female</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row-right">
+                        <div class="input-warp">
+                            <label for="birth">Birth Date</label>
+                            <input type="date" name="birth" required>
+                        </div>
+                    </div>
+                    <div class="row-right">
+                        <div class="input-warp">
                             <label for="identity">Identity Type</label><br>
                             <div class="radio_btn">
                                 <input type="radio" name="identity" id="ktp" value="KTP">
@@ -62,69 +72,82 @@
                                 <label for="ktm">KTM</label>
                             </div>
                         </div>
-                        <div class="input_warp">
+                    </div>
+                    <div class="row-right">
+                        <div class="input-warp">
                             <label for="id_number">Identity Number</label>
-                            <input type="id_number" name="id_number">
+                            <input type="text" name="id_number" required>
                         </div>
                     </div>
-              </div>
-              <h1>Academic</h1>
-              <div class="input-warp">
-                <label for="status">Status</label>
-                <select id="roleSelect" aria-label="Default select example">
-                    <option selected>Choose Status</option>
-                    <option value="1">Students</option>                                       
-                    <option value="2">Public</option>      
-                </select>
-              </div>
-              <h1>Contact</h1>
-              <div class="input-warp">
-                    <div class="row">
-                        <div class="col">
-                            <div class="input_warp hidden student-fields">
-                                <select aria-label="Default select example">
-                                    <option selected>Major</option>
-                                    <option value="1">T. Infromatika</option>
-                                    <option value="2">T. Listrik</option>
-                                    <option value="3">T. Elektro</option>
-                                    <option value="3">T. Mesin</option>
-                                </select>
+                    <h1>Test</h1>
+                    <div class="row-right">
+                        <div class="input-warp">
+                            <label for="status">Category</label>
+                            <select id="roleSelect" aria-label="Default select example">
+                                <option selected>Choose Categori</option>
+                                <option value="1">Students</option>                                       
+                                <option value="2">Public</option>      
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row-right">
+                        <div class="col-right">
+                            <div class="input-warp">
+                                <div class="input-warp hidden student-fields">
+                                    <select aria-label="Default select example">
+                                        <option selected>Major</option>
+                                        <option value="1">T. Infromatika</option>
+                                        <option value="2">T. Listrik</option>
+                                        <option value="3">T. Elektro</option>
+                                        <option value="3">T. Mesin</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
-                        <div class="col">
-                            <div class="input_warp hidden student-fields">
-                                <select  aria-label="Default select example">
-                                    <option selected>Study Program</option>
-                                    <option value="1">D3-TI</option>
-                                    <option value="2">D3-TL</option>
-                                    <option value="3">D3-TE</option>
-                                    <option value="3">D3-TM</option>
-                                </select>
+                        <div class="col-right">
+                            <div class="input-warp">
+                                <div class="input-warp hidden student-fields">
+                                    <select  aria-label="Default select example">
+                                        <option selected>Study Program</option>
+                                        <option value="1">D3-TI</option>
+                                        <option value="2">D3-TL</option>
+                                        <option value="3">D3-TE</option>
+                                        <option value="3">D3-TM</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
-                        <div class="col">
-                            <div class="input_warp hidden student-fields">
-                                <select aria-label="Default select example">
-                                    <option selected>Semester</option>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="3">4</option>
-                                </select>
+                        <div class="col-right">
+                            <div class="input-warp">
+                                <div class="input-warp hidden student-fields">
+                                    <select aria-label="Default select example">
+                                        <option selected>Semester</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="3">4</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
                     </div>
-              </div>
-              <div class="input-warp">
-                <label for="address">Address</label>
-                <input type="text-area" name="address" id="address">
-              </div>
-              <div class="input-warp">
-                <label for="phonenum">Phone Number</label>
-                <input type="text" name="phonenum" id="phonenum">
-              </div>
-                 <button type="submit" class="save-btn">Save</button>
+                    <h1>Contact</h1>
+                    <div class="row-right">
+                        <div class="input-warp">
+                            <label for="address">Address</label>
+                            <input type="text-area" name="address" id="address" required>
+                        </div>
+                    </div>
+                    <div class="row-right">
+                        <div class="input-warp">
+                            <label for="phonenum">Phone Number</label>
+                            <input type="text" name="phonenum" id="phonenum" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="save-btn">Save</button>
+                </div>
             </div>
+
         </form>
 </main>
 

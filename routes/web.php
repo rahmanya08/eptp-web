@@ -1,10 +1,13 @@
 <?php
 
+
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashboardController;
-use Illuminate\Support\Facades\Route;
-
-
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DashboardIdentityController;
+use App\Http\Controllers\ScheduleController;
+use App\Models\Identity;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,33 +20,49 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+/* Route::get('/', function () {
    return view('welcome');
+});*/
+
+
+
+Route::controller(AuthController::class)->group(function(){
+   Route::get('/login', 'signin')->name('login')->middleware('guest');
+   Route::post('/login', 'authenticate')->name('signin');
+
+   Route::get('/signup', 'signup')->name('signup')->middleware('guest');
+   Route::post('/signup', 'store')->name('store');
+
+   Route::post('/logout', 'logout')->name('logout');
+});
+
+Route::controller(UserController::class)->group(function(){
+   Route::get('/test-card','card')->name('card');
+   Route::get('/test-card','card')->name('card');
+
+});
+
+Route::controller(IdentityController::class)->group(function(){
+   Route::get('/test-register', 'test')->name('test');
+   Route::post('/test-register', 'store')->name('store');
+});
+
+Route::controller(DashboardController::class)->group(function(){
+
+Route::get('/dashboard','index')->name('index')->middleware('auth');
+Route::get('/menu-schedule','schedule')->name('schedule');
+Route::get('/menu-user-data','user')->name('user');
+Route::get('/menu-payment','payment')->name('payment');
+Route::get('/menu-registrant','registrant')->name('registrant');
+Route::get('/menu-announce','announce')->name('announce');
+Route::get('/menu-account','account')->name('account');
+Route::get('/menu-result','result')->name('result');
+Route::get('/menu-identity','identity')->name('identity');
+Route::get('/menu-course','course')->name('course');
+
+Route::get('/landing-page','landing')->name('landing');
+
 });
 
 
-Route::get('/login', [UserController::class, 'login'])->name('login');
-
-Route::get('/signup', [UserController::class, 'signup'])->name('signup');
-
-Route::get('/test-card', [UserController::class, 'card'])->name('card');
-
-Route::get('/test-register', [UserController::class, 'test_register'])->name('test-register');
-
-Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
-
-Route::get('/menu-schedule', [DashboardController::class, 'schedule'])->name('schedule');
-
-Route::get('/menu-user-data', [DashboardController::class, 'user_ver'])->name('user_ver');
-
-Route::get('/menu-payment', [DashboardController::class, 'payment'])->name('payment');
-
-Route::get('/menu-registrant', [DashboardController::class, 'registrant'])->name('registrant');
-
-Route::get('/menu-announce', [DashboardController::class, 'announce'])->name('announce');
-
-Route::get('/menu-account', [DashboardController::class, 'account'])->name('account');
-
-Route::get('/menu-result', [DashboardController::class, 'result'])->name('result');
-
-Route::get('/menu-course', [DashboardController::class, 'course'])->name('course');
+//Route::resource('/menu-identity', DashboardIdentityController::class)->middleware('auth');

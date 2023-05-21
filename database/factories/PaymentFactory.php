@@ -1,11 +1,10 @@
 <?php
 
 namespace Database\Factories;
-
-use App\Models\Test;
 use App\Models\User;
+use App\Models\Schedule;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Psr\Http\Message\UploadedFileFactoryInterface;
+use Illuminate\Support\Str;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Payment>
@@ -20,11 +19,10 @@ class PaymentFactory extends Factory
     public function definition()
     {
         return [
-            'user_id' => User::all()->random()->id,
-            'test_id' => Test::all()->random()->id,
-            'register_date' => fake()->date(),
-            'payment_doc' => fake()->imageUrl(640, 480, 'receipt'),
-            'is_verified' => fake()->boolean(),
+            'user_id'=>User::all()->random()->id,
+            //'schedule_id' => Schedule::all()->random()->id,
+            'pay_url'=>fake()->imageUrl(640, 480, 'receipt'),
+            'is_payed'=>fake()->boolean()
         ];
     }
 }

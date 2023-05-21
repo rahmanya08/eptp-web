@@ -1,89 +1,34 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    @stack('meta')
-    <title>@yield('title')</title>
-    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
-    @stack('custom-css')
-</head>
-<body>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        
+        @stack('meta')
+        <title>@yield('title')</title>
+        @stack('custom-css')
+      
+        {{-- Bootstrap Icons --}}
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+        
+        {{-- Box Icons --}}
+        
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     
-    
-    <input type="checkbox" name="" id="nav-toggle">
-    <div class="sidebar">
-        <div class="sidebar-brand">
-            <h2><span class=" las la-globe-africa"></span><span>Language Center</span> 
-            </h2>
-        </div>
-        <div class="sidebar-menu">
-            <ul>
-                <li>
-                    <a href="{{ route('dashboard') }}" class="active"><span class="las la-igloo"></span>
-                    <span>Dasboard</span></a>
-                </li>
-                <li>
-                    <a href="{{ route('user_ver') }}"><span class="las la-users"></span>
-                    <span>User Data</span></a>
-                </li>
-                <li>
-                    <a href="{{ route('registrant') }}"><span class="las la-clipboard-list"></span>
-                    <span>Registrant Data</span></a>
-                </li>
-                <li>
-                    <a href="{{ route('schedule') }}"><span class="las la-calendar"></span>
-                    <span>Schedule</span></a>
-                </li>
-                <li>
-                    <a href="{{ route('announce') }}"><span class="las la-certificate"></span>
-                    <span>Announcment</span></a>
-                </li>
-                <li>
-                    <a href="{{ route('payment') }}"><span class=" las la-money-check"></span>
-                    <span>Payment</span></a>
-                </li>
-                <li>
-                    <a href="{{ route('result') }}"><span class=" las la-upload"></span>
-                    <span>Result</span></a>
-                </li>
-                <li>
-                    <a href="{{ route('course') }}"><span class=" las la-desktop"></span>
-                    <span>Course</span></a>
-                </li>
-                <li>
-                    <a href="{{ route('account') }}"><span class="las la-user-circle"></span>
-                    <span>Accounts</span></a>
-                </li>
-            </ul>
-        </div>
-    </div>
+    </head>
+    <body>
+            
+    <!--SIDEBAR-->
+        @include('partials.sidebar')
+    <!--SIDEBAR-->
 
-    <div class="main-content">
-        <header>
-                <h2>
-                    <label for="nav-toggle">
-                        <span class="las la-bars"></span>
-                    </label>
-                    
-                    Dashboard
-                </h2>
+    <!--CONTNET-->
+        @include('partials.content')
+    <!--CONTENT-->
 
-                <div class="search-wrapper">
-                    <span class="las la-search"></span>
-                    <input type="search" placeholder="search here" />
-                </div>
-
-                <div class="user-wrapper">
-                    @stack('user')
-                </div>
-        </header>
-        <main>
-                @yield('main-content')
-        </main>
-    </div>
 
     @stack('child-js')  
-</body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>   
+    </body>
 </html>

@@ -8,48 +8,81 @@ use App\Models\User;
 
 class DashboardController extends Controller
 {
-    public function dashboard ()
+
+    public function index ()
     {
-        return view('dashboard');
+        return view('dashboard.index', [
+            'title' => 'Dashboard'
+        ]);
     }
 
     public function schedule ()
     {
-        return view('schedule');
+        return view('dashboard.schedule', [
+            'title' => 'Schedule'
+        ]);
     }
 
-    public function user_ver ()
+    public function user ()
     {
-        return view('user_ver');
+        return view('dashboard.user', [
+            'title' => 'User'
+        ]);
     }
 
     public function payment ()
     {
-        return view('payment');
+        return view('dashboard.payment', [
+            'title' => 'Payment'
+        ]);
     }
 
     public function registrant ()
     {
-        return view('registrant');
+        return view('dashboard.registrant', [
+            'title' => 'Registrant'
+        ]);
     }
 
     public function announce ()
     {
-        return view('announce');
+        return view('dashboard.announce ', [
+            'title' => 'Announcement '
+        ]);
     }
 
     public function result ()
     {
-        return view('result');
+        return view('dashboard.result ', [
+            'title' => 'Announcement'
+        ]);
+    }
+
+    public function identity ()
+    {
+        return view('dashboard.identity ', [
+            'title' => 'User Identity'
+        ]);
     }
 
     public function account ()
     {
-        return view('account');
+        return view('dashboard.account ', [
+            'title' => 'Account'
+        ]);
     }
 
     public function course ()
     {
-        return view('course');
+        return view('dashboard.course ', [
+            'title' => 'Course'
+        ]);
+    }
+
+    public function landing ()
+    {
+        return view('landing.index', [
+            'title' => 'Home'
+        ]);
     }
 }

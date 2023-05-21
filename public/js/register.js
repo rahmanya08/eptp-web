@@ -9,6 +9,8 @@ const customBtn = document.getElementById("upload-btn");
 const customTxt = document.getElementById("custom-msg");
 const imgArea = document.querySelector(".img-area");
 var checkBox = document.getElementById("accept");
+
+
 let i = 0;
 
 allTab[i].classList.add("show");
@@ -126,20 +128,5 @@ filebtn.addEventListener("change", function () {
     }
 });
 
-checkBox.onchange = function () {
-    if (this.checked) {
-        btnNext.innerHTML = "Submit";
-        btnNext.disabled = false;
-    } else {
-        btnNext.innerHTML = "Submit";
-        btnNext.disabled = true;
-    }
-};
 
-const roleSelect = document.querySelector("#roleSelect");
-const studentFields = document.querySelectorAll(".student-fields");
-roleSelect.addEventListener("change", function () {
-    if (roleSelect.value === "4")
-        studentFields.forEach((el) => el.classList.remove("hidden"));
-    else studentFields.forEach((el) => el.classList.add("hidden"));
-});
+

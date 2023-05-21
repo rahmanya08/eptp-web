@@ -10,18 +10,20 @@ class Payment extends Model
     use HasFactory;
 
     protected $fillable = [
-        'register_date',
-        'payment_doc',
-        'is_verified'
+        'user_id',
+        'schedule_id',
+        'pay_url',
+        'is_payed'
     ];
 
-    public function user()
+
+    public function user_payment()
     {
-        return $this->hasMany(User::class);
+        return $this->belongsTo(User::class);
     }
 
-    public function test()
+    public function schedule()
     {
-        return $this->hasMany(Test::class);
+        return $this->belongsTo(Schedule::class);
     }
 }

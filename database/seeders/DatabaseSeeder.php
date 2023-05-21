@@ -5,9 +5,10 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\User;
+use App\Models\Identity; 
 use App\Models\Payment;
-use App\Models\Test;
-use App\Models\Certificate;
+use App\Models\Schedule;
+use App\Models\Result;
 
 
 
@@ -21,10 +22,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        User::factory(5)->create();
-        Test::factory(10)->create();
-        Payment::factory(8)->create();
-        Certificate::factory(3)->create();
+        User::factory(10)->create();
+        Identity::factory(8)->create();
+        Payment::factory(5)->create();
+        Schedule::factory(5)->create();
+        Result::factory(3)->create();
+
 
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',

@@ -10,9 +10,16 @@
     @stack('custom-css')
 </head>
     <body>
-        <div class="container">
-            @yield('container')
+
+        <!--NAVBAR-->
+        @include('partials.navbar-form')
+        <!--NAVBAR-->
+        <!--CONTENT-->
+        <div class="warpper">
+            @yield('main-content')
         </div>
+        <!--CONTENT-->
+
 
         @stack('child-js')   
     </body>

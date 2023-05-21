@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Laravel\Scout\Searchable;
 
 class User extends Authenticatable
 {
@@ -18,21 +19,9 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
-        'img-url',
-        'birth_date',
-        'gender',
-        'identity_type',
-        'identity_num',
-        'phone_num',
         'email',
-        'address',
         'password',
-        'role',
-        'major',
-        'study_program',
-        'semester',
-        'is_accepted'
+        //'role',
     ];
 
     /**
@@ -54,13 +43,20 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function payment()
+
+
+    public function user_identity()
     {
-        return $this->belongsTo(Payment::class);
+        return $this->hasOne(Identity::class);
     }
 
-    public function certificate()
+    public function user_payment()
     {
-        return $this->belongsTo(Certificate::class);
+        return $this->hasMany(Payment::class);
+    }
+
+    public function user_result()
+    {
+        return $this->hasMany(Result::class);
     }
 }

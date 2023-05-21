@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\DashboardIdentityController;
+use App\Http\Controllers\IdentityController;
 use App\Http\Controllers\ScheduleController;
 use App\Models\Identity;
 
@@ -57,7 +57,6 @@ Route::get('/menu-registrant','registrant')->name('registrant');
 Route::get('/menu-announce','announce')->name('announce');
 Route::get('/menu-account','account')->name('account');
 Route::get('/menu-result','result')->name('result');
-Route::get('/menu-identity','identity')->name('identity');
 Route::get('/menu-course','course')->name('course');
 
 Route::get('/landing-page','landing')->name('landing');
@@ -65,4 +64,4 @@ Route::get('/landing-page','landing')->name('landing');
 });
 
 
-//Route::resource('/menu-identity', DashboardIdentityController::class)->middleware('auth');
+Route::resource('identity', IdentityController::class)->middleware('auth');

@@ -34,8 +34,8 @@
             @csrf
             @include("partials.up-profile")
             <div class="container-form">
-              <h1>Personal</h1>
-              <p>Please fill in this form to continue the registration</p>
+                <p>Please fill in this form to continue the registration</p>
+                <h1>Personal</h1>
               <div class="input-warp">
                 <label for="name"><b>Name</b></label>
                 <input type="text" placeholder="Enter Name" name="name" id="name" required>
@@ -68,6 +68,7 @@
                         </div>
                     </div>
               </div>
+              <h1>Academic</h1>
               <div class="input-warp">
                 <label for="status">Status</label>
                 <select id="roleSelect" aria-label="Default select example">
@@ -76,6 +77,7 @@
                     <option value="2">Public</option>      
                 </select>
               </div>
+              <h1>Contact</h1>
               <div class="input-warp">
                     <div class="row">
                         <div class="col">
@@ -121,7 +123,7 @@
                 <label for="phonenum">Phone Number</label>
                 <input type="text" name="phonenum" id="phonenum">
               </div>
-                 <button type="submit" class="registerbtn">Save</button>
+                 <button type="submit" class="save-btn">Save</button>
             </div>
         </form>
 </main>

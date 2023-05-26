@@ -10,10 +10,12 @@ use App\Models\User;
 class UserController extends Controller
 {
 
-    public function card ()
+    public function user ()
     {
-        return view('test.test-card', [
-            'title' => 'Test Card'
+        return view('dashboard.user', [
+            'title' => 'User',
+            'users' => User::all()
+
         ]);
     }
 }

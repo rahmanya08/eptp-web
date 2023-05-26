@@ -31,27 +31,31 @@
             </ul>
         </div>
     </div>
-    <div class="row">
-        <div class="col">
-            <input type="date" name="date" id="date" >
+    <form action="{{ route('schedule') }}" method="post">
+        @csrf
+        <div class="row">
+            <div class="col">
+                <input type="date" name="date" id="date" @error('date') is-invalid @enderror required value="{{ old('date') }}">
+                @error('date')
+                    <div class="invalid-feedback">
+                        {{  $message  }}
+                    </div>
+                @enderror
+            </div>
+            <div class="col">
+                <select name="type" id="test-type">
+                    <option value="option1">Select Test Type</option>
+                    <option value="option2">TOEFL</option>
+                    <option value="option3">TOEIC</option>
+                </select>
+            </div>
+            <div class="col">
+                <button type="submit" onclick="return getData()">Add</button>
+                <button type="submit" onclick="return getData()">Edit</button>
+            </div>
         </div>
-        <div class="col">
-            <select name="type" id="test-type">
-                <option value="option1">Select Test Type</option>
-                <option value="option2">TOEFL</option>
-                <option value="option3">TOEIC</option>
-            </select>
-        </div>
-        <div class="col">
-            <a href="#" class="btn-add">
-                <span class="text">Add</span>
-            </a>
-            <a href="#" class="btn-add">
-                <span class="text">Edit</span>
-            </a>
-        </div>
-    </div>
-
+    </form>
+    
     <div class="table-data">
         <div class="order">
             <div class="head">
@@ -70,40 +74,19 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @foreach ($schedules as $schedule)
                     <tr>
-                        <td>03</td>
-                        <td>10-05-2023</td>
-                        <td>TOEFL</td>
-                        {{-- <td>
-                            <div class="animated-progress progress-blue">
-                                <span data-progress="90"></span>
-                            </div>
-                        </td> --}}
+                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ $schedule->date_test }}</td>
+                        <td>{{ $schedule->type_test }}</td>
                         <td><span class="status completed">Finish</span></td>
                     </tr>
-                    <tr>
-                        <td>02</td>
-                        <td>20-05-2023</td>
-                        <td>TOEFL</td>
-                        {{-- <td>
-                            <div class="animated-progress progress-blue">
-                                <span data-progress="90"></span>
-                            </div>
-                        </td> --}}
-                        <td><span class="status almost">Soon</span></td>
-                    </tr>
-                    <tr>
-                        <td>03</td>
-                        <td>10-05-2023</td>
-                        <td>TOEIC</td>
-                        {{-- <td>
-                            <div class="animated-progress progress-blue">
-                                <span data-progress="90"></span>
-                            </div>
-                        </td> --}}
-                        <td><span class="status un-completed">Start</span></td>
-                    </tr>
-                    
+                    @endforeach
+                    {{-- <td>
+                        <div class="animated-progress progress-blue">
+                            <span data-progress="90"></span>
+                        </div>
+                    </td> --}}
                 </tbody>
             </table>
         </div>

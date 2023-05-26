@@ -4,82 +4,44 @@ namespace App\Http\Controllers;
 
 use App\Models\Identity;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class IdentityController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        // return view('dashboard.identity');
-    }
+    
+        public function identity ()
+        {
+            return view('dashboard.identity');
+        }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+        //Input Data Akun
+        public function store(Request $request)
+        {
+            //return $request;
+            $validatedData = $request->validate([
+                //'user_id',
+                'name' =>'required','min:5','max:255',
+                'img_url' =>'required','min:5','max:255',
+                'birth_date' =>'required','min:5','max:50',
+                'gender'=>'required','min:5','max:255',
+                'identity_type'=>'required','min:5',
+                'identity_num'=>'required','min:9','max:16',
+                'phone'=>'required','min:12','max:13',
+                'address'=>'required','min:15','max:255',
+                'category'=>'required','min:20',
+                'major'=>'required','min:5','max:20',
+                'study_program'=>'required','min:5','max:20',
+                'semester'=>'required','max:1',
+                //'jabatan'=>'required','min:5','max:20',
+                //'status_identitas'
+            ]);  
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+            Identity::create($validatedData);
+        
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Identity  $identity
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Identity $identity)
-    {
-        //
-    }
+            return redirect('/menu-course')->with('success', 'Formulir Complete! Please Choose Your Test');
+        }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Identity  $identity
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Identity $identity)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Identity  $identity
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Identity $identity)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Identity  $identity
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Identity $identity)
-    {
-        //
-    }
+ 
+  
 }

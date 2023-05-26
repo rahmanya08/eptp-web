@@ -51,43 +51,18 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @foreach ($users as $user)
                     <tr>
-                        <td>01</td>
-                        <td>
-                            <p>IanSomerhalder@gmail.com</p>
-                        </td>
-                        <td>TOEFL</td>
+                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ $user->email }}</td>
+                        <td>{{ $user->password }}</td>
                         {{-- <td>Staff</td> --}}
                         <td><span class="status In-Active">Inactive</span></td>
                         <td>
                             <span><button class="btn-act">Disable</button></span>
                         </td>
-                    </tr>
-                    <tr>
-                        <td>02</td>
-                        <td>
-                            <p>AkinAkinozu@gmail.com</p>
-                        </td>
-                        <td>TOEFL</td>
-                        {{-- <td>Participant</td> --}}
-                        <td><span class="status Active"> Active </span></td>
-                        <td>
-                            <span><button class="btn-act">Disable</button></span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>02</td>
-                        <td>
-                            <p>CanYaman@gmail.com</p>
-                        </td>
-                        <td>TOEFL</td>
-                        {{-- <td>Staff</td> --}}
-                        <td><span class="status Active">Active</span></td>
-                        <td>
-                            <span><button class="btn-act">Disable</button></span>
-                        </td>
-                    </tr>
-                    
+                    </tr>                           
+                    @endforeach
                 </tbody>
             </table>
         </div>

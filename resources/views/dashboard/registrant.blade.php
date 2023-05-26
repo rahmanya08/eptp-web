@@ -43,7 +43,7 @@
                 <thead>
                     <tr>
                         <th>Name</th>
-                        <th>Status</th>
+                        <th>Category</th>
                         <th>Test Type</th>
                         <th>Schedule</th>
                         <th>Action</th>

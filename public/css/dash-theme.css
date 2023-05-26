@@ -782,6 +782,21 @@ a.btn-add {
         min-width: 420px;
     }
 }
+
+
+    .col button {
+        box-sizing: border-box;
+        border: none;
+        width: 50%;
+        background: skyblue;
+        border-radius: 52px;
+        color: white;
+        font-size: 16px;
+        margin-right: 10px;
+        cursor: pointer;
+    }
+
+
 .row-from {
     box-sizing: border-box;
     margin-top: 50px;

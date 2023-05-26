@@ -16,20 +16,6 @@ class DashboardController extends Controller
         ]);
     }
 
-    public function schedule ()
-    {
-        return view('dashboard.schedule', [
-            'title' => 'Schedule'
-        ]);
-    }
-
-    public function user ()
-    {
-        return view('dashboard.user', [
-            'title' => 'User'
-        ]);
-    }
-
     public function payment ()
     {
         return view('dashboard.payment', [
@@ -55,13 +41,6 @@ class DashboardController extends Controller
     {
         return view('dashboard.result ', [
             'title' => 'Announcement'
-        ]);
-    }
-
-    public function identity ()
-    {
-        return view('dashboard.identity ', [
-            'title' => 'User Identity'
         ]);
     }
 

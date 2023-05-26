@@ -5,6 +5,7 @@
         <span class="text">EPT-P</span>
     </a>
     <ul class="side-menu top">
+        {{-- {{ Request::is('dashboard') ? 'active' : '' }} --}}
         <li class="active">
             <a href="{{ route('index') }}">
                 <i class='bx bxs-dashboard'></i>
@@ -47,7 +48,7 @@
                 <span class="text">Result</span>
             </a>
         </li>
-        <li>
+        <li {{ Request::is('identity') ? 'active' : '' }}>
             <a href="{{ route('identity') }}">
                 <i class='bx bxs-id-card'></i>
                 <span class="text">Identity</span>

@@ -5,8 +5,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Controller;
 use App\Http\Controllers\IdentityController;
-use App\Models\Identity;
+use App\Http\Controllers\ScheduleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,9 +20,9 @@ use App\Models\Identity;
 |
 */
 
-/* Route::get('/', function () {
+ Route::get('/', function () {
    return view('welcome');
-});*/
+});
 
 
 
@@ -41,27 +42,30 @@ Route::controller(UserController::class)->group(function(){
 
 });
 
-Route::controller(IdentityController::class)->group(function(){
-   Route::get('/test-register', 'test')->name('test');
-   Route::post('/test-register', 'store')->name('store');
-});
-
 Route::controller(DashboardController::class)->group(function(){
 
 Route::get('/dashboard','index')->name('index')->middleware('auth');
-Route::get('/menu-schedule','schedule')->name('schedule');
-Route::get('/menu-user-data','user')->name('user');
 Route::get('/menu-payment','payment')->name('payment');
 Route::get('/menu-registrant','registrant')->name('registrant');
 Route::get('/menu-announce','announce')->name('announce');
 Route::get('/menu-account','account')->name('account');
 Route::get('/menu-result','result')->name('result');
-Route::get('/menu-identity','identity')->name('identity');
 Route::get('/menu-course','course')->name('course');
 
 Route::get('/landing-page','landing')->name('landing');
 
 });
 
+Route::controller(IdentityController::class)->group(function(){
+   Route::get('/menu-identity','identity')->name('identity');
+   Route::post('/menu-identity', 'store')->name('store');
+});
 
-//Route::resource('identity', IdentityController::class)->middleware('auth');
+Route::controller(UserController::class)->group(function(){
+   Route::get('/menu-user-data','user')->name('user');
+});
+
+Route::controller(ScheduleController::class)->group(function(){
+   Route::get('/menu-schedule','schedule')->name('schedule');
+   Route::post('/menu-schedule','store')->name('store');
+});

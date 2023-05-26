@@ -30,9 +30,8 @@
             </ul>
         </div>
     </div>
-        <form action="action_page.php">
+        <form action="{{ route('identity') }}" method="post">
             @csrf
-           
             <div class="row-from">
                 <div class="column left">
                     @include("partials.up-profile")
@@ -42,7 +41,12 @@
                     <div class="row-right">
                         <div class="input-warp">
                             <label for="name">Name</label>
-                            <input type="text" placeholder="Enter Name" name="name" id="name" required>
+                            <input type="text" placeholder="Enter Name" name="name" id="name" @error('name') is-invalid @enderror required value="{{ old('name') }}">
+                            @error('name')
+                            <div class="invalid-feedback">
+                                {{  $message  }}
+                            </div>
+                            @enderror
                         </div>
                     </div>
                     <div class="row-right">
@@ -59,7 +63,12 @@
                     <div class="row-right">
                         <div class="input-warp">
                             <label for="birth">Birth Date</label>
-                            <input type="date" name="birth" required>
+                            <input type="date" name="birth" @error('birth') is-invalid @enderror required value="{{ old('birth') }}">
+                            @error('birth')
+                            <div class="invalid-feedback">
+                                {{  $message  }}
+                            </div>
+                            @enderror
                         </div>
                     </div>
                     <div class="row-right">
@@ -76,8 +85,13 @@
                     <div class="row-right">
                         <div class="input-warp">
                             <label for="id_number">Identity Number</label>
-                            <input type="text" name="id_number" required>
+                            <input type="text" name="id_number" @error('id_number') is-invalid @enderror required value="{{ old('id_number') }}">
                         </div>
+                        @error('id_number')
+                        <div class="invalid-feedback">
+                            {{  $message  }}
+                        </div>
+                        @enderror
                     </div>
                     <h1>Test</h1>
                     <div class="row-right">
@@ -135,16 +149,26 @@
                     <div class="row-right">
                         <div class="input-warp">
                             <label for="address">Address</label>
-                            <input type="text-area" name="address" id="address" required>
+                            <input type="text-area" name="address" id="address" @error('address') is-invalid @enderror required value="{{ old('address') }}">
+                            @error('address')
+                            <div class="invalid-feedback">
+                                {{  $message  }}
+                            </div>
+                            @enderror
                         </div>
                     </div>
                     <div class="row-right">
                         <div class="input-warp">
                             <label for="phonenum">Phone Number</label>
-                            <input type="text" name="phonenum" id="phonenum" required>
+                            <input type="text" name="phonenum" id="phonenum" @error('phonenum') is-invalid @enderror required value="{{ old('phonenum') }}">
+                            @error('phonenum')
+                            <div class="invalid-feedback">
+                                {{  $message  }}
+                            </div>
+                            @enderror
                         </div>
                     </div>
-                    <button type="submit" class="save-btn">Save</button>
+                    <button type="submit" class="save-btn"  onclick="return getData()">Save</button>
                 </div>
             </div>
 

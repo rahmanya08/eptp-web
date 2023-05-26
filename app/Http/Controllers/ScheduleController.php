@@ -20,16 +20,15 @@ class ScheduleController extends Controller
 
    public function store(Request $request)
    {
-      //return $request;
-      $validatedData = $request->validate([
-         'date_test'=> 'required',
-         'type_test' => 'required'
+         $validatedData = $request->validate([
+         'date_test'=> 'required|date',
+         'type_test' => 'required',
+         'status_test'=> 'required'
       ]);  
 
-
+      //dd($request->all());
       Schedule::create($validatedData);
-   
-
+         
       return redirect('/schedule')->with('success', 'Schedule Data Saved!');
    }
 

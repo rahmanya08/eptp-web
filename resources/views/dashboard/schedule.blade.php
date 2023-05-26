@@ -31,22 +31,27 @@
             </ul>
         </div>
     </div>
+    @if (session()->has('success'))
+        <div class="alert alrt-success" role="alert" id="alert">
+            {{ session('success') }}
+            <i class='bx bx-x' id="icon" onclick="hideAlert()"></i>
+        </div>
+    @endif
     <form action="{{ route('schedule') }}" method="post">
         @csrf
         <div class="row">
             <div class="col">
-                <input type="date" name="date" id="date" @error('date') is-invalid @enderror required value="{{ old('date') }}">
-                @error('date')
+                <input type="date" name="date_test" id="date" @error('date_test') is-invalid @enderror required value="{{ old('date') }}">
+                @error('date_test')
                     <div class="invalid-feedback">
                         {{  $message  }}
                     </div>
                 @enderror
             </div>
             <div class="col">
-                <select name="type" id="test-type">
-                    <option value="option1">Select Test Type</option>
-                    <option value="option2">TOEFL</option>
-                    <option value="option3">TOEIC</option>
+                <select name="type_test" id="test-type">
+                    <option value="toefl">TOEFL</option>
+                    <option value="toeic">TOEIC</option>
                 </select>
             </div>
             <div class="col">
@@ -79,7 +84,8 @@
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $schedule->date_test }}</td>
                         <td>{{ $schedule->type_test }}</td>
-                        <td><span class="status completed">Finish</span></td>
+                        <td>{{ $schedule->status_test }}</td>
+                        {{-- <td><span class="status completed">Finish</span></td> --}}
                     </tr>
                     @endforeach
                     {{-- <td>

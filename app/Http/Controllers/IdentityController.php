@@ -22,7 +22,7 @@ class IdentityController extends Controller
                 //'user_id',
                 'name' =>'required','min:5','max:255',
                 'img_url' =>'required','min:5','max:255',
-                'birth_date' =>'required','min:5','max:50',
+                'birth_date' =>'required','date',
                 'gender'=>'required','min:5','max:255',
                 'identity_type'=>'required','min:5',
                 'identity_num'=>'required','min:9','max:16',

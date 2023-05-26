@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->date('date_test');
             $table->enum('type_test',['TOEFL','IBT']);
-            $table->boolean('status_test');
+            $table->boolean('status_test')->default(true);
             $table->timestamps();
         });
     }

@@ -17,20 +17,18 @@ return new class extends Migration
         Schema::create('identities', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(User::class)->constrained();
-            $table->string('name');
-            $table->string('img_url');
-            $table->date('birth_date');
+            $table->string('image');
             $table->enum('gender',['Male','Female']);
+            $table->date('birth_date');
             $table->enum('identity_type',['KTP','KTM']);
             $table->string('identity_num')->unique();
+            $table->enum('category',['Student', 'Employee', 'Public']);
+            $table->string('major')->nullable();
+            $table->string('study_program')->nullable();
+            $table->string('semester')->nullable();
             $table->string('phone')->unique();
             $table->string('address');
-            $table->enum('category',['Public', 'Employee', 'Student']);
-            $table->string('major');
-            $table->string('program');
-            $table->string('semester');
-            $table->enum('jabatan',['leader','staff']);
-            $table->boolean('status_identitas');
+            $table->boolean('status_identitas')->default(true);
             $table->timestamps();
         });
     }

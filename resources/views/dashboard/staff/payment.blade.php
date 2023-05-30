@@ -1,6 +1,6 @@
 @extends('layouts.master-menu')
 
-@section('title', 'User Data')
+@section('title', 'Payment')
 
 @push('custom-css')
 <link rel="stylesheet" href="{{ asset('css/dash-theme.css') }}">
@@ -26,7 +26,7 @@
                     <i class='bx bx-chevron-right'></i>
                 </li>
                 <li>
-                    <a class="active" href="{{ route('user') }}">User Data</a>
+                    <a class="active" href="{{ route('payment') }}">Payment</a>
                 </li>
             </ul>
         </div>
@@ -43,25 +43,33 @@
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Email</th>
-                        <th>Password</th>
-                        {{-- <th>Role</th> --}}
+                        <th>Participant</th>
+                        <th>Date</th>
+                        <th>Attacment</th>
                         <th>Status</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($users as $user)
+                    @foreach ($payments as $payment)
                     <tr>
-                        <td>{{ $loop->iteration }}</td>
-                        <td>{{ $user->email }}</td>
-                        <td>{{ $user->password }}</td>
-                        {{-- <td>Staff</td> --}}
-                        <td><span class="status In-Active">Inactive</span></td>
+                        <td>{{$loop->iteration}}</td>
+                        @foreach ($users as $user)
+                             <td value="{{ $user->id }}" >{{$user->name}}</td>
+                        @endforeach
+                        @foreach ($schedules as $schedule)
+                            <td value="{{ $schedule->id }}" >{{$schedule->date_test}}</td>
+                        @endforeach
+                        <td>{{$payment->pay_url}}</td>
+                        @if ($payment->is_payed == 1)
+                            <td><span class="status Active">{{ $payment->is_payed = 'Verified' }}</span></td>
+                        @else
+                        <td><span class="status In-Active">{{ $payment->is_payed = 'Unverified' }}</span></td>
+                        @endif
                         <td>
-                            <span><button class="btn-act">Disable</button></span>
+                            <span><button class="btn-act">Verify</button></span>
                         </td>
-                    </tr>                           
+                    </tr>
                     @endforeach
                 </tbody>
             </table>

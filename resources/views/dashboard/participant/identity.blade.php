@@ -9,6 +9,7 @@
 @push('profile')
     <a href="#">
         <img src="{{ asset('img/Murat.jpeg') }}">
+        {{-- <img src="{{ asset('storage/images/users/'.$identities->image) }}"> --}}
     </a>
 @endpush
 
@@ -30,7 +31,13 @@
             </ul>
         </div>
     </div>
-        <form action="{{ route('identity') }}" method="post">
+    @if (session()->has('success'))
+        <div class="alert alrt-success" role="alert" id="alert">
+            {{ session('success') }}
+            <i class='bx bx-x' id="icon" onclick="hideAlert()"></i>
+        </div>
+    @endif
+        <form action="{{ route('identity') }}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="row-from">
                 <div class="column left">
@@ -41,12 +48,7 @@
                     <div class="row-right">
                         <div class="input-warp">
                             <label for="name">Name</label>
-                            <input type="text" placeholder="Enter Name" name="name" id="name" @error('name') is-invalid @enderror required value="{{ old('name') }}">
-                            @error('name')
-                            <div class="invalid-feedback">
-                                {{  $message  }}
-                            </div>
-                            @enderror
+                            <input readonly type="text"  name="name" id="name" value="{{ auth()->user()->name }}">
                         </div>
                     </div>
                     <div class="row-right">
@@ -63,8 +65,8 @@
                     <div class="row-right">
                         <div class="input-warp">
                             <label for="birth">Birth Date</label>
-                            <input type="date" name="birth" @error('birth') is-invalid @enderror required value="{{ old('birth') }}">
-                            @error('birth')
+                            <input type="date" name="birth_date" @error('birth_date') is-invalid @enderror required value="{{ old('birth_date') }}">
+                            @error('birth_date')
                             <div class="invalid-feedback">
                                 {{  $message  }}
                             </div>
@@ -75,9 +77,9 @@
                         <div class="input-warp">
                             <label for="identity">Identity Type</label><br>
                             <div class="radio_btn">
-                                <input type="radio" name="identity" id="ktp" value="KTP">
+                                <input type="radio" name="identity_type" id="ktp" value="KTP">
                                 <label for="ktp">KTP</label>
-                                <input type="radio" name="identity" id="ktm" value="KTM">
+                                <input type="radio" name="identity_type" id="ktm" value="KTM">
                                 <label for="ktm">KTM</label>
                             </div>
                         </div>
@@ -85,9 +87,9 @@
                     <div class="row-right">
                         <div class="input-warp">
                             <label for="id_number">Identity Number</label>
-                            <input type="text" name="id_number" @error('id_number') is-invalid @enderror required value="{{ old('id_number') }}">
+                            <input  type="text" name="identity_num" @error('identity_num') is-invalid @enderror required value="{{ old('identity_num') }}">
                         </div>
-                        @error('id_number')
+                        @error('identity_num')
                         <div class="invalid-feedback">
                             {{  $message  }}
                         </div>
@@ -97,10 +99,11 @@
                     <div class="row-right">
                         <div class="input-warp">
                             <label for="status">Category</label>
-                            <select id="roleSelect" aria-label="Default select example">
-                                <option selected>Choose Categori</option>
-                                <option value="1">Students</option>                                       
-                                <option value="2">Public</option>      
+                            <select name="category" id="roleSelect" aria-label="Default select example">
+                                <option selected>Choose Category</option>
+                                <option value="1">Student</option>       
+                                <option value="2">Employee</option>
+                                <option value="3">Public</option>                                       
                             </select>
                         </div>
                     </div>
@@ -108,12 +111,12 @@
                         <div class="col-right">
                             <div class="input-warp">
                                 <div class="input-warp hidden student-fields">
-                                    <select aria-label="Default select example">
+                                    <select name="major" aria-label="Default select example">
                                         <option selected>Major</option>
-                                        <option value="1">T. Infromatika</option>
-                                        <option value="2">T. Listrik</option>
-                                        <option value="3">T. Elektro</option>
-                                        <option value="3">T. Mesin</option>
+                                        <option value="T. Infromatika">T. Infromatika</option>
+                                        <option value="T. Listrik">T. Listrik</option>
+                                        <option value="T. Elektro">T. Elektro</option>
+                                        <option value="T. Mesin">T. Mesin</option>
                                     </select>
                                 </div>
                             </div>
@@ -121,12 +124,12 @@
                         <div class="col-right">
                             <div class="input-warp">
                                 <div class="input-warp hidden student-fields">
-                                    <select  aria-label="Default select example">
+                                    <select name="study_program"  aria-label="Default select example">
                                         <option selected>Study Program</option>
-                                        <option value="1">D3-TI</option>
-                                        <option value="2">D3-TL</option>
-                                        <option value="3">D3-TE</option>
-                                        <option value="3">D3-TM</option>
+                                        <option value="D3-TI">D3-TI</option>
+                                        <option value="D3-TL">D3-TL</option>
+                                        <option value="D3-TE">D3-TE</option>
+                                        <option value="D3-TM">D3-TM</option>
                                     </select>
                                 </div>
                             </div>
@@ -134,7 +137,7 @@
                         <div class="col-right">
                             <div class="input-warp">
                                 <div class="input-warp hidden student-fields">
-                                    <select aria-label="Default select example">
+                                    <select name="semester" aria-label="Default select example">
                                         <option selected>Semester</option>
                                         <option value="1">1</option>
                                         <option value="2">2</option>
@@ -148,9 +151,9 @@
                     <h1>Contact</h1>
                     <div class="row-right">
                         <div class="input-warp">
-                            <label for="address">Address</label>
-                            <input type="text-area" name="address" id="address" @error('address') is-invalid @enderror required value="{{ old('address') }}">
-                            @error('address')
+                            <label for="phonenum">Phone Number</label>
+                            <input type="text" name="phone" id="phone" @error('phone') is-invalid @enderror required value="{{ old('phone') }}">
+                            @error('phone')
                             <div class="invalid-feedback">
                                 {{  $message  }}
                             </div>
@@ -159,9 +162,9 @@
                     </div>
                     <div class="row-right">
                         <div class="input-warp">
-                            <label for="phonenum">Phone Number</label>
-                            <input type="text" name="phonenum" id="phonenum" @error('phonenum') is-invalid @enderror required value="{{ old('phonenum') }}">
-                            @error('phonenum')
+                            <label for="address">Address</label>
+                            <input type="text-area" name="address" id="address" @error('address') is-invalid @enderror required value="{{ old('address') }}">
+                            @error('address')
                             <div class="invalid-feedback">
                                 {{  $message  }}
                             </div>

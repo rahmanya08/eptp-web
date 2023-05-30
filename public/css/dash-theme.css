@@ -417,6 +417,7 @@ a.btn-add {
 #content main .col {
     box-sizing: border-box;
     display: flex;
+    align-items: center;
 }
 
 #content main .sett-box .text-box input,
@@ -784,6 +785,11 @@ a.btn-add {
 }
 
 
+
+select#test-type,
+input#date {
+    height: 40px;
+}
     .col button {
         box-sizing: border-box;
         border: none;
@@ -930,3 +936,141 @@ input#ktp {
 
 
 /*FORMULIR*/
+
+/*SETTING*/
+.identity-box,
+.account-box {
+    box-sizing: border-box;
+    border: none;
+    background: darkgray;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    margin-top: 25px;
+}
+
+.text-box {
+    width: 50%;
+    height: 50%;
+    padding: 10px;
+}
+
+.text-box input {
+    width: 80%;
+    padding: 7px;
+    box-sizing: border-box;
+    border: none;
+    background: white;
+    border-radius: 3px;
+}
+
+.btn-edit {
+    box-sizing: border-box;
+    border: none;
+    background: var(--blue);
+    width: 17%;
+    padding: 5px;
+    text-align: center;
+    border-radius: 20px;
+    font-size: 14px;
+    margin-left: 80%;
+    margin-top: 10px;
+}
+
+.btn-edit a {
+    color: black;
+    font-weight: bold;
+}
+/*SETTING*/
+/*TEST-FORM*/
+.test-part {
+    box-sizing: border-box;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.test-part select{
+    padding: 10px;
+    width: 50%;
+    border: none;
+    background: mediumpurple;
+    border-radius: 5px;
+}
+
+.payment-part {
+    box-sizing: border-box;
+    border: none;
+    width: 48%;
+    height: 3.2rem;
+    background: slateblue;
+    padding: 15px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    margin: 20px 14px;
+}
+
+form button {
+    margin: 40px 14px;
+        padding: 12px;
+        width: 10%;
+        background: mediumslateblue;
+        border: none;
+        border-radius: 20px;
+        float: right;
+}
+/*TEST-FORM*/
+/*TEST-CARD*/
+.test-card {
+    box-sizing: border-box;
+    background: white;
+    border: solid 1px;
+    width: 60%;
+    height: 25rem;
+    margin-top: 50px;
+    margin-left: 150px;
+}
+/* Create two unequal columns that floats next to each other */
+.column-card {
+    float: left;
+    padding: 10px;
+    height: 300px; /* Should be removed. Only for demonstration */
+  }
+  
+  .left-side {
+    width: 31.6rem;
+    text-align: left;
+  }
+  
+  .right-side {
+    width: 16rem;
+  }
+  
+  /* Clear floats after the columns */
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+
+  .kop {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.photo {
+    box-sizing: border-box;
+    border: 1px solid;
+    width: 8rem;
+    height: 10rem;
+    margin: 0px 50px;
+}
+
+.photo img {
+    width: 8rem;
+    height: 10rem;
+    object-fit: cover;
+}
+/*TEST-CARD*/

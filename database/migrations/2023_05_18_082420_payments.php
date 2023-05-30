@@ -17,10 +17,10 @@ return new class extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(User::class)->nullable()->constrained()->nullOnDelete();
-            $table->foreignIdFor(Schedule::class)->nullable()->constrained();
+            $table->foreignIdFor(User::class)->constrained();
+            $table->foreignIdFor(Schedule::class)->constrained();
             $table->string('pay_url');
-            $table->boolean('is_payed');
+            $table->boolean('is_payed')->default(false);
             $table->timestamps();
         });
     }

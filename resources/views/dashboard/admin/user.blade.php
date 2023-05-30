@@ -1,6 +1,6 @@
 @extends('layouts.master-menu')
 
-@section('title', 'Registrant Data')
+@section('title', 'User Data')
 
 @push('custom-css')
 <link rel="stylesheet" href="{{ asset('css/dash-theme.css') }}">
@@ -8,7 +8,8 @@
 
 @push('profile')
     <a href="#">
-        <img src="{{ asset('img/Murat.jpeg') }}">
+        <img src="{{ asset('img/Akin Akinozu.jpg') }}" alt="">
+        {{-- <img src="{{ asset('storage/images/users'.$identity->image) }}"> --}}
     </a>
 @endpush
 
@@ -26,7 +27,7 @@
                     <i class='bx bx-chevron-right'></i>
                 </li>
                 <li>
-                    <a class="active" href="{{ route('registrant') }}">Registrant Data</a>
+                    <a class="active" href="{{ route('user') }}">User Data</a>
                 </li>
             </ul>
         </div>
@@ -42,31 +43,27 @@
             <table>
                 <thead>
                     <tr>
-                        <th>ID Participant</th>
-                        <th>Category</th>
-                        <th>Name</th>
-                        <th>Test Type</th>
-                        <th>Schedule</th>
+                        <th>ID</th>
+                        <th>Email</th>
+                        <th>Password</th>
+                        <th>Role</th>
+                        {{-- <th>Status</th> --}}
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($identities as $identity)
+                    @foreach ($users as $user)
                     <tr>
-                        <td>{{$loop->iteration}}</td>
-                        <td>{{$identity->category }}</td>
-                        @foreach ($users as $user)
-                            <td>{{$user->name}} </td>  
-                        @endforeach
-                        @foreach ($schedules as $schedule)
-                            <td>{{$schedule->type_test}}</td>
-                            <td>{{$schedule->date_test}}</td>       
-                        @endforeach
+                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ $user->email }}</td>
+                        <td>{{ $user->password }}</td>
+                        <td>{{ $user->role }}</td>
+                        {{-- <td><span class="status In-Active">Inactive</span></td>--}}
                         <td>
                             <span><button class="btn-act">Disable</button></span>
-                        </td>
-                    </tr>
-                    @endforeach                   
+                        </td> 
+                    </tr>                           
+                    @endforeach
                 </tbody>
             </table>
         </div>

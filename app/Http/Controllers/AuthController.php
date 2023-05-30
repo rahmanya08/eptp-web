@@ -28,18 +28,51 @@ class AuthController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
+            'name' =>'required','min:5','max:255',
             'email'=> 'required','email:dns','unique:users',
-            'password'=>'required','min:5','max:255'
+            'password'=>'required','min:5','max:255',
         ]);  
+        
+        $validatedData['role']='student';
+        // $validatedData['role']='admin';
 
-        //$validatedData['password'] = bcrypt($validatedData['password']);
         $validatedData['password'] = Hash::make($validatedData['password']);
+
+        //dd ($validatedData);
 
         User::create($validatedData);
     
 
         return redirect('/login')->with('success', 'Registration successfull! Please Login');
     }
+
+    public function signupStaff()
+    {
+        return view('signup.signup-staff', [
+            'title' => 'SignUp'
+        ]);
+    }
+
+        //Input Data Akun
+        public function storeStaff(Request $request)
+        {
+            $validatedData = $request->validate([
+                'name' =>'required','min:5','max:255',
+                'email'=> 'required','email:dns','unique:users',
+                'password'=>'required','min:5','max:255',
+            ]);  
+            
+            $validatedData['role']='staff';
+    
+            $validatedData['password'] = Hash::make($validatedData['password']);
+    
+            //dd ($validatedData);
+    
+            User::create($validatedData);
+        
+    
+            return redirect('/login')->with('success', 'Registration successfull! Please Login');
+        }
 
     //Autentikasi
     public function authenticate(Request $request)
@@ -51,7 +84,7 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
- 
+            
             return redirect()->intended('/dashboard');
         }
  
@@ -69,5 +102,10 @@ class AuthController extends Controller
 
         return redirect('/login');
         
+    }
+
+    public function checkName(Request $request)
+    {
+        //
     }
 }

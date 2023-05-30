@@ -37,7 +37,7 @@
                         @enderror
                     </div>
                     <div class="input-box">
-                        <i class='bx bx-lock-open'></i>
+                        <i class='bx bx-lock-open' onclick="myFunction()" style="cursor: pointer"></i>
                         <input type="password" name="password" id="password" required>
                         <label for="password">Password</label>
                     </div>

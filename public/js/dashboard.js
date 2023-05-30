@@ -73,3 +73,11 @@ roleSelect.addEventListener("change", function () {
         studentFields.forEach((el) => el.classList.remove("hidden"));
     else studentFields.forEach((el) => el.classList.add("hidden"));
 });
+
+const name = document.querySelector('#name');
+
+name.addEventListener('change', function(){
+	fetch('/menu-identity')
+	.then(response => response.json())
+	.then(data => name.value = data.name)
+});

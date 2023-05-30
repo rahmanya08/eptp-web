@@ -41,7 +41,7 @@
         @csrf
         <div class="row">
             <div class="col">
-                <input type="date" name="date_test" id="date" @error('date_test') is-invalid @enderror required value="{{ old('date') }}">
+                <input type="date" name="date_test" id="date" @error('date_test') is-invalid @enderror required value="{{ old('date_test') }}">
                 @error('date_test')
                     <div class="invalid-feedback">
                         {{  $message  }}
@@ -51,7 +51,7 @@
             <div class="col">
                 <select name="type_test" id="test-type">
                     <option value="toefl">TOEFL</option>
-                    <option value="toeic">TOEIC</option>
+                    <option value="ibt">IBT</option>
                 </select>
             </div>
             <div class="col">
@@ -74,8 +74,8 @@
                         <th>ID</th>
                         <th>Date</th>
                         <th>Type</th>
-                        {{-- <th>Participant</th> --}}
                         <th>Status</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -84,15 +84,16 @@
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $schedule->date_test }}</td>
                         <td>{{ $schedule->type_test }}</td>
-                        <td>{{ $schedule->status_test }}</td>
-                        {{-- <td><span class="status completed">Finish</span></td> --}}
+                        @if ($schedule->status_test == 1)
+                            <td>{{ $schedule->status_test = 'Active' }}</td>
+                        @else
+                            <td>{{ $schedule->status_test = 'Non-Active' }}</td>
+                        @endif
+                       <td>
+                        <a href="#">Disable</a>
+                       </td>
                     </tr>
                     @endforeach
-                    {{-- <td>
-                        <div class="animated-progress progress-blue">
-                            <span data-progress="90"></span>
-                        </div>
-                    </td> --}}
                 </tbody>
             </table>
         </div>

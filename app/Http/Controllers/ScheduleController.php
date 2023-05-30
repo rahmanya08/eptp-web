@@ -11,7 +11,7 @@ class ScheduleController extends Controller
    
    public function schedule ()
    {
-       return view('dashboard.schedule', [
+       return view('dashboard.staff.schedule', [
            'title' => 'Schedule',
            'schedules' => Schedule::all()
            
@@ -22,14 +22,14 @@ class ScheduleController extends Controller
    {
          $validatedData = $request->validate([
          'date_test'=> 'required|date',
-         'type_test' => 'required',
-         'status_test'=> 'required'
+         'type_test' => 'required'
       ]);  
 
-      //dd($request->all());
+      // dd($request->all());
+
       Schedule::create($validatedData);
          
-      return redirect('/schedule')->with('success', 'Schedule Data Saved!');
+      return redirect('/menu-schedule')->with('success', 'Schedule Data Saved!');
    }
 
 }

@@ -20,19 +20,17 @@ class Identity extends Authenticatable
      */
     protected $fillable = [
         'user_id',
-        'name',
-        'img_url',
-        'birth_date',
+        'image',
         'gender',
+        'birth_date',
         'identity_type',
         'identity_num',
-        'phone',
-        'address',
         'category',
         'major',
         'study_program',
         'semester',
-        'jabatan',
+        'phone',
+        'address',
         'status_identitas'
     ];
 

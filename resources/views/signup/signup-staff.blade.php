@@ -11,7 +11,7 @@
     <section>
         <div class="form-box signup  lg-5">
             <div class="form-value">
-                <form action="{{ route('signup') }}" method="post">
+                <form action="{{ route('signupStaff') }}" method="post">
                     @csrf
                     <h2>SignUp</h2>
                     <div class="input-box">

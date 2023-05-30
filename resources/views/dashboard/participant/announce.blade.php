@@ -36,7 +36,9 @@
                         <i class='bx bxs-check-circle'></i>
                 </div>
                 <div class="box-body">
-                        <h1>550</h1>
+                    @foreach ($results as $result)
+                        <h1 value="{{ $result->user_id }}">{{  $result->skor}}</h1>
+                    @endforeach
                         <p>You can download the certificate below</p>
                 </div>
                 <div>

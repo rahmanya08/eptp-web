@@ -1,8 +1,5 @@
 <?php
 
-use App\Models\Identitas;
-use App\Models\Identity;
-use App\Models\Result;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -20,9 +17,10 @@ return new class extends Migration
         Schema::create('results', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(User::class)->nullable()->constrained();
+            $table->string('name');
             $table->string('skor');
             $table->string('sertif_url');
-            $table->boolean('result_status');
+            $table->boolean('result_status')->default(false);
             $table->timestamps();
         });
     }

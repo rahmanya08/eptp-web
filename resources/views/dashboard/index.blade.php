@@ -9,6 +9,7 @@
 @push('profile')
     <a href="#">
         <img src="{{ asset('img/Murat.jpeg') }}">
+        {{-- //<img src="{{ asset('storage/images/users/'.$identities->image) }}"> --}}
     </a>
 @endpush
 

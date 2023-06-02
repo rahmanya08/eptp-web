@@ -40,9 +40,9 @@
         @csrf
         <div class="row-4">
             <div class="col">
-                <select class="form-select" name="name" id="name">
+                <select class="form-select" name="user_id" id="name">
                     @foreach ($users as $user)
-                        <option value="{{ $user->id }}">{{  $user->name}}</option>
+                        <option value="{{ $user->user_id }}">{{  $user->name}}</option>
                     @endforeach
                 </select>
             </div>
@@ -76,9 +76,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($results as $result)
+                        @foreach ($results as $result)
                         <tr>
-                            <td>{{  $loop->iteration }}</td>
+                            <td>{{ $loop->iteration }}</td>
                             <td>{{ $result->name }}</td>
                             <td>{{ $result->skor }}</td>
                             <td>{{ $result->sertif_url }}</td>
@@ -89,7 +89,7 @@
                             @endif
                             <td><a href="#">Success</a></td>
                         </tr> 
-                    @endforeach
+                        @endforeach
                 </tbody>
             </table>
         </div>

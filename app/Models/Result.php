@@ -11,7 +11,6 @@ class Result extends Model
 
     protected $fillable = [
         'user_id',
-        'name',
         'skor',
         'sertif_url',
         'result_status'

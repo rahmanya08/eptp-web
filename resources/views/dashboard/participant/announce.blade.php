@@ -37,12 +37,12 @@
                 </div>
                 <div class="box-body">
                     @foreach ($results as $result)
-                        <h1 value="{{ $result->user_id }}">{{  $result->skor}}</h1>
+                        <h1>{{ $result->skor}}</h1>
                     @endforeach
                         <p>You can download the certificate below</p>
                 </div>
                 <div>
-                    <a href="#" class="btn-download">
+                    <a href="file/certif{{ $result->certif_url }}" class="btn-download">
                         <i class='bx bxs-download'></i>
                         <span class="text">Download PDF</span>
                     </a>

@@ -16,19 +16,38 @@ class PaymentController extends Controller
     {
         return view('dashboard.staff.payment', [
             'title' => 'Payment',
-            'payments' => Payment::all(),
-            'schedules' => Schedule::all(),
-            'users' => User::all(),
-            'identities'=> Identity::all()
+            'payments' => Payment::select('payments.id', 'users.name', 'payments.pay_url', 'payments.is_payed')
+            ->join('users', 'users.id', '=', 'payments.user_id' )->get()
         ]);
     }
 
     public function create()
     {
         return view('dashboard.participant.test-form ', [
-            'schedules' => Schedule::all()
+            'schedules' => Schedule::all(),
+            'identities' => Identity::select('image')->where('user_id', auth()->user()->id)
         ]);
     }
+
+    public function participant ()
+    {
+        return view('dashboard.admin.participant', [
+            'title' => 'Participant',
+            'identities' => Identity::all()->where('position', '=', null),
+            'users' => User::select('name')->join('identities', 'users.id', '=', 'identities.user_id' )->get()
+        ]);
+    }
+
+    public function registrant ()
+    {
+        return view('dashboard.registrant', [
+            'title' => 'Registration Data',
+            'payments' => Payment::select('payments.created_at', 'users.name', 'schedules.type_test', 'schedules.date_test')
+            ->join('users', 'users.id', '=', 'payments.user_id' )->join('schedules','schedules.id', '=', 'payments.schedule_id')->get()
+        ]);
+    }
+
+
 
     //Input Data Test Payment
     public function store(Request $request)

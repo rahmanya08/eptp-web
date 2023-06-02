@@ -14,17 +14,35 @@
         </li>
         @can('admin')
             <li>
-                <a href="{{ route('user') }} {{ Request::is('identity') ? 'active' : '' }}">
+                <a href="{{ route('user') }} {{ Request::is('user') ? 'active' : '' }}">
                     <i class='bx bxs-user-detail'></i>
                     <span class="text">User Data</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('staff') }} {{ Request::is('staff') ? 'active' : '' }}">
+                    <i class='bx bxs-briefcase'></i>
+                    <span class="text">Staff Data</span>
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('participant') }} {{ Request::is('participant') ? 'active' : '' }}">
+                    <i class='bx bx-group'></i>
+                    <span class="text">Participant Data</span>
                 </a>
             </li>
         @endcan
         @can('staff')
             <li>
+                <a href="{{ route('identityStaff') }}" {{ Request::is('identityStaff') ? 'active' : '' }}>
+                    <i class='bx bxs-id-card'></i>
+                    <span class="text">Profile</span>
+                </a>
+            </li>
+            <li>
                 <a href="{{ route('registrant') }}">
                     <i class='bx bxs-registered'></i>
-                    <span class="text">Registrant Data</span>
+                    <span class="text">Registrantion Data</span>
                 </a>
             </li>
             <li>
@@ -48,15 +66,9 @@
         @endcan
         @can('student')
             <li>
-                <a href="{{ route('announce') }}">
-                    <i class='bx bxs-award'></i>
-                    <span class="text">Announcment</span>
-                </a>
-            </li>
-            <li>
                 <a href="{{ route('identity') }}" {{ Request::is('identity') ? 'active' : '' }}>
                     <i class='bx bxs-id-card'></i>
-                    <span class="text">Identity</span>
+                    <span class="text">Profile</span>
                 </a>
             </li>
             <li>
@@ -65,6 +77,12 @@
                     <span class="text">Test</span>
                 </a>
             </li>  
+            <li>
+                <a href="{{ route('announce') }}">
+                    <i class='bx bxs-award'></i>
+                    <span class="text">Announcment</span>
+                </a>
+            </li>
         @endcan
     </ul>
     <ul class="side-menu">

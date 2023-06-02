@@ -31,6 +31,7 @@ class Identity extends Authenticatable
         'semester',
         'phone',
         'address',
+        'position',
         'status_identitas'
     ];
 

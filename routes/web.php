@@ -10,6 +10,8 @@ use App\Http\Controllers\IdentityController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ResultController;
 use App\Http\Controllers\ScheduleController;
+use App\Http\Controllers\StaffController;
+use GuzzleHttp\Middleware;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,44 +45,56 @@ Route::controller(AuthController::class)->group(function(){
 });
 
 Route::controller(UserController::class)->group(function(){
-   Route::get('/test-card','card')->name('card');
-   
-
+   //
 });
 
 Route::controller(DashboardController::class)->group(function(){
 
-Route::get('/dashboard','index')->name('index')->middleware('auth');
+Route::get('/dashboard-admin','index')->name('index')->middleware('admin');
+
 Route::get('/landing-page','landing')->name('landing');
+});
 
-Route::get('/test-card','show')->name('show');
+Route::controller(StaffController::class)->group(function(){
+   Route::get('/dashboard-staff','index')->name('index')->middleware('staff');
 
+   Route::get('/identity-staff','identityStaff')->name('identityStaff')->middleware('staff');
+
+   Route::get('/menu-staff-data','staff')->name('staff')->middleware('admin');
+   
+   Route::post('/identity-staff','store')->name('store')->middleware('staff');
 });
 
 Route::controller(IdentityController::class)->group(function(){
    Route::get('/menu-identity','identity')->name('identity');
-   Route::put('/menu-identity','edit')->name('edit');
+
    Route::post('/menu-identity', 'store')->name('store');
 
-   Route::get('/menu-registrant','registrant')->name('registrant')->middleware('staff');
+   Route::get('/dashboard-participant','index')->name('index');
+   Route::get('/menu-participant-data','participant')->name('participant')->middleware('admin');
 });
 
 Route::controller(UserController::class)->group(function(){
    Route::get('/menu-user-data','user')->name('user')->middleware('admin');
 
    Route::get('/menu-account','account')->name('account')->middleware('auth');
+
    Route::get('/menu-account','edit')->name('edit');
 });
 
 Route::controller(ScheduleController::class)->group(function(){
    Route::get('/menu-schedule','schedule')->name('schedule')->middleware('staff');
-   Route::post('/menu-schedule','store')->name('store');
+
+   Route::post('/menu-schedule','store')->name('store')->middleware('staff');
 });
 
 Route::controller(PaymentController::class)->group(function(){
    Route::get('/menu-payment','payment')->name('payment')->middleware('staff');
+   
+   Route::get('/menu-registrant','registrant')->name('registrant')->middleware('staff');
 
    Route::get('/menu-test','create')->name('create');
+
    Route::post('/menu-test','store')->name('store');
 });
 
@@ -88,6 +102,7 @@ Route::controller(ResultController::class)->group(function(){
    Route::get('/test-card','testcard')->name('testcard');
 
    Route::get('/menu-result','result')->name('result')->middleware('staff');
+
    Route::post('/menu-result','store')->name('store')->middleware('staff');
 
    Route::get('/menu-announce','announce')->name('announce');

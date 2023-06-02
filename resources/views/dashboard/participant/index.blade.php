@@ -31,17 +31,13 @@
                 </li>
             </ul>
         </div>
-        {{-- <a href="#" class="btn-download">
-            <i class='bx bxs-download'></i>
-            <span class="text">Download PDF</span>
-        </a> --}}
     </div>
     <ul class="box-info">
         <li>
-            <i class='bx bxs-user-check'></i>
+            <i class='bx bxs-download'></i>
             <span class="text">
-                <h3>200</h3>
-                <p>Users</p>
+                <h3>Test Card</h3>
+                <a href="{{ route('testcard') }}" class="btn-download">Download</a>
             </span>
         </li>
     </ul>

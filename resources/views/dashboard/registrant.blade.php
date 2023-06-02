@@ -1,6 +1,6 @@
 @extends('layouts.master-menu')
 
-@section('title', 'Registrant Data')
+@section('title', 'Registration Data')
 
 @push('custom-css')
 <link rel="stylesheet" href="{{ asset('css/dash-theme.css') }}">
@@ -42,31 +42,25 @@
             <table>
                 <thead>
                     <tr>
-                        <th>ID Participant</th>
-                        <th>Category</th>
+                        <th>No Registration</th>
                         <th>Name</th>
                         <th>Test Type</th>
-                        <th>Schedule</th>
-                        <th>Action</th>
+                        <th>Date</th>
+                        <th>Status</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($identities as $identity)
+                    @foreach ($payments as $payment)
                     <tr>
-                        <td>{{$loop->iteration}}</td>
-                        <td>{{$identity->category }}</td>
-                        @foreach ($users as $user)
-                            <td>{{$user->name}} </td>  
-                        @endforeach
-                        @foreach ($schedules as $schedule)
-                            <td>{{$schedule->type_test}}</td>
-                            <td>{{$schedule->date_test}}</td>       
-                        @endforeach
+                        <td>{{$payment->created_at->format('Ymd His')}}</td>
+                        <td>{{$payment->name }}</td>
+                        <td>{{$payment->type_test }}</td>
+                        <td>{{$payment->date_test }}</td>
                         <td>
                             <span><button class="btn-act">Disable</button></span>
                         </td>
                     </tr>
-                    @endforeach                   
+                    @endforeach
                 </tbody>
             </table>
         </div>

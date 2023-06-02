@@ -20,14 +20,15 @@ return new class extends Migration
             $table->string('image');
             $table->enum('gender',['Male','Female']);
             $table->date('birth_date');
-            $table->enum('identity_type',['KTP','KTM']);
+            $table->enum('identity_type',['KTP','KTM'])->nullable();
             $table->string('identity_num')->unique();
-            $table->enum('category',['Student', 'Employee', 'Public']);
+            $table->enum('category',['Student', 'Employee', 'Public'])->nullable();
             $table->string('major')->nullable();
             $table->string('study_program')->nullable();
             $table->string('semester')->nullable();
             $table->string('phone')->unique();
             $table->string('address');
+            $table->enum('position',['Head Staff','Staff'])->nullable();
             $table->boolean('status_identitas')->default(true);
             $table->timestamps();
         });

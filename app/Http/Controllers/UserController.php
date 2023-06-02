@@ -20,6 +20,14 @@ class UserController extends Controller
         ]);
     }
 
+    
+    public function account ()
+    {
+        return view('dashboard.account ', [
+            'title' => 'Account'
+        ]);
+    }
+
     public function edit(User $user)
     {
         return view('dashboard.account ', [

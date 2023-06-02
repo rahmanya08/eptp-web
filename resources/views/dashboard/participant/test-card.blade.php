@@ -53,39 +53,32 @@
                 <div class="column-card left-side">
                     <table class="table">
                         <tbody>
-                            @foreach ($identities as $identity)
-                                <tr>
-                                    <th scope="row">Registration Number:</th>
-                                    <td colspan="2">{{$identity->created_at->format('Ymd His')}}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Name:</th>
-                                    <td colspan="2">{{ auth()->user()->name }}</td>
-                                </tr>  
-                                {{-- @foreach ($users as $user)
-                                    <tr>
-                                        <th scope="row">Name:</th>
-                                        <td colspan="2">{{ $user->name }}</td>
-                                    </tr>  
-                                @endforeach --}}
-                                <tr>
-                                    <th scope="row">Birth Date:</th>
-                                    <td colspan="2">{{$identity->birth_date}}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">Phone:</th>
-                                    <td colspan="2">{{$identity->phone}}</td>
-                                </tr>
-                                @foreach ($schedules as $schedule)
-                                    <tr>
-                                        <th scope="row">Schedule:</th>
-                                        <td colspan="2">{{$schedule->date}}</td>
-                                    </tr>
-                                @endforeach
+                            @foreach ($payments as $payment)
+                            <tr>
+                                <th scope="row">Registration Number:</th>
+                                <td colspan="2" value="{{ auth()->user()->id }}">{{$payment->created_at->format('Ymd His')}}</td>
+                             </tr>
                             @endforeach
-                            
-                            
-                            
+                            @foreach ($users as $user)
+                            <tr>
+                                <th scope="row">Name:</th>
+                                <td colspan="2">{{$user->name }}</td>
+                            </tr>   
+                            <tr>
+                                <th scope="row">Birth Date:</th>
+                                <td colspan="2">{{$user->birth_date}}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Phone:</th>
+                                <td colspan="2">{{$user->phone}}</td>
+                            </tr>
+                            @endforeach
+                            @foreach ($payments as $payment)
+                                <tr>
+                                    <th scope="row">Schedule:</th>
+                                    <td colspan="2">{{$payment->date_test}}</td>
+                                </tr>
+                            @endforeach
                         </tbody>
                       </table>
                 </div>

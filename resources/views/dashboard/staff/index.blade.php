@@ -38,10 +38,17 @@
     </div>
     <ul class="box-info">
         <li>
-            <i class='bx bxs-user-check'></i>
+            <i class='bx bxs-group'></i>
             <span class="text">
-                <h3>200</h3>
-                <p>Users</p>
+                <h3>500</h3>
+                <p>Registration</p>
+            </span>
+        </li>
+        <li>
+            <i class='bx bx-calendar-edit'></i>
+            <span class="text">
+                <h3>5</h3>
+                <p>Schedule</p>
             </span>
         </li>
     </ul>

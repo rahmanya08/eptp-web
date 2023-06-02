@@ -7,9 +7,11 @@
 @endpush
 
 @push('profile')
-    <a href="#">
-        <img src="{{ asset('img/Akin Akinozu.jpg') }}">
-    </a>
+    @foreach ($identities as $identity)
+        <a href="#">
+            <img src="{{ asset('public/images/users/'.$identity->image) }}">
+        </a>
+    @endforeach
 @endpush
 
 

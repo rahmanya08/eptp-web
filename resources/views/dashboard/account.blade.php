@@ -30,10 +30,10 @@
                 </ul>
             </div>
         </div>
-        <form action="{{ route('edit') }}" method="post">
+        <form action="{{ ('edit') }}" method="post">
             @method('put')
             @csrf
-            <h2 style="margin-top: 50px">Account</h2>
+            <h2 style="margin-top: 50px">Edit Account</h2>
             <div class="account-box">
                 <div class="text-box">
                     <input type="text" name="name" id="name" required value="{{ old('name', $user->name) }}">

@@ -44,7 +44,6 @@
                     <tr>
                         <th>ID</th>
                         <th>Participant</th>
-                        <th>Date</th>
                         <th>Attacment</th>
                         <th>Status</th>
                         <th>Action</th>
@@ -53,19 +52,14 @@
                 <tbody>
                     @foreach ($payments as $payment)
                     <tr>
-                        <td>{{$loop->iteration}}</td>
-                        @foreach ($users as $user)
-                             <td value="{{ $user->id }}" >{{$user->name}}</td>
-                        @endforeach
-                        @foreach ($schedules as $schedule)
-                            <td value="{{ $schedule->id }}" >{{$schedule->date_test}}</td>
-                        @endforeach
+                        <td>{{ $loop->iteration }}</td>
+                        <td>{{$payment->name}}</td>
                         <td>{{$payment->pay_url}}</td>
-                        @if ($payment->is_payed == 1)
-                            <td><span class="status Active">{{ $payment->is_payed = 'Verified' }}</span></td>
-                        @else
-                        <td><span class="status In-Active">{{ $payment->is_payed = 'Unverified' }}</span></td>
-                        @endif
+                            @if ($payment->is_payed == 1)
+                                <td><span class="status Active">{{ $payment->is_payed = 'Verified' }}</span></td>
+                            @else
+                            <td><span class="status In-Active">{{ $payment->is_payed = 'Unverified' }}</span></td>
+                            @endif
                         <td>
                             <span><button class="btn-act">Verify</button></span>
                         </td>

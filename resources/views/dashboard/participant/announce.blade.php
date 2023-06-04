@@ -7,9 +7,13 @@
 @endpush
 
 @push('profile')
-    <a href="#">
-        <img src="{{ asset('img/Akin Akinozu.jpg') }}">
-    </a>
+    @foreach ($identities as $identity)
+        @if ($identity->image != null)
+            <img src="{{ asset('storage/images/users/'.$identity->image) }}">
+        @else
+            <img src="{{ asset('img/nopic.png') }}" alt="" id="profile">
+        @endif
+    @endforeach
 @endpush
 
 @section('main-content')
@@ -42,10 +46,12 @@
                         <p>You can download the certificate below</p>
                 </div>
                 <div>
-                    <a href="file/certif{{ $result->certif_url }}" class="btn-download">
+                    @foreach ($results as $result)
+                    <a href="{{ asset('storage/file/certif/'.$result->sertif_url) }}" class="btn-download">
                         <i class='bx bxs-download'></i>
                         <span class="text">Download PDF</span>
                     </a>
+                    @endforeach
                 </div>
             </div>
             

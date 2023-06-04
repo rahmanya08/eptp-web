@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\FIleController;
 use App\Http\Controllers\IdentityController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ResultController;
@@ -69,6 +70,7 @@ Route::controller(IdentityController::class)->group(function(){
    Route::get('/menu-identity','identity')->name('identity');
 
    Route::post('/menu-identity', 'store')->name('store');
+   Route::get('/menu-identity-edit','updateIdentity')->name('updateIdentity');
 
    Route::get('/dashboard-participant','index')->name('index');
    Route::get('/menu-participant-data','participant')->name('participant')->middleware('admin');
@@ -78,8 +80,7 @@ Route::controller(UserController::class)->group(function(){
    Route::get('/menu-user-data','user')->name('user')->middleware('admin');
 
    Route::get('/menu-account','account')->name('account')->middleware('auth');
-
-   Route::get('/menu-account','edit')->name('edit');
+   Route::post('/menu-account','updateAccount')->name('updateAccount');
 });
 
 Route::controller(ScheduleController::class)->group(function(){
@@ -100,10 +101,16 @@ Route::controller(PaymentController::class)->group(function(){
 
 Route::controller(ResultController::class)->group(function(){
    Route::get('/test-card','testcard')->name('testcard');
+   Route::get('/test-card-pdf','convertPdf')->name('convertPdf');
+
 
    Route::get('/menu-result','result')->name('result')->middleware('staff');
 
    Route::post('/menu-result','store')->name('store')->middleware('staff');
 
    Route::get('/menu-announce','announce')->name('announce');
+});
+
+Route::controller(FIleController::class)->group(function(){
+   //Route::get('/test-card-pdf','convertPdf')->name('convertPdf');
 });

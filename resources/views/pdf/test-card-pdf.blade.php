@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="{{ asset('css/dash-theme.css') }}">
 @endpush
 
-@push('profile')
+{{-- @push('profile')
     @foreach ($identities as $identity)
         @if ($identity->image != null)
             <img src="{{ asset('storage/images/users/'.$identity->image) }}">
@@ -14,37 +14,16 @@
             <img src="{{ asset('img/nopic.png') }}" alt="" id="profile">
         @endif
     @endforeach
-@endpush
+@endpush --}}
 
 
 @section('main-content')
 
 <main>
-    <div class="head-title">
-        <div class="left">
-            <h1>Dashboard</h1>
-            <ul class="breadcrumb">
-                <li>
-                    <a href="{{ route('index') }}">Dashboard</a>
-                </li>
-                <li>
-                    <i class='bx bx-chevron-right'></i>
-                </li>
-                <li>
-                    <a class="active" href="{{ route('testcard') }}">Test Card</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-    @if (session()->has('success'))
-        <div class="alert alrt-success" role="alert" id="alert">
-            {{ session('success') }}
-            <i class='bx bx-x' id="icon" onclick="hideAlert()"></i>
-        </div>
-    @endif
-    <form action="{{ route('testcard') }}" method="" enctype="">
+    <form action="{{ route('convertPdf') }}" method="" enctype="">
+        <h1>Test Card</h1>
         <div class="test-card">
-            <div class="fill-card">
+            {{-- <div class="fill-card">
                 <table class="table-card">
                     <tbody>
                         <tr>
@@ -92,10 +71,10 @@
                         @endforeach
                     </tbody>
                   </table>
-            </div>
-            <div>
+            </div> --}}
+            {{-- <div>
                 <a class="btn-convert" href="{{ route('convertPdf') }}">Download</a>
-            </div> 
+            </div>  --}}
         </div>
     </form>
 </main>

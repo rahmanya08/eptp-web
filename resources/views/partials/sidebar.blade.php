@@ -87,7 +87,7 @@
     </ul>
     <ul class="side-menu">
         <li>
-            <a href="{{ route('edit') }}">
+            <a href="{{ route('updateAccount') }}">
                 <i class='bx bxs-cog' ></i>
                 <span class="text">Setting</span>
             </a>

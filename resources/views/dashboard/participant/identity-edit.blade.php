@@ -26,7 +26,7 @@
                     <i class='bx bx-chevron-right'></i>
                 </li>
                 <li>
-                    <a class="active" href="{{ route('identity') }}">Identity</a>
+                    <a class="active" href="{{ route('updateIdentity') }}">Update Identity</a>
                 </li>
             </ul>
         </div>
@@ -37,8 +37,9 @@
             <i class='bx bx-x' id="icon" onclick="hideAlert()"></i>
         </div>
     @endif
-        <form action="{{ route('identity') }}" method="post" enctype="multipart/form-data">
+        <form action="{{ route('updateIdentity') }}" method="post" enctype="multipart/form-data">
             @csrf
+            @method('put')
             <div class="row-from">
                 <div class="column left">
                     @include("partials.up-profile")
@@ -152,7 +153,7 @@
                     <div class="row-right">
                         <div class="input-warp">
                             <label for="phonenum">Phone Number</label>
-                            <input type="text" name="phone" id="phone" @error('phone') is-invalid @enderror required value="{{ old('phone') }}">
+                            <input type="text" name="phone" id="phone" @error('phone') is-invalid @enderror required value="{{ old('phone'), $identity->phone}}">
                             @error('phone')
                             <div class="invalid-feedback">
                                 {{  $message  }}
@@ -172,9 +173,6 @@
                         </div>
                     </div>
                     <button type="submit" class="save-btn"  onclick="return getData()">Save</button>
-                    <div>
-                        <a class="btn-convert" href="{{ route('updateIdentity') }}">Edit</a>
-                    </div>
                 </div>
             </div>
 

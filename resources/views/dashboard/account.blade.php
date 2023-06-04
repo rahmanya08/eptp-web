@@ -25,30 +25,35 @@
                         <i class='bx bx-chevron-right'></i>
                     </li>
                     <li>
-                        <a class="active" href="{{ route('edit') }}">Setting</a>
+                        <a class="active" href="{{ route('updateAccount') }}">Setting</a>
                     </li>
                 </ul>
             </div>
         </div>
-        <form action="{{ ('edit') }}" method="post">
-            @method('put')
+        @if (session()->has('success'))
+        <div class="alert alrt-success" role="alert" id="alert">
+            {{ session('success') }}
+            <i class='bx bx-x' id="icon" onclick="hideAlert()"></i>
+        </div>
+        @endif
+        <form action="{{ route('updateAccount') }}" method="post">
             @csrf
             <h2 style="margin-top: 50px">Edit Account</h2>
             <div class="account-box">
-                <div class="text-box">
-                    <input type="text" name="name" id="name" required value="{{ old('name', $user->name) }}">
+                <div class="input-box">
+                    <label for="">Name</label>
+                    <input type="text" name="name" id="name" required value="{{ old('name', auth()->user()->name) }}">
                 </div>
-                <div class="text-box">
-                    <input type="email" name="email" id="email" required value="{{ old('email', $user->email) }}">
+                <div class="input-box">
+                    <label for="email">Email</label>
+                    <input type="email" name="email" id="email" required value="{{ old('email', auth()->user()->email) }}">
                 </div>
-                <div class="text-box">
-                    <input type="password" name="pass" id="pass" required value="{{ old('password', $user->password) }}" >
+                <div class="input-box password-box">
+                    <i class='bx bx-lock-open' onclick="myFunction()" style="cursor: pointer"></i>
+                    <label for="password">Password</label>
+                    <input type="password" name="pass" id="pass" value="{{ old('password')}}">
                 </div>
-                <div class="btn-edit">
-                    <a href="#">
-                        <span class="text">Save Changes</span>
-                    </a>
-                </div>
+                <button type="submit" class="edit-btn"  onclick="return getData()">Save Changes</button>
             </div>
         </form>
         {{-- <form action="{{ route('account') }}" method="post">

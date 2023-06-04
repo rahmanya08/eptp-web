@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\Identity;
 use App\Models\Payment;
 use App\Models\Result;
-use App\Models\Schedule;
 use App\Models\User;
 use Illuminate\Contracts\Support\ValidatedData;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
+use Barryvdh\DomPDF\Facade\PDF;
+
 
 class ResultController extends Controller
 {
@@ -24,11 +26,17 @@ class ResultController extends Controller
             'users' => User::select('users.name', 'identities.birth_date', 'identities.phone')
             ->join('identities' ,'identities.user_id' ,'=' ,'users.id')
             ->where('user_id', auth()->user()->id)
+            ->get(),
+
+            'identities' => Identity::select('image')
+            ->join('users', 'identities.user_id', '=', 'users.id')
+            ->where('user_id', auth()->user()->id)
             ->get()
 
         ]);
     }
 
+    
     public function result ()
     {
         return view('dashboard.staff.result', [
@@ -43,7 +51,11 @@ class ResultController extends Controller
     {
         return view('dashboard.participant.announce ', [
             'title' => 'Announce',
-            'results' => Result::select('skor')
+            'identities' => Identity::select('image')
+            ->join('users', 'identities.user_id', '=', 'users.id')
+            ->where('user_id', auth()->user()->id)
+            ->get(),
+            'results' => Result::select('skor','sertif_url')
             ->join('users', 'results.user_id', '=', 'users.id')
             ->where('user_id', auth()->user()->id)
             ->get()
@@ -72,18 +84,16 @@ class ResultController extends Controller
             $validatedData['sertif_url'] = $file_name;
         }
 
-        // if ($request->has('skor') >= 400)
-        // {
-        //     $changeStatus = '1';
-        //     $ValidatedData['is_payed'] = $changeStatus;
-        // }
-
        Result::create($validatedData);
     
 
         return redirect('/menu-result')->with('success', 'Formulir Complete! Please Choose Your Test');
     }
 
-
+    public function convertPdf()
+    {
+        $pdf = PDF::loadView('pdf.test-card-pdf');
+        return $pdf->download('test-card-pdf.pdf');
+    }
 
 }

@@ -17,7 +17,7 @@ return new class extends Migration
         Schema::create('identities', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(User::class)->constrained();
-            $table->string('image');
+            $table->string('image')->default(null);
             $table->enum('gender',['Male','Female']);
             $table->date('birth_date');
             $table->enum('identity_type',['KTP','KTM'])->nullable();

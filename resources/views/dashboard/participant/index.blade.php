@@ -7,10 +7,13 @@
 @endpush
 
 @push('profile')
-    <a href="#">
-        <img src="{{ asset('img/Murat.jpeg') }}">
-        {{-- //<img src="{{ asset('storage/images/users/'.$identities->image) }}"> --}}
-    </a>
+    @foreach ($identities as $identity)
+        @if ($identity->image != null)
+            <img src="{{ asset('storage/images/users/'.$identity->image) }}">
+        @else
+            <img src="{{ asset('img/nopic.png') }}" alt="" id="profile">
+        @endif
+    @endforeach
 @endpush
 
 @section('main-content')

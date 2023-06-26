@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 
-class isHeadStaff
+class IsHead
 {
     /**
      * Handle an incoming request.
@@ -16,6 +16,9 @@ class isHeadStaff
      */
     public function handle(Request $request, Closure $next)
     {
+        if (!auth()->check() || auth()->user()->role !== 'headStaff') {
+            abort(403);
+        }
         return $next($request);
     }
 }

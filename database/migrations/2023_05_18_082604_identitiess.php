@@ -16,7 +16,7 @@ return new class extends Migration
     {
         Schema::create('identities', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(User::class)->constrained();
+            $table->foreignIdFor(User::class)->nullable()->constrained();
             $table->string('image')->default(null);
             $table->enum('gender',['Male','Female']);
             $table->date('birth_date');
@@ -29,7 +29,6 @@ return new class extends Migration
             $table->string('phone')->unique();
             $table->string('address');
             $table->enum('position',['Head Staff','Staff'])->nullable();
-            $table->boolean('status_identitas')->default(true);
             $table->timestamps();
         });
     }

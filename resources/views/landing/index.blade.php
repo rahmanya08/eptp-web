@@ -70,7 +70,7 @@
     <!-- Navbar Start -->
     <nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top py-lg-0 px-lg-5 wow fadeIn" data-wow-delay="0.1s">
         <a href="index.html" class="navbar-brand ms-4 ms-lg-0">
-            <h1 class="text-primary m-0"><img class="me-3" src="img/icons/icon-1.png" alt="Icon">Language Center</h1>
+            <h3 class="text-primary m-0"><img class="me-3" src="img/icons/icon-1.png" alt="Icon">Language Center Of Cilacap State Polytechnic</h3>
         </a>
         <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
             <span class="navbar-toggler-icon"></span>
@@ -80,7 +80,7 @@
                 <a href="index.html" class="nav-item nav-link active">Home</a>
                 <a href="about.html" class="nav-item nav-link">About</a>
                 <a href="service.html" class="nav-item nav-link">Services</a>
-                <div class="nav-item dropdown">
+                {{-- <div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
                     <div class="dropdown-menu border-0 m-0">
                         <a href="feature.html" class="dropdown-item">Our Features</a>
@@ -90,7 +90,7 @@
                         <a href="testimonial.html" class="dropdown-item">Testimonial</a>
                         <a href="404.html" class="dropdown-item">404 Page</a>
                     </div>
-                </div>
+                </div> --}}
                 <a href="contact.html" class="nav-item nav-link">Contact</a>
             </div>
             <a href="{{ route('signin') }}" class="btn btn-primary py-2 px-4 d-none d-lg-block">Sign In</a>
@@ -103,7 +103,7 @@
     <!-- Carousel Start -->
     <div class="container-fluid p-0 pb-5 wow fadeIn" data-wow-delay="0.1s">
         <div class="owl-carousel header-carousel position-relative">
-            <div class="owl-carousel-item position-relative" data-dot="<img src='img/carousel-1.png'>">
+            {{-- <div class="owl-carousel-item position-relative" data-dot="<img src='img/carousel-1.png'>">
                 <img class="img-fluid" src="{{  asset('img/carousel-1.png') }}" alt="">
                 <div class="owl-carousel-inner">
                     <div class="container">
@@ -116,7 +116,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
             <div class="owl-carousel-item position-relative" data-dot="<img src='img/carousel-2.jpg'>">
                 <img class="img-fluid" src="img/carousel-2.jpg" alt="">
                 <div class="owl-carousel-inner">
@@ -124,14 +124,16 @@
                         <div class="row justify-content-start">
                             <div class="col-10 col-lg-8">
                                 <h1 class="display-1 text-white animated slideInDown">Find Our Best Course & Become Master</h1>
-                                <p class="fs-5 fw-medium text-white mb-4 pb-3">Vero elitr justo clita lorem. Ipsum dolor at sed stet sit diam no. Kasd rebum ipsum et diam justo clita et kasd rebum sea elitr.</p>
+                                <p class="fs-5 fw-medium text-white mb-4 pb-3">Lorem, ipsum dolor sit amet consectetur adipisicing elit. 
+                                    Neque autem, voluptates architecto reprehenderit consectetur explicabo ad ducimus tempore consequatur inventore error natus, 
+                                    quo perspiciatis qui tenetur in ex modi quod?</p>
                                 <a href="" class="btn btn-primary py-3 px-5 animated slideInLeft">Read More</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="owl-carousel-item position-relative" data-dot="<img src='img/carousel-3.jpg'>">
+            {{-- <div class="owl-carousel-item position-relative" data-dot="<img src='img/carousel-3.jpg'>">
                 <img class="img-fluid" src="img/carousel-3.jpg" alt="">
                 <div class="owl-carousel-inner">
                     <div class="container">
@@ -144,7 +146,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </div>
     <!-- Carousel End -->
@@ -199,20 +201,20 @@
                 </div>
                 <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
                     <h4 class="section-title">About Us</h4>
-                    <h1 class="display-5 mb-4">A Creative Architecture Agency For Your Dream Home</h1>
+                    <h1 class="display-5 mb-4">Ministry of Education, Culture, Research, and Technology</h1>
                     <p>Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo magna dolore erat amet</p>
                     <p class="mb-4">Stet no et lorem dolor et diam, amet duo ut dolore vero eos. No stet est diam rebum amet diam ipsum. Clita clita labore, dolor duo nonumy clita sit at, sed sit sanctus dolor eos.</p>
                     <div class="d-flex align-items-center mb-5">
-                        <div class="d-flex flex-shrink-0 align-items-center justify-content-center border border-5 border-primary" style="width: 120px; height: 120px;">
+                        {{-- <div class="d-flex flex-shrink-0 align-items-center justify-content-center border border-5 border-primary" style="width: 120px; height: 120px;">
                             <h1 class="display-1 mb-n2" data-toggle="counter-up">25</h1>
                         </div>
                         <div class="ps-4">
                             <h3>Years</h3>
                             <h3>Working</h3>
                             <h3 class="mb-0">Experience</h3>
-                        </div>
+                        </div> --}}
                     </div>
-                    <a class="btn btn-primary py-3 px-5" href="">Read More</a>
+                    {{-- <a class="btn btn-primary py-3 px-5" href="">Read More</a> --}}
                 </div>
             </div>
         </div>
@@ -221,7 +223,7 @@
 
 
     <!-- Service Start -->
-    <div class="container-xxl py-5">
+    {{-- <div class="container-xxl py-5">
         <div class="container">
             <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
                 <h4 class="section-title">Our Services</h4>
@@ -296,12 +298,12 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     <!-- Service End -->
 
 
     <!-- Feature Start -->
-    <div class="container-xxl py-5">
+    {{-- <div class="container-xxl py-5">
         <div class="container">
             <div class="row g-5">
                 <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
@@ -346,7 +348,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     <!-- Feature End -->
 
 
@@ -354,17 +356,17 @@
     <div class="container-xxl project py-5">
         <div class="container">
             <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
-                <h4 class="section-title">Our Projects</h4>
-                <h1 class="display-5 mb-4">Visit Our Latest Projects And Our Innovative Works</h1>
+                <h4 class="section-title">Rule & Schedule</h4>
+                <h1 class="display-5 mb-4">Read The Rule And Make Sure For Schedule</h1>
             </div>
             <div class="row g-4 wow fadeInUp" data-wow-delay="0.3s">
                 <div class="col-lg-4">
                     <div class="nav nav-pills d-flex justify-content-between w-100 h-100 me-4">
                         <button class="nav-link w-100 d-flex align-items-center text-start p-4 mb-4 active" data-bs-toggle="pill" data-bs-target="#tab-pane-1" type="button">
-                            <h3 class="m-0">01. Modern Complex</h3>
+                            <h3 class="m-0">01. Registration Rule</h3>
                         </button>
                         <button class="nav-link w-100 d-flex align-items-center text-start p-4 mb-4" data-bs-toggle="pill" data-bs-target="#tab-pane-2" type="button">
-                            <h3 class="m-0">02. Royal Hotel</h3>
+                            <h3 class="m-0">02. Schedule</h3>
                         </button>
                         <button class="nav-link w-100 d-flex align-items-center text-start p-4 mb-4" data-bs-toggle="pill" data-bs-target="#tab-pane-3" type="button">
                             <h3 class="m-0">03. Mexwel Buiding</h3>
@@ -380,16 +382,20 @@
                             <div class="row g-4">
                                 <div class="col-md-6" style="min-height: 350px;">
                                     <div class="position-relative h-100">
-                                        <img class="position-absolute img-fluid w-100 h-100" src="img/project-1.jpg"
+                                        <img class="position-absolute img-fluid w-100 h-100" src= "{{  asset('img/rule.jpeg') }}" 
                                             style="object-fit: cover;" alt="">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <h1 class="mb-3">25 Years Of Experience In Architecture Industry</h1>
+                                    <h1 class="mb-3">Read The Registration Flow Carefully</h1>
                                     <p class="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo magna dolore erat amet</p>
-                                    <p><i class="fa fa-check text-primary me-3"></i>Design Approach</p>
-                                    <p><i class="fa fa-check text-primary me-3"></i>Innovative Solutions</p>
-                                    <p><i class="fa fa-check text-primary me-3"></i>Project Management</p>
+                                    <p><i class="fa fa-check text-primary me-3"></i>Must Have An Account</p>
+                                    <p><i class="fa fa-check text-primary me-3"></i>Complete The Profile</p>
+                                    <p><i class="fa fa-check text-primary me-3"></i>Select The Available Test Schedule</p>
+                                    <p><i class="fa fa-check text-primary me-3"></i>Pay Through The Test</p>
+                                    <p><i class="fa fa-check text-primary me-3"></i>Upload Proof Of Payment</p>
+                                    <p><i class="fa fa-check text-primary me-3"></i>Wait For Verification, Get A Test Card</p>
+                                    <p><i class="fa fa-check text-primary me-3"></i>Get A Test Card</p>
                                     <a href="" class="btn btn-primary py-3 px-5 mt-3">Read More</a>
                                 </div>
                             </div>
@@ -398,8 +404,37 @@
                             <div class="row g-4">
                                 <div class="col-md-6" style="min-height: 350px;">
                                     <div class="position-relative h-100">
-                                        <img class="position-absolute img-fluid w-100 h-100" src="img/project-2.jpg"
-                                            style="object-fit: cover;" alt="">
+                                        <table class="schedule-show">
+                                            <thead>
+                                                <tr>
+                                                    <th>No</th>
+                                                    <th>Date</th>
+                                                    <th>Participant</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($schedules as $testDate)
+                                                <tr>
+                                                    <td>{{ $loop->iteration }}</td>
+                                                    <td>{{ $testDate->date_test }}</td>
+                                                    @if ($testDate->detail_tests_count >= 24)
+                                                        <td style="color: red">Full</td>
+                                                    @else
+                                                        <td>{{ $testDate->detail_tests_count}}</td>
+                                                    @endif
+                                                </tr>
+                                                @endforeach
+                                                {{-- @foreach ($schedules as $schedule)
+                                                <tr>
+                                                    <td>{{ $loop->iteration }}</td>
+                                                    <td>{{ $schedule->date_test }}</td>
+                                                    <td>{{ $schedule->test_id }}</td>
+                                                </tr>
+                                                @endforeach --}}
+                                            </tbody>
+                                        </table>
+                                        {{-- <img class="position-absolute img-fluid w-100 h-100" src="img/project-2.jpg"
+                                            style="object-fit: cover;" alt=""> --}}
                                     </div>
                                 </div>
                                 <div class="col-md-6">
@@ -475,8 +510,8 @@
                             </div>
                         </div>
                         <div class="bg-light text-center p-4">
-                            <h3 class="mt-2">Architect Name</h3>
-                            <span class="text-primary">Designation</span>
+                            <h3 class="mt-2">Ian Joshep Somerhalder</h3>
+                            <span class="text-primary">Bussines Daddy</span>
                         </div>
                     </div>
                 </div>
@@ -491,8 +526,8 @@
                             </div>
                         </div>
                         <div class="bg-light text-center p-4">
-                            <h3 class="mt-2">Architect Name</h3>
-                            <span class="text-primary">Designation</span>
+                            <h3 class="mt-2">Christian Grey</h3>
+                            <span class="text-primary">Actor Daddy</span>
                         </div>
                     </div>
                 </div>
@@ -507,8 +542,8 @@
                             </div>
                         </div>
                         <div class="bg-light text-center p-4">
-                            <h3 class="mt-2">Architect Name</h3>
-                            <span class="text-primary">Designation</span>
+                            <h3 class="mt-2">Murat Boz</h3>
+                            <span class="text-primary">Singer Daddy</span>
                         </div>
                     </div>
                 </div>
@@ -523,8 +558,8 @@
                             </div>
                         </div>
                         <div class="bg-light text-center p-4">
-                            <h3 class="mt-2">Architect Name</h3>
-                            <span class="text-primary">Designation</span>
+                            <h3 class="mt-2">Can Yaman</h3>
+                            <span class="text-primary">Daddy</span>
                         </div>
                     </div>
                 </div>

@@ -7,10 +7,13 @@
 @endpush
 
 @push('profile')
-    <a href="#">
-        <img src="{{ asset('img/Murat.jpeg') }}">
-        {{-- //<img src="{{ asset('storage/images/users/'.$identities->image) }}"> --}}
-    </a>
+    @foreach ($profile as $img)
+        @if ($img->image != null)
+            <img src="{{ asset('storage/images/users/'.$img->image) }}">
+        @else
+            <img src="{{ asset('img/nopic.png') }}" alt="" id="profile">
+        @endif
+    @endforeach
 @endpush
 
 @section('main-content')
@@ -21,26 +24,22 @@
             <h1>Dashboard</h1>
             <ul class="breadcrumb">
                 <li>
-                    <a href="{{ route('index') }}">Dashboard</a>
+                    <a href="{{ route('indexAdmin') }}">Dashboard</a>
                 </li>
                 <li>
                     <i class='bx bx-chevron-right'></i>
                 </li>
                 <li>
-                    <a class="active" href="{{ route('index') }}">Dashboard</a>
+                    <a class="active" href="{{ route('indexAdmin') }}">Dashboard</a>
                 </li>
             </ul>
         </div>
-        {{-- <a href="#" class="btn-download">
-            <i class='bx bxs-download'></i>
-            <span class="text">Download PDF</span>
-        </a> --}}
     </div>
     <ul class="box-info">
         <li>
             <i class='bx bxs-user-check'></i>
             <span class="text">
-                <h3>200</h3>
+                <h3>{{ $users }}</h3>
                 <p>Users</p>
             </span>
         </li>

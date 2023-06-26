@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Schedule;
+use App\Models\Test;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -15,12 +15,17 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('payments', function (Blueprint $table) {
+        Schema::create('detail_tests', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(User::class)->constrained();
-            $table->foreignIdFor(Schedule::class)->constrained();
+            $table->string('registration');
+            $table->foreignIdFor(Test::class)->nullable()->constrained();
+            $table->foreignId('participant_id')->nullable()->constrained('users');
             $table->string('pay_url');
             $table->boolean('is_payed')->default(false);
+            $table->date('date_validation')->nullable();
+            $table->string('skor')->nullable();
+            $table->string('sertif_url')->nullable();
+            $table->boolean('is_passed')->default(false);
             $table->timestamps();
         });
     }
@@ -32,6 +37,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('payments');
+        Schema::dropIfExists('detail_tests');
     }
 };

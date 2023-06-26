@@ -6,10 +6,15 @@
 <link rel="stylesheet" href="{{ asset('css/dash-theme.css') }}">
 @endpush
 
+
 @push('profile')
-    <a href="#">
-        <img src="{{ asset('img/Murat.jpeg') }}">
-    </a>
+    @foreach ($profile as $img)
+        @if ($img->image != null)
+            <img src="{{ asset('storage/images/users/'.$img->image) }}">
+        @else
+            <img src="{{ asset('img/nopic.png') }}" alt="" id="profile">
+        @endif
+    @endforeach
 @endpush
 
 @section('main-content')
@@ -20,7 +25,7 @@
             <h1>Dashboard</h1>
             <ul class="breadcrumb">
                 <li>
-                    <a href="{{ route('index') }}">Dashboard</a>
+                    <a href="{{ route('indexStaff') }}">Dashboard</a>
                 </li>
                 <li>
                     <i class='bx bx-chevron-right'></i>
@@ -46,19 +51,16 @@
                         <th>Name</th>
                         <th>Test Type</th>
                         <th>Date</th>
-                        <th>Status</th>
+                        <th>Validate by Staff</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($payments as $payment)
+                    @foreach ($data as $registrant)
                     <tr>
-                        <td>{{$payment->created_at->format('Ymd His')}}</td>
-                        <td>{{$payment->name }}</td>
-                        <td>{{$payment->type_test }}</td>
-                        <td>{{$payment->date_test }}</td>
-                        <td>
-                            <span><button class="btn-act">Disable</button></span>
-                        </td>
+                        <td>{{$registrant->created_at->format('ym') . str_pad($registrant->id, 6, '0', STR_PAD_LEFT) }}</td>
+                        <td>{{$registrant->name }}</td>
+                        <td>{{$registrant->type_test }}</td>
+                        <td>{{$registrant->date_test }}</td>
                     </tr>
                     @endforeach
                 </tbody>

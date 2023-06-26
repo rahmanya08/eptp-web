@@ -7,10 +7,13 @@
 @endpush
 
 @push('profile')
-    <a href="#">
-        <img src="{{ asset('img/Akin Akinozu.jpg') }}" alt="">
-        {{-- <img src="{{ asset('storage/images/users'.$identity->image) }}"> --}}
-    </a>
+    @foreach ($profile as $img)
+        @if ($img->image != null)
+            <img src="{{ asset('storage/images/users/'.$img->image) }}">
+        @else
+            <img src="{{ asset('img/nopic.png') }}" alt="" id="profile">
+        @endif
+    @endforeach
 @endpush
 
 @section('main-content')
@@ -21,7 +24,7 @@
             <h1>Dashboard</h1>
             <ul class="breadcrumb">
                 <li>
-                    <a href="{{ route('index') }}">Dashboard</a>
+                    <a href="{{ route('indexAdmin') }}">Dashboard</a>
                 </li>
                 <li>
                     <i class='bx bx-chevron-right'></i>
@@ -43,43 +46,35 @@
             <table>
                 <thead>
                     <tr>
-                        <th>ID</th>
+                        <th>No</th>
                         <th>Name</th>
                         <th>Gender</th>
                         <th>Brith</th>
                         <th>KTP/KTM</th>
-                        <th>Identity</th>
+                        <th>Identity Number</th>
                         <th>Category</th>
                         <th>Major</th>
                         <th>Study Program</th>
                         <th>Semester</th>
                         <th>Phone</th>
                         <th>Address</th>
-                        {{-- <th>Status</th>
-                        <th>Action</th> --}}
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($identities as $identity)
+                    @foreach ($participant as $student)
                     <tr>
-                        <td>{{ $identity->id }}</td>
-                        @foreach ($users as $user)
-                            <td>{{ $user->name }}</td>
-                        @endforeach
-                        <td>{{ $identity->gender }}</td>
-                        <td>{{ $identity->birth_date}}</td>
-                        <td>{{ $identity->identity_type }}</td>
-                        <td>{{ $identity->identity_num }}</td>
-                        <td>{{ $identity->category }}</td>
-                        <td>{{ $identity->major }}</td>
-                        <td>{{ $identity->study_program }}</td>
-                        <td>{{ $identity->semester}}</td>
-                        <td>{{ $identity->phone }}</td>
-                        <td>{{ $identity->address }}</td>
-                        {{-- <td><span class="status In-Active">Inactive</span></td> --}}
-                        {{-- <td>
-                            <span><button class="btn-act">Disable</button></span>
-                        </td>  --}}
+                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ $student->name }}</td>
+                        <td>{{ $student->gender }}</td>
+                        <td>{{ $student->birth_date}}</td>
+                        <td>{{ $student->identity_type }}</td>
+                        <td>{{ $student->identity_num }}</td>
+                        <td>{{ $student->category }}</td>
+                        <td>{{ $student->major }}</td>
+                        <td>{{ $student->study_program }}</td>
+                        <td>{{ $student->semester}}</td>
+                        <td>{{ $student->phone }}</td>
+                        <td>{{ $student->address }}</td>
                     </tr>                           
                     @endforeach
                 </tbody>

@@ -7,9 +7,13 @@
 @endpush
 
 @push('profile')
-    <a href="#">
-        <img src="{{ asset('img/Murat.jpeg') }}">
-    </a>
+    @foreach ($profile as $img)
+        @if ($img->image != null)
+            <img src="{{ asset('storage/images/users/'.$img->image) }}">
+        @else
+            <img src="{{ asset('img/nopic.png') }}" alt="" id="profile">
+        @endif
+    @endforeach
 @endpush
 
 @section('main-content')
@@ -20,7 +24,7 @@
             <h1>Dashboard</h1>
             <ul class="breadcrumb">
                 <li>
-                    <a href="{{ route('index') }}">Dashboard</a>
+                    <a href="{{ route('indexStaff') }}">Dashboard</a>
                 </li>
                 <li>
                     <i class='bx bx-chevron-right'></i>
@@ -31,7 +35,12 @@
             </ul>
         </div>
     </div>
-
+    @if (session()->has('success'))
+    <div class="alert alrt-success" role="alert" id="alert">
+        {{ session('success') }}
+        <i class='bx bx-x' id="icon" onclick="hideAlert()"></i>
+    </div>
+    @endif
     <div class="table-data">
         <div class="order">
             <div class="head">
@@ -44,6 +53,7 @@
                     <tr>
                         <th>ID</th>
                         <th>Participant</th>
+                        <th>Test</th>
                         <th>Attacment</th>
                         <th>Status</th>
                         <th>Action</th>
@@ -53,15 +63,16 @@
                     @foreach ($payments as $payment)
                     <tr>
                         <td>{{ $loop->iteration }}</td>
-                        <td>{{$payment->name}}</td>
-                        <td>{{$payment->pay_url}}</td>
+                        <td>{{ $payment->name}}</td>
+                        <td>{{ $payment->date_test }}</td>
+                        <td>{{ $payment->pay_url}}</td>
                             @if ($payment->is_payed == 1)
                                 <td><span class="status Active">{{ $payment->is_payed = 'Verified' }}</span></td>
                             @else
                             <td><span class="status In-Active">{{ $payment->is_payed = 'Unverified' }}</span></td>
                             @endif
                         <td>
-                            <span><button class="btn-act">Verify</button></span>
+                            <a href={{"/menu-payment/edit/".$payment['id']}}>Verify</a>
                         </td>
                     </tr>
                     @endforeach
@@ -77,4 +88,22 @@
         
 @push('child-js')
     <script src="{{ asset('js/dashboard.js') }}"></script>
+    <script>
+    function updateStatus(statusId) {
+    $.ajax({
+        url: '/status/update/' + statusId,
+        type: 'PUT',
+        success: function(response) {
+        if (response.success) {
+            alert('Status updated successfully!');
+        } else {
+            alert('Status update failed!');
+        }
+        },
+        error: function() {
+        alert('An error occurred while updating the status.');
+        }
+    });
+    }
+    </script>    
 @endpush

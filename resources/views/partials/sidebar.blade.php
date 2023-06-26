@@ -5,14 +5,13 @@
         <span class="text">EPT-P</span>
     </a>
     <ul class="side-menu top">
-        {{-- {{ Request::is('dashboard') ? 'active' : '' }} --}}
-        <li class="active">
-            <a href="{{ route('index') }} {{ Request::is('identity') ? 'active' : '' }}">
-                <i class='bx bxs-dashboard'></i>
-                <span class="text">Dashboard</span>
-            </a>
-        </li>
         @can('admin')
+            <li class="active">
+                <a href="{{ route('indexAdmin') }} {{ Request::is('indexAdmin') ? 'active' : '' }}">
+                    <i class='bx bxs-dashboard'></i>
+                    <span class="text">Dashboard</span>
+                </a>
+            </li>
             <li>
                 <a href="{{ route('user') }} {{ Request::is('user') ? 'active' : '' }}">
                     <i class='bx bxs-user-detail'></i>
@@ -33,57 +32,103 @@
             </li>
         @endcan
         @can('staff')
-            <li>
-                <a href="{{ route('identityStaff') }}" {{ Request::is('identityStaff') ? 'active' : '' }}>
-                    <i class='bx bxs-id-card'></i>
-                    <span class="text">Profile</span>
+            <li class="{{ request()->routeIs('indexStaff') ? 'active' : '' }}">
+                <a href="{{ route('indexStaff') }}">
+                    <i class='bx bxs-dashboard'></i>
+                    <span class="text">Dashboard</span>
                 </a>
             </li>
-            <li>
+            <li class="{{ request()->routeIs('staffProfile') ? 'active' : '' }}">
+                <a href="{{ route('staffProfile') }}">
+                    <i class='bx bx-group'></i>
+                    <span class="text">Profile</span>   
+                </a>
+            </li>
+            <li class="{{ request()->routeIs('registrant') ? 'active' : '' }}">
                 <a href="{{ route('registrant') }}">
                     <i class='bx bxs-registered'></i>
                     <span class="text">Registrantion Data</span>
                 </a>
             </li>
-            <li>
-                <a href="{{ route('schedule') }}">
+            <li class="{{ request()->routeIs('schedule') ? 'active' : '' }}">
+                <a href="{{ route('schedule') }} {{ Request::is('/menu-schedule') ? 'active' : '' }}">
                     <i class='bx bx-calendar'></i>
                     <span class="text">Schedule</span>
                 </a>
             </li>
-            <li>
+            <li class="{{ request()->routeIs('payment') ? 'active' : '' }}">
                 <a href="{{ route('payment') }}">
                     <i class='bx bxs-wallet-alt'></i>
                     <span class="text">Payment</span>
                 </a>
             </li>
-            <li>
+            <li class="{{ request()->routeIs('result') ? 'active' : '' }}">
                 <a href="{{ route('result') }}">
                     <i class='bx bxs-archive-out'></i>
                     <span class="text">Result</span>
                 </a>
             </li>
+            <li class="{{ request()->routeIs('reportStaff') ? 'active' : '' }}">
+                <a href="{{ route('reportStaff') }}">
+                    <i class='bx bxs-book'></i>
+                    <span class="text">Report</span>
+                </a>
+            </li> 
         @endcan
         @can('student')
-            <li>
-                <a href="{{ route('identity') }}" {{ Request::is('identity') ? 'active' : '' }}>
+            <li class="{{ request()->routeIs('indexParticipant') ? 'active' : '' }}">
+                <a href="{{ route('indexParticipant') }}">
+                    <i class='bx bxs-dashboard'></i>
+                    <span class="text">Dashboard</span>
+                </a>
+            </li>
+            <li class="{{ request()->routeIs('showProfile') ? 'active' : '' }}">
+                <a href="{{ route('showProfile') }}">
                     <i class='bx bxs-id-card'></i>
                     <span class="text">Profile</span>
                 </a>
             </li>
-            <li>
+            <li class="{{ request()->routeIs('create') ? 'active' : '' }}">
                 <a href="{{ route('create') }}">
                     <i class='bx bx-laptop'></i>
                     <span class="text">Test</span>
                 </a>
             </li>  
-            <li>
+            <li class="{{ request()->routeIs('announce') ? 'active' : '' }}">
                 <a href="{{ route('announce') }}">
                     <i class='bx bxs-award'></i>
                     <span class="text">Announcment</span>
                 </a>
             </li>
         @endcan
+        {{-- @can('headStaff') --}}
+        @if (Gate::check('headStaff'))
+        <li class="{{ request()->routeIs('indexheadStaff') ? 'active' : '' }}">
+            <a href="{{ route('indexheadStaff') }}">
+                <i class='bx bxs-dashboard'></i>
+                <span class="text">Dashboard</span>
+            </a>
+        </li>
+        <li class="{{ request()->routeIs('headStaffProfile') ? 'active' : '' }}">
+            <a href="{{ route('headStaffProfile') }}">
+                <i class='bx bx-group'></i>
+                <span class="text">Profile</span>   
+            </a>
+        </li>
+        <li class="{{ request()->routeIs('participant') ? 'active' : '' }}">
+            <a href="{{ route('participant') }}">
+                <i class='bx bx-user-check'></i>
+                <span class="text">Participant</span>
+            </a>
+        </li>  
+        <li class="{{ request()->routeIs('report') ? 'active' : '' }}">
+            <a href="{{ route('report') }}">
+                <i class='bx bxs-book'></i>
+                <span class="text">Report</span>
+            </a>
+        </li>    
+        @endif
+        {{-- @endcan --}}
     </ul>
     <ul class="side-menu">
         <li>

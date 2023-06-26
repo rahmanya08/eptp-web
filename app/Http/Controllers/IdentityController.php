@@ -6,13 +6,14 @@ use App\Models\Identity;
 use App\Models\Schedule;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
 class IdentityController extends Controller
 {
 
-        public function index ()
+        public function indexParticipant ()
         {
             return view('dashboard.participant.index', [
                 'title' => 'Dashboard',
@@ -22,25 +23,55 @@ class IdentityController extends Controller
                 ->get(),
             ]);
         }
-        public function identity ()
-        {
-            return view('dashboard.participant.identity', [
-                'title' => 'Identity',
-            ]);
-            
-        }
-
+        
         public function participant ()
         {
-            return view('dashboard.admin.participant', [
-                'title' => 'Participant',
-                'identities' => Identity::all()->where('position', '=', null),
-                'users' => User::select('name')->join('identities', 'users.id', '=', 'identities.user_id' )->get()
-            ]);
+            $participant = Identity::select('users.name','identities.gender', 'identities.birth_date', 'identities.identity_type', 'identities.identity_num',
+            'identities.category', 'identities.major', 'identities.study_program', 'identities.semester', 'identities.phone', 'identities.phone', 'identities.address')
+            ->join('users', 'identities.user_id', '=', 'users.id')
+            ->where('role', 'student')
+            ->get();
+
+            $profile = Identity::select('image')
+            ->join('users', 'identities.user_id', '=', 'users.id')
+            ->where('user_id', auth()->user()->id)
+            ->get();
+
+            return view('dashboard.admin.participant', compact('profile', 'participant'));
         }
-        
-        //Input Data Identitas
-        public function store(Request $request)
+
+        public function showProfile ()
+        {
+            $id = Auth::user()->id;
+            $data = Identity::select( 'users.name', 'users.email', 'identities.image', 'identities.gender', 'identities.identity_type',
+            'identities.birth_date', 'identities.identity_num', 'identities.category','identities.major','identities.study_program','identities.semester',
+            'identities.phone', 'identities.address', 'identities.position')
+            ->join('users', 'identities.user_id', '=', 'users.id')
+            ->where('identities.user_id', $id)
+            ->where('users.role', 'student')
+            ->get();
+            return view('dashboard.participant.identity', compact('data'));
+        }
+
+        public function editProfile($id)
+        {
+            $user = User::with('user_identity')->find(auth()->user()->id);
+            $data = Identity::select( 'users.name', 'users.email', 'identities.image', 'identities.gender',
+            'identities.birth_date', 'identities.identity_num', 'identities.phone', 'identities.address', 'identities.position')
+            ->join('users', 'identities.user_id', '=', 'users.id')
+            ->where('identities.user_id', $id)
+            ->get();
+            return view('dashboard.participant.identity-edit',[
+                'users' => User::all(),
+                'user'=>$user,
+                'data'=>$data
+            ]);
+        }   
+
+
+
+        //Function for save or update data 
+        public function saveOrUpdate(Request $request)
         {
             //dd($request->all());
             $validatedData = $request->validate([
@@ -70,83 +101,15 @@ class IdentityController extends Controller
             }
 
 
-            Identity::create($validatedData);
-            return redirect('/menu-test')->with('success', 'Formulir Complete! Please Choose Your Test');
-
-            // if (auth()->user()->role == 'staff')
-            // {
-            //     return redirect('/dashboard')->with('success', 'Thanks for Completed Data!');
-            // }
-            // else
-            // {
-            //     return redirect('/menu-test')->with('success', 'Formulir Complete! Please Choose Your Test');
-            // }
-
-        }
-
-        public function edit(Identity $identity)
-        {
-            return view('dashboard.participant.identity', compact('identities'));
-        }
-
-        public function updateIdentity(Request $request, Identity $identity)
-        {
+            $record = Identity::find($request->id);
             //dd($request->all());
-            $this->validate($request, [
-                
-                'image' => 'required','max:2048',
-                'gender'=>'required',
-                'birth_date' =>'required','date',
-                'identity_type'=>'required',
-                'identity_num'=>'required','min:9','max:20',
-                'category'=>'required',
-                'major'=>'required','min:5','max:20',
-                'study_program'=>'required','min:5','max:20',
-                'semester'=>'required','max:1',
-                'phone'=>'required','min:12','max:13',
-                'address'=>'required','min:15','max:255'
-            ]);  
-
-            if ($request->hasFile('image')) {
-
-                $destination_path = 'public/images/users';
-                $image = $request->file('image');
-                $image_name = $image->getClientOriginalName();
-                $path = $request->file('image')->storeAs($destination_path, $image_name);
-
-                Storage::delete('public/images/users'.$identity->image);
-                
-                $identity->update([
-                    'image' => $image->hashName($path),
-                    'gender'=> $request->gender,
-                    'birth_date' =>$request->birth_date,
-                    'identity_type'=> $request->identity_type,
-                    'identity_num'=> $request->identity_num,
-                    'category'=>$request->category,
-                    'major'=>$request->major,
-                    'study_program'=>$request->study_program,
-                    'semester'=>$request->semester,
-                    'phone'=>$request->phone,
-                    'address'=>$request->address
-                ]);
+            if ($record) {
+                $record->update($validatedData);
             } else {
-
-                $identity->update([
-                    'gender'=> $request->gender,
-                    'birth_date' =>$request->birth_date,
-                    'identity_type'=> $request->identity_type,
-                    'identity_num'=> $request->identity_num,
-                    'category'=>$request->category,
-                    'major'=>$request->major,
-                    'study_program'=>$request->study_program,
-                    'semester'=>$request->semester,
-                    'phone'=>$request->phone,
-                    'address'=>$request->address
-                ]);
+                Identity::create($validatedData);
             }
 
-            return redirect('/menu-identity')->with('success', 'User Account Updated!');
+            return redirect('/menu-identity')->with('success', 'Profile Updated!');
+
         }
- 
-  
 }

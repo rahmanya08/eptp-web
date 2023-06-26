@@ -7,10 +7,13 @@
 @endpush
 
 @push('profile')
-    <a href="#">
-        <img src="{{ asset('img/Murat.jpeg') }}">
-        {{-- //<img src="{{ asset('storage/images/users/'.$identities->image) }}"> --}}
-    </a>
+    @foreach ($profile as $img)
+        @if ($img->image != null)
+            <img src="{{ asset('storage/images/users/'.$img->image) }}">
+        @else
+            <img src="{{ asset('img/nopic.png') }}" alt="" id="profile">
+        @endif
+    @endforeach
 @endpush
 
 @section('main-content')
@@ -21,13 +24,13 @@
             <h1>Dashboard</h1>
             <ul class="breadcrumb">
                 <li>
-                    <a href="{{ route('index') }}">Dashboard</a>
+                    <a href="{{ route('indexStaff') }}">Dashboard</a>
                 </li>
                 <li>
                     <i class='bx bx-chevron-right'></i>
                 </li>
                 <li>
-                    <a class="active" href="{{ route('index') }}">Dashboard</a>
+                    <a class="active" href="{{ route('indexStaff') }}">Dashboard</a>
                 </li>
             </ul>
         </div>
@@ -40,14 +43,14 @@
         <li>
             <i class='bx bxs-group'></i>
             <span class="text">
-                <h3>500</h3>
-                <p>Registration</p>
+                <h3>{{ $regist }}</h3>
+                <p>Registrant</p>
             </span>
         </li>
         <li>
             <i class='bx bx-calendar-edit'></i>
             <span class="text">
-                <h3>5</h3>
+                <h3>{{ $schedule }}</h3>
                 <p>Schedule</p>
             </span>
         </li>

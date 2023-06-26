@@ -22,11 +22,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        User::factory(10)->create();
-        Identity::factory(8)->create();
-        Payment::factory(5)->create();
-        Schedule::factory(5)->create();
-        Result::factory(3)->create();
+        // User::factory(10)->create();
+        // Identity::factory(8)->create();
+        // Payment::factory(5)->create();
+        // Schedule::factory(5)->create();
+        // Result::factory(3)->create();
 
 
         // \App\Models\User::factory()->create([
@@ -63,6 +63,19 @@ class DatabaseSeeder extends Seeder
         //     'is_verified' => '1'
 
         // ]);
+
+        Identity::create([
+        'user_id'=>3,
+        'image'=>'djhjdjw',
+        'gender'=>'Male',
+        'birth_date'=>now(),
+        'identity_type'=>'KTP',
+        'identity_num'=>'787877798799797',
+        'category'=>'Student',
+        'phone'=>'9298293892',
+        'address'=>'clacap',
+        'position'=>'staff',
+        ]);
 
 
     }

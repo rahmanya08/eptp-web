@@ -17,14 +17,13 @@ class AuthController extends Controller
         ]);
     }
 
+    //Sign-up for paticipant account
     public function signup()
     {
         return view('signup.signup', [
             'title' => 'SignUp'
         ]);
     }
-
-    //Input Data Akun
     public function store(Request $request)
     {
         $validatedData = $request->validate([
@@ -41,11 +40,39 @@ class AuthController extends Controller
         //dd ($validatedData);
 
         User::create($validatedData);
+        return redirect('/login')->with('success', 'Registration successfull! Please Login');
+    }
     
 
+    //Sign-up for Head staff account
+    public function signupheadStaff()
+    {
+        return view('signup.signup-headstaff', [
+            'title' => 'SignUp'
+        ]);
+    }
+
+    //Input Data Akun
+    public function storeHeadStaff(Request $request)
+    {
+        $validatedData = $request->validate([
+        'name' =>'required','min:5','max:255',
+        'email'=> 'required','email:dns','unique:users',
+        'password'=>'required','min:5','max:255',
+        ]);  
+            
+        $validatedData['role']='headStaff';
+    
+        $validatedData['password'] = Hash::make($validatedData['password']);
+        //dd ($validatedData);
+    
+        User::create($validatedData);
         return redirect('/login')->with('success', 'Registration successfull! Please Login');
     }
 
+
+
+    //Sign-up for staff account
     public function signupStaff()
     {
         return view('signup.signup-staff', [
@@ -53,26 +80,23 @@ class AuthController extends Controller
         ]);
     }
 
-        //Input Data Akun
-        public function storeStaff(Request $request)
-        {
-            $validatedData = $request->validate([
-                'name' =>'required','min:5','max:255',
-                'email'=> 'required','email:dns','unique:users',
-                'password'=>'required','min:5','max:255',
-            ]);  
+    //Input Data Akun
+    public function storeStaff(Request $request)
+    {
+        $validatedData = $request->validate([
+        'name' =>'required','min:5','max:255',
+        'email'=> 'required','email:dns','unique:users',
+        'password'=>'required','min:5','max:255',
+        ]);  
             
-            $validatedData['role']='staff';
+        $validatedData['role']='staff';
     
-            $validatedData['password'] = Hash::make($validatedData['password']);
+        $validatedData['password'] = Hash::make($validatedData['password']);
+        //dd ($validatedData);
     
-            //dd ($validatedData);
-    
-            User::create($validatedData);
-        
-    
-            return redirect('/login')->with('success', 'Registration successfull! Please Login');
-        }
+        User::create($validatedData);
+        return redirect('/login')->with('success', 'Registration successfull! Please Login');
+    }
 
     //Autentikasi
     public function authenticate(Request $request)
@@ -91,6 +115,10 @@ class AuthController extends Controller
             elseif (auth()->user()->role == 'staff')
             {
                 return redirect()->intended('/dashboard-staff');
+            }
+            elseif (auth()->user()->role == 'headStaff')
+            {
+                return redirect()->intended('/dashboard-headStaff');
             }
             else
             {

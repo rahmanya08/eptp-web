@@ -7,17 +7,22 @@
 @endpush
 
 @push('profile')
-    <a href="#">
-        <img src="{{ asset('img/Akin Akinozu.jpg') }}">
-    </a>
+    @foreach ($profile as $img)
+        @if ($img->image != null)
+            <img src="{{ asset('storage/images/users/'.$img->image) }}">
+        @else
+            <img src="{{ asset('img/nopic.png') }}" alt="" id="profile">
+        @endif
+    @endforeach
 @endpush
+
 
 @section('main-content')
 <main>
         <div class="head-title">
             <div class="left">
-                <h1>Dashboard</h1>
-                <ul class="breadcrumb">
+                <h1>Setting</h1>
+                {{-- <ul class="breadcrumb">
                     <li>
                         <a href="{{ route('index') }}">Dashboard</a>
                     </li>
@@ -27,7 +32,7 @@
                     <li>
                         <a class="active" href="{{ route('updateAccount') }}">Setting</a>
                     </li>
-                </ul>
+                </ul> --}}
             </div>
         </div>
         @if (session()->has('success'))
@@ -38,7 +43,6 @@
         @endif
         <form action="{{ route('updateAccount') }}" method="post">
             @csrf
-            <h2 style="margin-top: 50px">Edit Account</h2>
             <div class="account-box">
                 <div class="input-box">
                     <label for="">Name</label>

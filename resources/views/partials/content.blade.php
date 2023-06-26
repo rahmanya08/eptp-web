@@ -15,7 +15,7 @@
         @endauth
         </div>
         <div>
-            <a href="#" class="notif">
+            <a hidden="#" class="notif">
                 <i class='bx bx-bell'></i>
                 <span class="num">8</span>
             </a>

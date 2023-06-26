@@ -7,10 +7,15 @@
 @endpush
 
 @push('profile')
-    <a href="#">
-        <img src="{{ asset('img/Murat.jpeg') }}">
-    </a>
+    @foreach ($profile as $img)
+        @if ($img->image != null)
+            <img src="{{ asset('storage/images/users/'.$img->image) }}">
+        @else
+            <img src="{{ asset('img/nopic.png') }}" alt="" id="profile">
+        @endif
+    @endforeach
 @endpush
+
 
 @section('main-content')
 <main>
@@ -19,7 +24,7 @@
             <h1>Dashboard</h1>
             <ul class="breadcrumb">
                 <li>
-                    <a href="{{ route('index') }}">Dashboard</a>
+                    <a href="{{ route('indexStaff') }}">Dashboard</a>
                 </li>
                 <li>
                     <i class='bx bx-chevron-right'></i>
@@ -36,27 +41,6 @@
         <i class='bx bx-x' id="icon" onclick="hideAlert()"></i>
     </div>
     @endif
-    <form action="{{ route('result') }}" method="post" enctype="multipart/form-data">
-        @csrf
-        <div class="row-4">
-            <div class="col">
-                <select class="form-select" name="user_id" id="name">
-                    @foreach ($users as $user)
-                        <option value="{{ $user->user_id }}">{{  $user->name}}</option>
-                    @endforeach
-                </select>
-            </div>
-            <div class="col">
-                <input type="number" name="skor" id="skor" placeholder="Add Score...." >
-            </div>
-            <div class="col-file">
-                <input type="file" name="sertif_url" id="sertif_url" accept=".pdf">
-            </div>
-            <div class="col">
-                <button type="submit" class="btn-upload" onclick="return getData()">Add</button>
-            </div>
-        </div>
-    </form>
     <div class="table-data">
         <div class="order">
             <div class="head">
@@ -76,18 +60,19 @@
                     </tr>
                 </thead>
                 <tbody>
-                        @foreach ($results as $result)
+                        @foreach ($detail_tests as $detailtest)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{ $result->name }}</td>
-                            <td>{{ $result->skor }}</td>
-                            <td>{{ $result->sertif_url }}</td>
-                            @if ($result->result_skor == 1 )
-                                <td>{{ $result->result_status = 'Passed'}}</td> 
+                            <td>{{ $detailtest->name }}</td>
+                            <td>{{ $detailtest->skor }}</td>
+                            <td>{{ $detailtest->sertif_url }}</td>
+                            @if ($detailtest->is_passed == 1 )
+                                <td>{{ $detailtest->is_passed = 'Success'}}</td> 
                             @else
-                                <td>{{ $result->result_status = 'Failed'}}</td>
+                                <td>{{ $detailtest->is_passed = 'Failed'}}</td>
                             @endif
-                            <td><a href="#">Success</a></td>
+
+                            <td><a href={{ "/menu-result/edit/".$detailtest['id']}}>Update</a></td>
                         </tr> 
                         @endforeach
                 </tbody>

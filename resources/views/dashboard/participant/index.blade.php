@@ -24,13 +24,13 @@
             <h1>Dashboard</h1>
             <ul class="breadcrumb">
                 <li>
-                    <a href="{{ route('index') }}">Dashboard</a>
+                    <a href="{{ route('indexParticipant') }}">Dashboard</a>
                 </li>
                 <li>
                     <i class='bx bx-chevron-right'></i>
                 </li>
                 <li>
-                    <a class="active" href="{{ route('index') }}">Dashboard</a>
+                    <a class="active" href="{{ route('indexParticipant') }}">Dashboard</a>
                 </li>
             </ul>
         </div>
@@ -45,14 +45,28 @@
         </li>
     </ul>
 
-    {{-- <div class="table-data">
+    <div class="table-data">
         <div class="order">
             <div class="head">
-                <h3>Recent Data</h3>
-                <i class='bx bx-search'></i>
-                <i class='bx bx-filter'></i>
+                <h3>Term & Regulation</h3>
+                {{-- <i class='bx bx-search'></i>
+                <i class='bx bx-filter'></i> --}}
             </div>
-            <table>
+            <div>
+                <p>
+                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Unde velit rerum fuga corporis odit dicta aliquid consequuntur deserunt eveniet, 
+                    nam iure nesciunt vitae accusantium quisquam obcaecati voluptate sint quam? Quam:
+                    <ul class="term-reg">
+                        <li style="list-style-type: disc"> Consectetur nam qui, vitae, </li>
+                        <li style="list-style-type: disc"> doloremque molestiae nihil fuga voluptatum.  </li>
+                        <li style="list-style-type: disc"> Officiis id, molestiae corrupti doloribus tempore dolorum! Exercitationem.</li>
+                        <li style="list-style-type: disc"> Consectetur nam qui, vitae,  </li>
+                        <li style="list-style-type: disc"> doloremque molestiae nihil fuga voluptatum.</li>
+                        <li style="list-style-type: disc"> Officiis id, molestiae corrupti doloribus tempore dolorum! Exercitationem. </li>
+                    </ul>
+                </p>
+            </div>
+            {{-- <table>
                 <thead>
                     <tr>
                         <th>Name</th>
@@ -87,8 +101,9 @@
                     </tr>
                     
                 </tbody>
-            </table>
+            </table> --}}
         </div>
+
         <!--<div class="todo">
             <div class="head">
                 <h3>Recent Data</h3>
@@ -115,7 +130,7 @@
             </ul>
         </div>-->
 
-    </div> --}}
+    </div>
 
 </main>
 

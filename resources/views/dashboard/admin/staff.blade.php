@@ -7,10 +7,13 @@
 @endpush
 
 @push('profile')
-    <a href="#">
-        <img src="{{ asset('img/Akin Akinozu.jpg') }}" alt="">
-        {{-- <img src="{{ asset('storage/images/users'.$identity->image) }}"> --}}
-    </a>
+    @foreach ($profile as $img)
+        @if ($img->image != null)
+            <img src="{{ asset('storage/images/users/'.$img->image) }}">
+        @else
+            <img src="{{ asset('img/nopic.png') }}" alt="" id="profile">
+        @endif
+    @endforeach
 @endpush
 
 @section('main-content')
@@ -21,7 +24,7 @@
             <h1>Dashboard</h1>
             <ul class="breadcrumb">
                 <li>
-                    <a href="{{ route('index') }}">Dashboard</a>
+                    <a href="{{ route('indexAdmin') }}">Dashboard</a>
                 </li>
                 <li>
                     <i class='bx bx-chevron-right'></i>
@@ -43,36 +46,27 @@
             <table>
                 <thead>
                     <tr>
-                        <th>ID</th>
-                        <th>User</th>
+                        <th>No</th>
+                        <th>Name</th>
                         <th>Gender</th>
                         <th>Brith</th>
                         <th>NIP</th>
                         <th>Phone</th>
                         <th>Address</th>
                         <th>Position</th>
-                        {{-- <th>Status</th>
-                        <th>Action</th> --}}
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($identities as $identity)
+                    @foreach ($staff as $data)
                     <tr>
                         <td>{{ $loop->iteration }}</td>
-                        {{-- <td>{{ $identity->user_id }}</td> --}}
-                        @foreach ($users as $user)
-                            <td>{{ $user->name }}</td>
-                        @endforeach
-                        <td>{{ $identity->gender }}</td>
-                        <td>{{ $identity->birth_date}}</td>
-                        <td>{{ $identity->identity_num }}</td>
-                        <td>{{ $identity->phone }}</td>
-                        <td>{{ $identity->address }}</td>
-                        <td>{{ $identity->position }}</td>
-                        {{-- <td><span class="status In-Active">Inactive</span></td> --}}
-                        {{-- <td>
-                            <span><button class="btn-act">Disable</button></span>
-                        </td>  --}}
+                        <td>{{ $data->name }}</td>
+                        <td>{{ $data->gender }}</td>
+                        <td>{{ $data->birth_date}}</td>
+                        <td>{{ $data->identity_num }}</td>
+                        <td>{{ $data->phone }}</td>
+                        <td>{{ $data->address }}</td>
+                        <td>{{ $data->position }}</td>
                     </tr>                           
                     @endforeach
                 </tbody>

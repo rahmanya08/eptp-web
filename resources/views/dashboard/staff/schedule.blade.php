@@ -7,9 +7,13 @@
 @endpush
 
 @push('profile')
-    <a href="#">
-        <img src="{{ asset('img/Murat.jpeg') }}">
-    </a>
+    @foreach ($profile as $img)
+        @if ($img->image != null)
+            <img src="{{ asset('storage/images/users/'.$img->image) }}">
+        @else
+            <img src="{{ asset('img/nopic.png') }}" alt="" id="profile">
+        @endif
+    @endforeach
 @endpush
 
 @section('main-content')
@@ -20,7 +24,7 @@
             <h1>Dashboard</h1>
             <ul class="breadcrumb">
                 <li>
-                    <a href="{{ route('index') }}">Dashboard</a>
+                    <a href="{{ route('indexStaff') }}">Dashboard</a>
                 </li>
                 <li>
                     <i class='bx bx-chevron-right'></i>
@@ -33,8 +37,9 @@
     </div>
     @if (session()->has('success'))
         <div class="alert alrt-success" role="alert" id="alert">
+            <i class='bx bxs-check-circle'></i>
             {{ session('success') }}
-            <i class='bx bx-x' id="icon" onclick="hideAlert()"></i>
+            <i class='bx bx-x' id="icon" style="cursor: pointer" onclick="hideAlert()"></i>
         </div>
     @endif
     <form action="{{ route('schedule') }}" method="post">
@@ -54,13 +59,14 @@
                     <option value="ibt">IBT</option>
                 </select>
             </div>
+            {{-- <div class="col">
+                <input type="text" readonly name="user_id" id="user_id" @error('user_id') is-invalid @enderror required value="{{auth()->user()->name}}">
+            </div> --}}
             <div class="col">
-                <button type="submit" onclick="return getData()">Add</button>
-                <button type="submit" onclick="return getData()">Edit</button>
+                <button type="submit" onclick="showToast()" onclick="return getData()">Add</button>
             </div>
         </div>
     </form>
-    
     <div class="table-data">
         <div class="order">
             <div class="head">
@@ -74,6 +80,7 @@
                         <th>ID</th>
                         <th>Date</th>
                         <th>Type</th>
+                        <th>Staff</th>
                         <th>Status</th>
                         <th>Action</th>
                     </tr>
@@ -84,13 +91,14 @@
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $schedule->date_test }}</td>
                         <td>{{ $schedule->type_test }}</td>
+                        <td>{{ $schedule->name }}</td>
                         @if ($schedule->status_test == 1)
-                            <td>{{ $schedule->status_test = 'Active' }}</td>
+                             <td><span class="status Active">{{ $schedule->status_test = 'Active' }}</span></td>    
                         @else
-                            <td>{{ $schedule->status_test = 'Non-Active' }}</td>
+                             <td><span class="status In-Active">{{ $schedule->status_test = 'Expired' }}</span></td>    
                         @endif
                        <td>
-                        <a href="#">Disable</a>
+                        <a style="cursor: pointer" class="btn-edit" href={{route('editSchedule', $schedule->id)}}>Disable</a>
                        </td>
                     </tr>
                     @endforeach

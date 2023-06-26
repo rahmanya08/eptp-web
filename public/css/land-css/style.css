@@ -561,3 +561,17 @@ h6,
 .footer .copyright a:hover {
     color: var(--primary);
 }
+
+table.schedule-show {
+    box-sizing: border-box;
+    border: solid 2px black;
+    width: 100%;
+    height: auto;
+    color: black;
+    text-align: center;
+}
+
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+  }

@@ -1,3 +1,5 @@
+// const { constant } = require("lodash");
+
 const allSideMenu = document.querySelectorAll('#sidebar .side-menu.top li a');
 
 allSideMenu.forEach(item=> {
@@ -57,8 +59,8 @@ window.addEventListener('resize', function () {
 //PROGRESS BAR
 
 //Profile Picture
-let profilepic = document.getElementById("profile");
-let inputpic = document.getElementById("file");
+let profilepic = document.getElementById('profile');
+let inputpic = document.getElementById('file');
 
 inputpic.onchange = function(){
     profilepic.src = URL.createObjectURL(inputpic.files[0]);
@@ -81,3 +83,22 @@ name.addEventListener('change', function(){
 	.then(response => response.json())
 	.then(data => name.value = data.name)
 });
+
+function exportToExcel(){
+	var table2excel = new Table2Excel();
+	table2excel.export(document.querySelectorAll("table.table"));
+}
+
+function hideAlert() {
+    
+    var alert = document.getElementById("alert");
+    //var xIcon = document.getElementById("icon");
+
+    if (alert.style.display != "flex")
+    {
+        alert.style.display = "flex";
+    }else {
+        alert.style.display = "none";
+    }
+
+}

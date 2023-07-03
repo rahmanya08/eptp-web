@@ -115,6 +115,7 @@ Route::controller(PaymentController::class)->group(function(){
 
 Route::controller(ResultController::class)->group(function(){
    Route::get('/test-card','testcard')->name('testcard')->middleware('participant');
+   Route::get('/test-validation','testValidate')->name('testValidate')->middleware('participant');
 
    Route::get('/menu-result','result')->name('result')->middleware('staff');
 

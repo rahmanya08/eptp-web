@@ -28,7 +28,7 @@ class HeadStaffController extends Controller
 
         $tb_schedule = Test::select('tests.date_test', 'tests.type_test', 'tests.status_test','users.name')
         ->join('users','tests.staff_id','=','users.id')
-        ->where('tests.status_test', true)
+        ->where('tests.status_test', false)
         ->orderBy('tests.id', 'desc')
         ->get();
         return view('dashboard.headstaff.index', compact('profile','regist','schedule','payment','tb_schedule'));
@@ -109,11 +109,15 @@ class HeadStaffController extends Controller
         ->join('users', 'users.id' ,'=','tests.staff_id')
         ->get();
 
+        $headstaff = User::select('users.name')
+        ->where('role', 'headstaff')
+        ->get();
+
         $users = User::select('detail_tests.participant_id','users.name')
         ->join('detail_tests' , 'users.id','=','detail_tests.participant_id')
         ->get();
 
-        return view('dashboard.headstaff.report-headstaff', compact('profile','users','reports') );
+        return view('dashboard.headstaff.report-headstaff', compact('profile','users','reports','headstaff') );
     }
 
     public function validateReport($id)
@@ -130,7 +134,11 @@ class HeadStaffController extends Controller
             ->where('tests.id', $id)
             ->get();
 
-        $reports = DetailTest::select('users.name', 'identities.major', 'identities.study_program', 'identities.semester', 'detail_tests.registration',
+        $headstaff = User::select('users.name')
+        ->where('role', 'headstaff')
+        ->get();
+
+        $reports = DetailTest::select('users.name', 'identities.category', 'identities.study_program', 'detail_tests.registration',
         'detail_tests.skor', 'detail_tests.is_passed')
         ->join('tests', 'detail_tests.test_id','=','tests.id')  
         ->join( 'users', 'detail_tests.participant_id','=','users.id')
@@ -139,7 +147,7 @@ class HeadStaffController extends Controller
         ->where('tests.report', true) 
         ->get();
 
-        return view('dashboard.headstaff.validate-report', compact('profile','test','reports','info'));
+        return view('dashboard.headstaff.validate-report', compact('profile','test','reports','info','headstaff'));
     }
 
     public function saveValidate(Request $request)
@@ -154,6 +162,7 @@ class HeadStaffController extends Controller
     
         if ($isChecked) {
             $test->date_report = now()->toDateString();
+            $test->report_validator = auth()->user()->id;
         } else {
             $test->date_report = null;
         }
@@ -177,12 +186,12 @@ class HeadStaffController extends Controller
         ->get();
 
         $tb_regist = DetailTest::select('users.id','users.name', 'identities.image' ,'tests.date_test',
-        'detail_tests.registration','detail_tests.is_payed','detail_tests.date_validation')
+        'detail_tests.id','detail_tests.registration','detail_tests.is_payed','detail_tests.date_validation','detail_tests.validator')
         ->join( 'tests' , 'tests.id' ,'=' ,'detail_tests.test_id' )
         ->join('users' ,'users.id' ,'=' ,'detail_tests.participant_id')
         ->join('identities' , 'users.id', '=' ,'identities.user_id')
         ->where('is_payed', true)
-        ->where('tests.status_test', true)
+        ->where('tests.status_test', false)
         ->get();
        
         $users = User::select('detail_tests.participant_id','users.name')->join('detail_tests' , 'users.id','=','detail_tests.participant_id')
@@ -194,31 +203,21 @@ class HeadStaffController extends Controller
     public function editValidate($id)
     {
         $test = DetailTest::find($id);
-        
-        $data = DetailTest::select('detail_tests.registration', 'detail_tests.date_validation', 'tests.date_test','detail_tests.participant_id')
-        ->join('tests','tests.id', '=', 'detail_tests.test_id')
-        ->join('users', 'detail_tests.participant_id', '=','users.id')
-        ->where('users.id', $id)
-        ->where('tests.status_test', true)
-        ->get();
 
-        $users = User::select('users.name', 'identities.birth_date', 'identities.gender','identities.identity_type', 'identities.identity_num')
-        ->join('identities' ,'identities.user_id' ,'=' ,'users.id')
-        ->where('user_id', $id)
+        $tb_regist = DetailTest::select('users.id','users.name', 'identities.image' ,'tests.date_test',
+        'detail_tests.id','detail_tests.registration','detail_tests.is_payed','detail_tests.date_validation')
+        ->join( 'tests' , 'tests.id' ,'=' ,'detail_tests.test_id' )
+        ->join('users' ,'users.id' ,'=' ,'detail_tests.participant_id')
+        ->join('identities' , 'users.id', '=' ,'identities.user_id')
+        ->where('detail_tests.id', $id)
         ->get();
 
         $profile = Identity::select('image')
         ->join('users', 'identities.user_id', '=', 'users.id')
         ->where('user_id', auth()->user()->id)
-        ->get();
+        ->get();        
 
-        $image = Identity::select('image')
-        ->join('users', 'identities.user_id', '=', 'users.id')
-        ->where('user_id', $id)
-        ->get();
-
-
-        return view('dashboard.headstaff.validate-card ', compact('data','users','profile','image','test'));
+        return view('dashboard.headstaff.validate-card ', compact('tb_regist','profile','test'));
     }
 
     public function updateValidate(Request $request)
@@ -226,15 +225,16 @@ class HeadStaffController extends Controller
         $testId = $request->input('detailtests_id');
         $test = DetailTest::find($testId);
         if (!$test) {
-            return redirect()->back()->with('error', 'Participant Not Validated');
+            return redirect()->back()->with('error', 'There is No This Participant');
         }
     
         $isChecked = $request->has('checkbox');
-    
         if ($isChecked) {
             $test->date_validation = now()->toDateString();
+            $test->validator = auth()->user()->id;
         } else {
             $test->date_validation = null;
+            $test->validator = null;
         }
     
         $test->save();

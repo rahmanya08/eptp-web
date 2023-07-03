@@ -55,8 +55,9 @@
                         <th>Test Date</th>
                         <th>Assist By</th>
                         <th>Status</th>
-                        <th>Action</th>
                         <th>Validation</th>
+                        <th>Validate By</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -74,6 +75,9 @@
                             @else
                             <td><span class="status In-Active">Un-Validated</span></td>
                             @endif
+                            @foreach ($headstaff as $validator)
+                                <td>{{ $validator->name}}</td>  
+                            @endforeach
                             <td>
                                 <span><a href={{route('validateReport', $data->id)}} class="btn-edit" style="color: white">See Details</a></span>
                             </td> 

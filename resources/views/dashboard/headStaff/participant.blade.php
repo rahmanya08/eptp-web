@@ -37,8 +37,9 @@
     </div>
     @if (session()->has('success'))
     <div class="alert alrt-success" role="alert" id="alert">
+        <i class='bx bxs-check-circle'></i>
         {{ session('success') }}
-        <i class='bx bx-x' id="icon" onclick="hideAlert()"></i>
+        <i class='bx bx-x' id="icon" style="cursor: pointer" onclick="hideAlert()"></i>
     </div>
     @endif
     <div class="table-data">
@@ -71,6 +72,7 @@
                         @if ($registrant->is_payed == 1)
                             <td>Payed</td>
                         @endif
+
                         @if ($registrant->date_validation !== null )
                             <td><span class="status Active">Validate at: {{$registrant->date_validation}}</span></td>
                         @else

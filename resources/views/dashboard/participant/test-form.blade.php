@@ -43,11 +43,11 @@
         </div>
     @endif
     @if (session()->has('success'))
-        <div class="alert alrt-success" role="alert" id="alert">
+        {{-- <div class="alert alrt-success" role="alert" id="alert">
             <i class='bx bxs-check-circle'></i>
             {{ session('success') }}
             <i class='bx bx-x' id="icon" style="cursor: pointer" onclick="hideAlert()"></i>
-        </div>
+        </div> --}}
     @endif
     <form action="{{ route('create') }}" method="post" enctype="multipart/form-data">
         @csrf
@@ -66,7 +66,7 @@
         <div class="payment-part">
             <input type="file" name="pay_url" id="pay_url" accept="image/jpg,image/png,image/jpeg" />
         </div>
-        <button type="submit" class="save-btn"  onclick="return getData()">Submit</button>
+        <button type="submit" class="save-btn" onclick="return getData()">Submit</button>
     </form>
 </main>
 @endsection

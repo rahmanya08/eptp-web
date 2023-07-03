@@ -50,17 +50,22 @@
                         <th>No Registration</th>
                         <th>Name</th>
                         <th>Test Type</th>
-                        <th>Date</th>
-                        <th>Validate by Staff</th>
+                        <th>Test Date</th>
+                        <th>Validate by Head Staff</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($data as $registrant)
                     <tr>
-                        <td>{{$registrant->created_at->format('ym') . str_pad($registrant->id, 6, '0', STR_PAD_LEFT) }}</td>
+                        <td>{{$registrant->registration}}</td>
                         <td>{{$registrant->name }}</td>
                         <td>{{$registrant->type_test }}</td>
                         <td>{{$registrant->date_test }}</td>
+                        @if ($registrant->date_validation !== null )
+                            <td><span class="status Active">Validate at: {{$registrant->date_validation}}</span></td>
+                        @else
+                            <td><span class="status In-Active">Un-Validate</span></td>
+                        @endif
                     </tr>
                     @endforeach
                 </tbody>

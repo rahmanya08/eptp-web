@@ -36,10 +36,11 @@
         </div>
     </div>
     @if (session()->has('success'))
-    <div class="alert alrt-success" role="alert" id="alert">
-        {{ session('success') }}
-        <i class='bx bx-x' id="icon" onclick="hideAlert()"></i>
-    </div>
+        <div class="alert alrt-success" role="alert" id="alert">
+            <i class='bx bxs-check-circle'></i>
+            {{ session('success') }}
+            <i class='bx bx-x' id="icon" style="cursor: pointer" onclick="hideAlert()"></i>
+        </div>
     @endif
     <div class="table-data">
         <div class="order">

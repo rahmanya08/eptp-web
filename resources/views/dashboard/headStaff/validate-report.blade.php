@@ -41,6 +41,7 @@
     </div>
     @if (session()->has('success'))
     <div class="alert alrt-success" role="alert" id="alert">
+        <i class='bx bxs-check-circle'></i>
         {{ session('success') }}
         <i class='bx bx-x' id="icon" onclick="hideAlert()"></i>
     </div>
@@ -57,19 +58,21 @@
                      @foreach ($info as $data)
                         @if ($data->date_report !== null)
                             <th>Test Date: {{ $data->date_test }}</th>
-                            <th>Assist By: {{ $data->name }}</th>
-                            <th>Validate At: {{ $data->date_report}}</th>  
+                            <th>Reported By: {{ $data->name }}</th>
+                            <th>Validate At: {{ $data->date_report}}</th> 
+                            @foreach ($headstaff as $validator)
+                                <th>Validate By: {{ $validator->name}}</th>  
+                            @endforeach 
                         @endif              
                     @endforeach
                 </thead>
                 <thead>
-
                     <tr>
-                        <th>Reg. Number</th>
+                        <th>No</th>
                         <th>Name</th>
-                        <th>Departement</th>
                         <th>Study Program</th>
-                        <th>Semester</th>
+                        <th>Reg. Number</th>
+                        <th>Participant Status</th>
                         <th>Score</th>
                         <th>Status</th>
                     </tr>
@@ -77,17 +80,15 @@
                 <tbody>
                         @foreach ($reports as $data)
                         <tr>
-                            <td>{{ $data->registration }}</td>
+                            <td>{{ $loop->iteration }}</td>
                             <td>{{ $data->name}}</td>
-                            @if ( $data->major == 'Major' && $data->study_program == 'Study Program' && $data->semester == 'Semester' )
-                                <td>-</td>
-                                <td>-</td>
+                            @if ( $data->study_program == 'Study Program')
                                 <td>-</td>
                             @else
-                                <td>{{ $data->major }}</td>
                                 <td>{{ $data->study_program}}</td>
-                                <td>{{ $data->semester }}</td>
                             @endif
+                            <td>{{ $data->registration }}</td>
+                            <td>{{ $data->category }}</td>
                             <td>{{ $data->skor }}</td>
                             @if ($data->is_passed == 1 )
                                 <td>{{ $data->is_passed = 'Success'}}</td> 

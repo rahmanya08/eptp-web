@@ -378,3 +378,58 @@ select.form-select {
 .hidden{
     display: none;
 }
+
+/*AFTER-SUBMIT*/  
+.after-box {
+    box-sizing: border-box;
+    border: none;
+    background: white;
+    border-radius: 30px;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.after-box img {
+    width: 80%;
+    position: relative;
+    left: 30px;
+    top: -50px;
+}
+
+.after-box h1, h3, h4 {
+    text-align: center;
+    color: #2b0053;
+    /* --yellow: #F2B705; */
+}
+
+h3 {
+    margin-top: -100px;
+}
+
+.register {
+    font-size: .9em;
+    text-align: center;
+    box-sizing: border-box;
+    border: none;
+    background: #F2B705;
+    width: 30%;
+    position: relative;
+    top: 5px;
+    left: 200px;
+    padding: 10px;
+    border-radius: 23px;
+  }
+  
+  .register  a {
+    color: #2b0053;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 16px;
+    font-family: 'Poppins';
+  }
+  
+  .register p a:hover {
+    text-decoration: underline;
+  }
+/*AFTER-SUBMIT*/ 

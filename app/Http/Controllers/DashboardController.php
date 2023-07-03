@@ -29,6 +29,7 @@ class DashboardController extends Controller
             $query->select('test_id')->groupBy('test_id');
         }])
         ->withCount('detail_tests')
+        ->where('status_test', false)
         ->get(['date_test', 'detail_tests_count']);
 
         return view('landing.index',compact('schedules'));

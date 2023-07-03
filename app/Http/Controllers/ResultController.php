@@ -17,11 +17,11 @@ class ResultController extends Controller
     public function testcard()
     {
         
-        $data = DetailTest::select('detail_tests.id','detail_tests.created_at', 'detail_tests.date_validation', 'tests.date_test','detail_tests.participant_id')
+        $data = DetailTest::select('detail_tests.registration', 'detail_tests.date_validation', 'tests.date_test','detail_tests.participant_id')
         ->join('tests','tests.id', '=', 'detail_tests.test_id')
         ->join('users', 'detail_tests.participant_id', '=','users.id')
         ->where('users.id', auth()->user()->id)
-        ->where('tests.status_test', true)
+        ->where('tests.status_test', false)
         ->get();
 
         $users = User::select('users.name', 'identities.birth_date', 'identities.gender','identities.identity_type', 'identities.identity_num')
@@ -35,8 +35,8 @@ class ResultController extends Controller
         ->get();
 
         $headstaff = User::select('users.name','identities.identity_num')
-        ->join('identities' ,'identities.user_id' ,'=' ,'users.id')
-        ->where('role', 'headStaff')
+        ->join('identities' ,'users.id','=' ,'identities.user_id')
+        ->where('role','headstaff')
         ->get();
 
         return view('dashboard.participant.test-card ', compact('data','users','profile','headstaff'));
@@ -50,8 +50,9 @@ class ResultController extends Controller
         ->where('user_id', auth()->user()->id)
         ->get();
 
-        $detail_tests = DetailTest::select('detail_tests.id','users.name', 'detail_tests.skor', 'detail_tests.sertif_url', 'detail_tests.is_passed')
-        ->join('users', 'users.id','=', 'detail_tests.participant_id' )
+        $detail_tests = DetailTest::select('users.name','identities.study_program', 'detail_tests.id', 'detail_tests.registration', 'identities.category','detail_tests.skor','detail_tests.sertif_url','detail_tests.is_passed')
+        ->join('users', 'users.id','=', 'detail_tests.participant_id')
+        ->join('identities','users.id','=','identities.user_id')
         ->orderBy('id', 'asc')
         ->get();
 
@@ -150,5 +151,10 @@ class ResultController extends Controller
        $data->save();
 
        return redirect('/menu-result')->with('success', 'Result Updated');
+   }
+
+   public function testValidate()
+   {
+    return view('partials.modal-popup');
    }
 }

@@ -437,14 +437,14 @@
                                             style="object-fit: cover;" alt=""> --}}
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                {{-- <div class="col-md-6">
                                     <h1 class="mb-3">25 Years Of Experience In Architecture Industry</h1>
                                     <p class="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo magna dolore erat amet</p>
                                     <p><i class="fa fa-check text-primary me-3"></i>Design Approach</p>
                                     <p><i class="fa fa-check text-primary me-3"></i>Innovative Solutions</p>
                                     <p><i class="fa fa-check text-primary me-3"></i>Project Management</p>
                                     <a href="" class="btn btn-primary py-3 px-5 mt-3">Read More</a>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
                         <div class="tab-pane fade" id="tab-pane-3">

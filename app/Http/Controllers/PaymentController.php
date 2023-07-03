@@ -49,10 +49,10 @@ class PaymentController extends Controller
          * )
          */
         $capactiy = Test::whereHas('detail_tests', function ($query) {
-            $query->groupBy('test_id')->havingRaw('COUNT(*) < 22');
+            $query->groupBy('test_id')->havingRaw('COUNT(*) < 22')->where('tests.status_test', false);
         })
         ->orWhereDoesntHave('detail_tests')
-        // ->where('status_test', true)
+        ->where('tests.status_test', false)
         ->pluck('date_test', 'id');
         
 
@@ -63,18 +63,6 @@ class PaymentController extends Controller
         return view('dashboard.participant.test-form ', compact('schedules','profile','capactiy'));
     }
 
-    /** 
-    * public function showScheduleList()
-    * {
-    *    $schedules = Test::withCount('participants')
-    *        ->whereHas('participants', function ($query) {
-    *            $query->having('participants_count', '<', 22);
-    *        })
-    *        ->get();
-    *
-    *    return view('schedule-list', ['schedules' => $schedules]);
-    * }
-    */
 
     public function participant ()
     {
@@ -90,7 +78,8 @@ class PaymentController extends Controller
     {
         $id = Auth::user()->id;
 
-        $data = DetailTest::select('detail_tests.registration' , 'users.name','detail_tests.participant_id', 'tests.type_test', 'tests.date_test' ,'tests.staff_id')
+        $data = DetailTest::select('detail_tests.registration' , 'users.name','detail_tests.participant_id', 'detail_tests.date_validation',
+        'tests.type_test', 'tests.date_test' ,'tests.staff_id')
         ->join('tests','detail_tests.test_id', '=', 'tests.id')
         ->join('users','detail_tests.participant_id','=', 'users.id')
         ->get();
@@ -135,20 +124,26 @@ class PaymentController extends Controller
 
 
 
-    public function store(Request $request, DetailTest $detailtest)
+    public function store(Request $request)
     {
         //dd($request->all());
 
-        // Format the created_at timestamp
-        $formattedDate = Carbon::parse($detailtest->created_at)->format('ym');
+        // Get the current year and month
+        $currentYear = Carbon::now()->format('y');
+        $currentMonth = Carbon::now()->format('m');
 
-        // Concatenate the formatted date and padded id
-        $registrationNumber = $formattedDate . str_pad($detailtest->id, 6, '0', STR_PAD_LEFT);
+        // Get the latest test detail ID
+        $latestDetailTest = DetailTest::latest('id')->first();
 
+        // Calculate the next registration number
+        $nextNumber = ($latestDetailTest ? ($latestDetailTest->id + 1) : 1);
+
+        // Format the registration number
+        $registrationNumber = $currentYear . $currentMonth . str_pad($nextNumber, 6, '0', STR_PAD_LEFT);
         $validatedData = $request->validate([
             'pay_url' =>'required','min:5','max:255',
             'test_id' =>  'required'
-        ]);
+        ]);        
 
         $validatedData['registration'] = $registrationNumber;
         $validatedData['participant_id'] = auth()->user()->id;
@@ -172,7 +167,7 @@ class PaymentController extends Controller
 
         $didnoTest = DetailTest::join('tests','detail_tests.test_id','=','tests.id') 
             ->where('detail_tests.participant_id', $id) 
-            ->where('tests.status_test', '1')
+            ->where('tests.status_test', false)
             ->first();
 
         if ($existingRegistration) {
@@ -186,7 +181,8 @@ class PaymentController extends Controller
             } else {
                 
                 DetailTest::create($validatedData);
-                return redirect('/test-card')->with('success', 'Thank you! Please Waiting fo Verify');
+                //return redirect('/test-card')->with('success', 'Thank you! Please Waiting fo Verify');
+                return redirect('/test-validation');
             }
         }
 
@@ -196,13 +192,12 @@ class PaymentController extends Controller
     public function editStatus($id)
     {
         $data = DetailTest::find($id);
-        return view('dashboard.staff.edit-payment',[
-            'identities' => Identity::select('image')
-            ->join('users', 'identities.user_id', '=', 'users.id')
-            ->where('user_id', auth()->user()->id)
-            ->get(),
-            'data'=>$data
-        ]);
+
+        $profile = Identity::select('image')
+        ->join('users', 'identities.user_id', '=', 'users.id')
+        ->where('user_id', auth()->user()->id)
+        ->get();
+        return view('dashboard.staff.edit-payment', compact('data','profile'));
     }
 
     //Update Status Payment
@@ -215,15 +210,5 @@ class PaymentController extends Controller
 
         return redirect('/menu-payment')->with('success', 'Payment verified!');
     }
-
-    public function testStatus(Request $request, $id)
-    {
-        $data = DetailTest::find($request->id);
-        $data->test_status = $request->verify;
-        $data->save();
-
-        return response()->json(['success' => true]);
-    }
-
 
 }

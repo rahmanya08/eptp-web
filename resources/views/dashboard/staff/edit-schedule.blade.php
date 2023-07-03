@@ -48,11 +48,11 @@
                 </select>
             </div>
             <div class="col check">
-                <input type="radio" id="status_test" name="status_test" value="0">
+                <input type="radio" id="status_test" name="status_test" value="1">
                 <label for="status_test">Expired</label>
             </div>
             <div class="col">
-                <button type="submit" onclick="return getData()">Edit</button>
+                <button type="submit" class="btn-save" onclick="return getData()">Edit</button>
             </div>
         </div>
     </form>

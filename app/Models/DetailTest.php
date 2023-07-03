@@ -16,6 +16,10 @@ class DetailTest extends Model
         'pay_url',
         'is_paid',
         'date_validation',
+        'validator',
+        'listening',
+        'writing',
+        'reading',
         'skor',
         'sertif_url',
         'is_passed'

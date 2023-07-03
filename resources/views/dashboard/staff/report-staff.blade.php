@@ -44,6 +44,7 @@
     </div>
     @if (session()->has('success'))
     <div class="alert alrt-success" role="alert" id="alert">
+        <i class='bx bxs-check-circle'></i>
         {{ session('success') }}
         <i class='bx bx-x' id="icon" onclick="hideAlert()"></i>
     </div>
@@ -53,8 +54,8 @@
         <div class="row">
             <div class="col">
                 <select name="date_test" id="date_test">
+                        <option value="">Select Test Date</option>
                         @foreach ($tests as $test)
-                            <option value="">Select Test Date</option>
                             <option value="{{ $test->id }}">{{\Carbon\Carbon::parse($test->date_test)->format('l, F d, Y')}}</option>
                         @endforeach
                 </select>
@@ -79,11 +80,10 @@
                 <thead>
                     <tr>
                         <th>Test Date</th>
-                        <th>Reg. Number</th>
                         <th>Name</th>
-                        <th>Departement</th>
                         <th>Study Program</th>
-                        <th>Semester</th>
+                        <th>Reg. Number</th>
+                        <th>Participant Status</th>
                         <th>Score</th>
                         <th>Status</th>
                     </tr>
@@ -92,17 +92,14 @@
                         @foreach ($detail_tests as $detailtest)
                         <tr>
                             <td>{{\Carbon\Carbon::parse($detailtest->date_test)->format('l, F d, Y')}}</td>
-                            <td>{{ $detailtest->registration}}</td>
                             <td>{{ $detailtest->name }}</td>
-                            @if ( $detailtest->major == 'Major' && $detailtest->study_program == 'Study Program' && $detailtest->semester == 'Semester' )
-                                <td>-</td>
-                                <td>-</td>
+                            @if ( $detailtest->study_program == 'Study Program')
                                 <td>-</td>
                             @else
-                                <td>{{ $detailtest->major }}</td>
                                 <td>{{ $detailtest->study_program}}</td>
-                                <td>{{ $detailtest->semester }}</td>
                             @endif
+                            <td>{{ $detailtest->registration}}</td>
+                            <td>{{ $detailtest->category }}</td>
                             <td>{{ $detailtest->skor }}</td>
                             @if ($detailtest->is_passed == 1 )
                                 <td>{{ $detailtest->is_passed = 'Success'}}</td> 

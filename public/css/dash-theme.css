@@ -510,7 +510,7 @@ a.btn-add {
     height: 36px;
     padding: 0 16px;
     border-radius: 36px;
-    background: var(---yellow);
+    background: var(--yellow);
     color: var(--light);
     display: flex; 
     justify-content: center;
@@ -1131,6 +1131,8 @@ table, th, td {
 img#qr {
     width: 60px;
 }
+
+.img-validate ,
 .photo-card {
     width: 0rem;
     height: 0rem;
@@ -1216,7 +1218,7 @@ tr .tabel {
 .profile-box {
     box-sizing: border-box;
     width: 90%;
-    height: 20rem;
+    height: 21rem;
     margin: 30px;
     background: #f1e5fb;
     border-radius: 10px;
@@ -1303,4 +1305,27 @@ td.unverified {
     font-style: italic;
     font-family: 'Poppins';
     font-size: 12px;
+}
+
+i.bx.bx-x-circle {
+    font-size: x-large;
+    color: red;
+}
+
+.img-validate img{ width: 5rem;
+    height: 6rem;
+    object-fit: cover;
+    position: relative;
+    left: 20px;
+    top: -24px;
+}
+
+.table-box {
+    box-sizing: border-box;
+    background: #f1e5fb;
+    width: 80%;
+    height: 7rem;
+    margin-top: 30px;
+    padding: 4px;
+    border-radius: 7px;
 }

@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('pay_url');
             $table->boolean('is_payed')->default(false);
             $table->date('date_validation')->nullable();
+            $table->foreignId('validator')->nullable()->constrained('users');
             $table->string('skor')->nullable();
             $table->string('sertif_url')->nullable();
             $table->boolean('is_passed')->default(false);

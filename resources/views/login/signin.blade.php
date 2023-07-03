@@ -6,6 +6,10 @@
 <link rel="stylesheet" href="{{ asset('css/auth-theme.css') }}">
 @endpush
 
+<!--NAVBAR-->
+@include('partials.navbar')
+<!--NAVBAR-->    
+
 @section('main-content')
 
     <section>
@@ -25,7 +29,7 @@
             <div class="form-value">
                 <form action="{{ route('signin') }}" method="post">
                     @csrf
-                    <h2>SignIn</h2>
+                    <h2>Welcome Back!</h2>
                     <div class="input-box">
                         <i class='bx bx-envelope' ></i>
                         <input type="email" name="email" id="email" @error('email') is-invalid @enderror required value="{{ old ('email') }}" autofocus>
@@ -42,7 +46,7 @@
                         <label for="password">Password</label>
                     </div>
                     <div class="forget">
-                        <label for=""><input type="checkbox" name="forget" id="forget">Remember Me <a href="#">Forget Password</a></label>  
+                        {{-- <label for=""><input type="checkbox" name="forget" id="forget">Remember Me <a href="#">Forget Password</a></label>   --}}
                     </div>
                     <button type="submit">SignIn</button>
                     <div class="register">

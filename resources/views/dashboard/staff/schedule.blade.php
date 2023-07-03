@@ -92,7 +92,7 @@
                         <td>{{ $schedule->date_test }}</td>
                         <td>{{ $schedule->type_test }}</td>
                         <td>{{ $schedule->name }}</td>
-                        @if ($schedule->status_test == 1)
+                        @if ($schedule->status_test == 0)
                              <td><span class="status Active">{{ $schedule->status_test = 'Active' }}</span></td>    
                         @else
                              <td><span class="status In-Active">{{ $schedule->status_test = 'Expired' }}</span></td>    

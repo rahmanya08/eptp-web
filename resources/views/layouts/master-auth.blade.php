@@ -20,9 +20,6 @@
     </head>
     <body>
             
-    <!--NAVBAR-->
-        @include('partials.navbar')
-    <!--NAVBAR-->
     <!--CONTENT-->
         @yield('main-content')
     <!--CONTENT-->

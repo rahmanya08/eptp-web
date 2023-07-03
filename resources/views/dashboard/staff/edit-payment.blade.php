@@ -7,9 +7,9 @@
 @endpush
 
 @push('profile')
-    @foreach ($identities as $identity)
-        @if ($identity->image != null)
-            <img src="{{ asset('storage/images/users/'.$identity->image) }}">
+    @foreach ($profile as $img)
+        @if ($img->image != null)
+            <img src="{{ asset('storage/images/users/'.$img->image) }}">
         @else
             <img src="{{ asset('img/nopic.png') }}" alt="" id="profile">
         @endif

@@ -38,6 +38,7 @@
     </div>
     @if (session()->has('success'))
         <div class="alert alrt-success" role="alert" id="alert">
+            <i class='bx bxs-check-circle'></i>
             {{ session('success') }}
             <i class='bx bx-x' id="icon" onclick="hideAlert()"></i>
         </div>
@@ -75,7 +76,7 @@
                         <tr>
                           <th style="margin-top: 15px">Registration No</th>
                           @foreach ($data as $payment)
-                             <td>:{{ $payment->created_at->format('ym') . str_pad($payment->id, 6, '0', STR_PAD_LEFT) }}</td>
+                             <td>:{{ $payment->registration}}</td>
                           @endforeach
                         </tr>
                         <tr>
@@ -116,7 +117,9 @@
                         </tr>
                         <tr>
                             <th></th>
+                            @foreach ($data as $payment)
                             <td>Cilacap,{{ $payment->date_validation}}</td>
+                            @endforeach
                             <td></td>
                         </tr>
                         <tr>
@@ -131,24 +134,20 @@
                                 @if ($payment->date_validation != null)
                                     <td><img src="{{ asset('img/qr.png') }}" alt="" id="qr"></td>
                                 @endif
-                                
                             </tr>
-                        @endforeach
-                        @foreach ($headstaff as $head)
-                        <tr>
-                            <th></th>  
-                            <td>{{$head->name}}</td>
-                        </tr>
-                        <tr>
-                            <th></th>
-                            <td>NPAK:{{$head->identity_num}}</td>
-                        </tr>
+                                @foreach ($headstaff as $head)
+                                <tr>
+                                    <th></th>  
+                                    <td>{{$head->name}}</td>
+                                </tr>
+                                <tr>
+                                    <th></th>
+                                    <td>NPAK:{{$head->identity_num}}</td>
+                                </tr>
+                                @endforeach
                         @endforeach
                     </tbody>
                 </table>
-                {{-- <div class="sign-head">
-                    <h5>Head of UPT Bahasa</h5>
-                </div> --}}
             </div>
         </div> 
         <button id="toPDF" onclick="window.print()" class="btn btn-lg btn-primary mb-5" style="cursor: pointer">Download</button>

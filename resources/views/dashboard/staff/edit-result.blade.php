@@ -40,7 +40,8 @@
                 </select>
             </div>
             <div class="col">
-                <input type="number" name="skor" id="skor" value="{{ $data->skor }}" >
+                <label for="">Score</label>
+                <input type="number" name="skor" id="skor" value="{{ $data->skor}}" >
             </div>
             <div class="col">
                 <select class="form-select" name="is_passed" id="is_passed">

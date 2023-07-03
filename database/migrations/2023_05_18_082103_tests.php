@@ -22,6 +22,7 @@ return new class extends Migration
             $table->boolean('status_test')->default(false);
             $table->boolean('report')->default(false);
             $table->date('date_report')->nullable();
+            $table->foreignId('report_validator')->nullable()->constrained('users');
             $table->timestamps();
         });
     }

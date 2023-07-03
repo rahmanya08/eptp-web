@@ -15,7 +15,8 @@ class Test extends Model
         'type_test',
         'status_test',
         'report',
-        'date_report'
+        'date_report',
+        'report_validator'
     ];
 
     public function user_test()

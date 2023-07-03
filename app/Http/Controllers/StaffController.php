@@ -113,7 +113,7 @@ class StaffController extends Controller
         ->where('user_id', auth()->user()->id)
         ->get();
 
-        $detail_tests = DetailTest::select('tests.date_test','detail_tests.registration', 'users.name', 'identities.major','identities.study_program', 'identities.semester', 'detail_tests.skor', 'detail_tests.is_passed')
+        $detail_tests = DetailTest::select('tests.date_test','detail_tests.registration', 'users.name', 'identities.category','identities.study_program', 'detail_tests.skor', 'detail_tests.is_passed')
         ->join('tests', 'detail_tests.test_id','=', 'tests.id')
         ->join('users', 'users.id','=', 'detail_tests.participant_id')
         ->join('identities' , 'users.id','=','identities.user_id')
@@ -125,7 +125,7 @@ class StaffController extends Controller
         ->get();
 
         $tests = Test::where('staff_id', auth()->user()->id)
-        ->where('status_test', false)
+        ->where('status_test', true)
         ->where('report', false)
         ->get();
 

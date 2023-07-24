@@ -56,7 +56,7 @@
         @csrf
         <input type="hidden" name="detailtests_id" value="{{ $test['id'] }}">
         <div>
-            <input type="checkbox" name="checkbox" value="1">
+            <input type="checkbox" name="checkbox" value="1"{{ $test->date_validation ? 'checked' : '' }}>
             <label for="date_validation">Valid</label>
         </div>
         <div>

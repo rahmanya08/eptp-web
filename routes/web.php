@@ -66,6 +66,9 @@ Route::controller(StaffController::class)->group(function(){
    Route::post('/identity-staff/edit','staffSaveUp')->name('staffSaveUp')->middleware('staff');
    
    Route::get('/menu-report-staff','reportStaff')->name('reportStaff')->middleware('staff');
+
+   Route::get('/menu-report-staff/{id}','Reported')->name('Reported')->middleware('staff');
+ 
    Route::post('/menu-report-staff','saveReport')->name('saveReport')->middleware('staff');
 
    Route::get('/menu-staff-data','staff')->name('staff')->middleware('admin');

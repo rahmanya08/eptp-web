@@ -37,10 +37,6 @@
                 </li>
             </ul>
         </div>
-        <button onclick="exportToExcel()" class="btn-download" style="border: none">
-            <i class='bx bxs-download'></i>
-            <span class="text">Download PDF</span>
-        </button>
     </div>
     @if (session()->has('success'))
     <div class="alert alrt-success" role="alert" id="alert">
@@ -80,33 +76,39 @@
                 <thead>
                     <tr>
                         <th>Test Date</th>
-                        <th>Name</th>
-                        <th>Study Program</th>
-                        <th>Reg. Number</th>
-                        <th>Participant Status</th>
-                        <th>Score</th>
+                        <th>Assist By</th>
                         <th>Status</th>
+                        <th>Validation</th>
+                        <th>Validate By</th>
+                        <th>See Details</th>
                     </tr>
                 </thead>
                 <tbody>
-                        @foreach ($detail_tests as $detailtest)
+                        @foreach ($reports as $tests)
                         <tr>
-                            <td>{{\Carbon\Carbon::parse($detailtest->date_test)->format('l, F d, Y')}}</td>
-                            <td>{{ $detailtest->name }}</td>
-                            @if ( $detailtest->study_program == 'Study Program')
-                                <td>-</td>
+                            <td>{{\Carbon\Carbon::parse($tests->date_test)->format('l, F d, Y')}}</td>
+                            <td>{{$tests->name}}</td>
+                            @if ($tests->report == 1 )
+                                <td><span class="status Active">{{ $tests->report = 'Reported'}}</span></td>
                             @else
-                                <td>{{ $detailtest->study_program}}</td>
+                                <td><span class="status In-Active">{{ $tests->report = 'Un-Reported'}}</span></td>
                             @endif
-                            <td>{{ $detailtest->registration}}</td>
-                            <td>{{ $detailtest->category }}</td>
-                            <td>{{ $detailtest->skor }}</td>
-                            @if ($detailtest->is_passed == 1 )
-                                <td>{{ $detailtest->is_passed = 'Success'}}</td> 
+                            @if ($tests->date_report != null)
+                            <td><span class="status Active">validated at {{ $tests->date_report}}</span></td>
                             @else
-                                <td>{{ $detailtest->is_passed = 'Failed'}}</td>
+                            <td><span class="status In-Active">Un-Validated</span></td>
                             @endif
-                        </tr> 
+                            @if ($tests->date_report != null)
+                                @foreach ($headstaff as $validator)
+                                    <td>{{ $validator->name}}</td>  
+                                @endforeach
+                            @else
+                                <td><span class="status In-Active">Un-Validated</span></td>
+                            @endif
+                            <td>
+                                <span><a href={{route('Reported', $tests->id)}} class="btn-edit" style="color: white">See Details</a></span>
+                            </td> 
+                        </tr>
                         @endforeach
                 </tbody>
             </table>

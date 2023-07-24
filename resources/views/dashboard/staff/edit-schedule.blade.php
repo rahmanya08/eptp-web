@@ -43,6 +43,14 @@
                 @enderror
             </div>
             <div class="col">
+                <input readonly type="time" name="time_test" id="time" @error('time_test') is-invalid @enderror required value="{{ $test->time_test}}">
+                @error('time_test')
+                    <div class="invalid-feedback">
+                        {{  $message  }}
+                    </div>
+                @enderror
+            </div>
+            <div class="col">
                 <select  name="type_test" id="test-type">
                     <option  value="{{ $test->id }}" {{$test->type_test == $test->id ? 'selected' : ''}}>{{ $test->type_test}}</option>
                 </select>

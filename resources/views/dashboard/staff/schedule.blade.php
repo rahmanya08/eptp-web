@@ -16,6 +16,10 @@
     @endforeach
 @endpush
 
+@php
+    use Carbon\Carbon;
+@endphp
+
 @section('main-content')
 
 <main>
@@ -35,6 +39,13 @@
             </ul>
         </div>
     </div>
+    @if (session()->has('failed'))
+        <div class="alert alrt-danger" role="alert" id="alert">
+            <i class='bx bx-x-circle'></i>
+            {{ session('failed') }}
+            <i class='bx bx-x' id="icon" style="cursor: pointer" onclick="hideAlert()"></i>
+        </div>
+    @endif
     @if (session()->has('success'))
         <div class="alert alrt-success" role="alert" id="alert">
             <i class='bx bxs-check-circle'></i>
@@ -54,9 +65,17 @@
                 @enderror
             </div>
             <div class="col">
+                <input type="time" name="time_test" id="time" @error('time_test') is-invalid @enderror required value="{{ old('time_test') }}">
+                @error('time_test')
+                    <div class="invalid-feedback">
+                        {{  $message  }}
+                    </div>
+                @enderror
+            </div>
+            <div class="col">
                 <select name="type_test" id="test-type">
-                    <option value="toefl">TOEFL</option>
-                    <option value="ibt">IBT</option>
+                    <option value="toefl">TOEFL-ITP</option>
+                    <option value="eptp">EPT-P</option>
                 </select>
             </div>
             {{-- <div class="col">
@@ -79,6 +98,7 @@
                     <tr>
                         <th>ID</th>
                         <th>Date</th>
+                        <th>Time</th>
                         <th>Type</th>
                         <th>Staff</th>
                         <th>Status</th>
@@ -90,6 +110,9 @@
                     <tr>
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $schedule->date_test }}</td>
+                        <td>
+                            {{ \Carbon\Carbon::createFromFormat('H:i:s', $schedule->time_test)->format('H:i') }}
+                        </td>                        
                         <td>{{ $schedule->type_test }}</td>
                         <td>{{ $schedule->name }}</td>
                         @if ($schedule->status_test == 0)

@@ -27,7 +27,7 @@
        @csrf
        <input type="hidden" name="id" value="{{ $data['id'] }}">
        <img src="{{ asset('storage/images/payments/'.$data->pay_url) }}" alt="" style="width: 40%">
-       <input type="checkbox" id="verify" name="verify" value="1">
+       <input type="checkbox" id="verify" name="verify" value="1" {{ $isChecked ? 'checked' : '' }}>
        <label for="verify">Verification</label><br><br>
        <button type="submit" style="cursor: pointer">Verified</button>                
     </form>

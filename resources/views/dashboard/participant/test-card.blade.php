@@ -150,7 +150,7 @@
                 </table>
             </div>
         </div> 
-        <button id="toPDF" onclick="window.print()" class="btn btn-lg btn-primary mb-5" style="cursor: pointer">Download</button>
+        <button id="toPDF" onclick="pdf_btn" class="btn btn-lg btn-primary mb-5" style="cursor: pointer">Download</button>
     </form>
 </main>
 @endsection

@@ -12,6 +12,7 @@ class Test extends Model
     protected $fillable = [
         'staff_id',
         'date_test',
+        'time_test',
         'type_test',
         'status_test',
         'report',

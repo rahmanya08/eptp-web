@@ -20,6 +20,7 @@ class PaymentController extends Controller
         'detail_tests.is_payed', 'tests.date_test')
         ->join('users', 'users.id', '=', 'detail_tests.participant_id' )
         ->join('tests','tests.id' , '=','detail_tests.test_id')
+        ->orderBy('is_payed')
         ->get();
 
         $profile = Identity::select('image')
@@ -49,7 +50,7 @@ class PaymentController extends Controller
          * )
          */
         $capactiy = Test::whereHas('detail_tests', function ($query) {
-            $query->groupBy('test_id')->havingRaw('COUNT(*) < 22')->where('tests.status_test', false);
+            $query->groupBy('test_id')->havingRaw('COUNT(*) < 16')->where('tests.status_test', false);
         })
         ->orWhereDoesntHave('detail_tests')
         ->where('tests.status_test', false)
@@ -82,6 +83,7 @@ class PaymentController extends Controller
         'tests.type_test', 'tests.date_test' ,'tests.staff_id')
         ->join('tests','detail_tests.test_id', '=', 'tests.id')
         ->join('users','detail_tests.participant_id','=', 'users.id')
+        ->orderBy('date_validation')
         ->get();
 
         $profile = Identity::select('image')
@@ -193,17 +195,20 @@ class PaymentController extends Controller
     {
         $data = DetailTest::find($id);
 
+        $isChecked = $data->is_payed; 
+
         $profile = Identity::select('image')
         ->join('users', 'identities.user_id', '=', 'users.id')
         ->where('user_id', auth()->user()->id)
         ->get();
-        return view('dashboard.staff.edit-payment', compact('data','profile'));
+        return view('dashboard.staff.edit-payment', compact('data','profile','isChecked'));
     }
 
     //Update Status Payment
     public function updateStatus(Request $request)
     {
         //dd($request->all());
+
         $data = DetailTest::find($request->id);
         $data->is_payed = $request->verify;
         $data->save();

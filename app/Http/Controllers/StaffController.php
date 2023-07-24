@@ -113,11 +113,13 @@ class StaffController extends Controller
         ->where('user_id', auth()->user()->id)
         ->get();
 
-        $detail_tests = DetailTest::select('tests.date_test','detail_tests.registration', 'users.name', 'identities.category','identities.study_program', 'detail_tests.skor', 'detail_tests.is_passed')
-        ->join('tests', 'detail_tests.test_id','=', 'tests.id')
-        ->join('users', 'users.id','=', 'detail_tests.participant_id')
-        ->join('identities' , 'users.id','=','identities.user_id')
-        ->where('report', false)
+        $reports = Test::select('users.name', 'tests.id','tests.date_test', 'tests.report', 'tests.date_report')
+        ->join('users', 'users.id' ,'=','tests.staff_id')
+        ->orderby('report')
+        ->get();
+
+        $headstaff = User::select('users.name')
+        ->where('role', 'headstaff')
         ->get();
 
         $users = User::select('detail_tests.participant_id','users.name')
@@ -129,9 +131,37 @@ class StaffController extends Controller
         ->where('report', false)
         ->get();
 
-        return view('dashboard.staff.report-staff', compact('profile','detail_tests','users','tests') );
+        return view('dashboard.staff.report-staff', compact('profile','reports','users','tests','headstaff') );
     }
 
+    public function Reported($id)
+    {
+        $test = Test::find($id);
+
+        $profile = Identity::select('image')
+            ->join('users', 'identities.user_id', '=', 'users.id')
+            ->where('user_id', auth()->user()->id)
+            ->get();
+    
+        $info = Test::select('users.name', 'tests.id','tests.date_test', 'tests.report', 'tests.date_report')
+            ->join('users', 'users.id' ,'=','tests.staff_id')
+            ->where('tests.id', $id)
+            ->get();
+
+        $headstaff = User::select('users.name')
+        ->where('role', 'headstaff')
+        ->get();
+
+        $reports = DetailTest::select('users.name', 'identities.category', 'identities.study_program', 'detail_tests.registration',
+        'detail_tests.skor', 'detail_tests.is_passed')
+        ->join('tests', 'detail_tests.test_id','=','tests.id')  
+        ->join( 'users', 'detail_tests.participant_id','=','users.id')
+        ->join('identities' , 'identities.user_id', '=', 'users.id' )
+        ->where('detail_tests.test_id', $id)
+        ->get();
+
+        return view('dashboard.staff.staff-reporting', compact('profile','test','reports','info','headstaff'));
+    }
 
     public function saveReport(Request $request)
     {

@@ -109,8 +109,8 @@ class HeadStaffController extends Controller
         ->join('users', 'users.id' ,'=','tests.staff_id')
         ->get();
 
-        $headstaff = User::select('users.name')
-        ->where('role', 'headstaff')
+        $headstaff = Test::select('users.name')
+        ->join('tests ', 'users.id', '=', 'tests.report_validator')
         ->get();
 
         $users = User::select('detail_tests.participant_id','users.name')

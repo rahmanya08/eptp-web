@@ -18,7 +18,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('staff_id')->nullable()->constrained('users');
             $table->date('date_test');
-            $table->enum('type_test',['TOEFL','IBT']);
+            $table->time('time_test');
+            $table->enum('type_test',['TOEFL','EPTP']);
             $table->boolean('status_test')->default(false);
             $table->boolean('report')->default(false);
             $table->date('date_report')->nullable();

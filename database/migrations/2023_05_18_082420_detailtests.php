@@ -17,14 +17,18 @@ return new class extends Migration
     {
         Schema::create('detail_tests', function (Blueprint $table) {
             $table->id();
-            $table->string('registration');
+            $table->string('registration',10);
+            $table->dateTime('reg_date');
+            $table->timestamp('due_date')->nullable();
             $table->foreignIdFor(Test::class)->nullable()->constrained();
             $table->foreignId('participant_id')->nullable()->constrained('users');
-            $table->string('pay_url');
+            $table->string('pay_url')->nullable();
             $table->boolean('is_payed')->default(false);
             $table->date('date_validation')->nullable();
             $table->foreignId('validator')->nullable()->constrained('users');
-            $table->string('skor')->nullable();
+            $table->boolean('reg_status')->default(true);
+            $table->boolean('present')->default(false);
+            $table->string('skor',10)->nullable();
             $table->string('sertif_url')->nullable();
             $table->boolean('is_passed')->default(false);
             $table->timestamps();

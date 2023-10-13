@@ -48,19 +48,32 @@
                 <thead>
                     <tr>
                         <th>No Registration</th>
+                        <th>Reg. Date</th>
                         <th>Name</th>
                         <th>Test Type</th>
                         <th>Test Date</th>
+                        <th>Reg. Status</th>
                         <th>Validate by Head Staff</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($data as $registrant)
+                    {{-- && \Carbon\Carbon::parse($registrant->date_test)->subDays(3)->isToday() --}}
+                    @foreach ($pesertaList as $registrant)
                     <tr>
                         <td>{{$registrant->registration}}</td>
+                        <td>{{$registrant->created_at->format('Y-m-d')}}</td>
                         <td>{{$registrant->name }}</td>
                         <td>{{$registrant->type_test }}</td>
                         <td>{{$registrant->date_test }}</td>
+                        @if ($registrant->reg_status == 1)
+                            @if ($registrant->is_payed == 0 && $registrant->due_date >= now())
+                                <td><span class="status On-Going">Segera Verifikasi</span></td>
+                            @elseif ($registrant->is_payed == 1)
+                                <td><span class="status Active">Verified</span></td>
+                            @endif
+                        @else
+                            <td><span class="status In-Active">Expired</span></td>
+                        @endif
                         @if ($registrant->date_validation !== null )
                             <td><span class="status Active">Validate at: {{$registrant->date_validation}}</span></td>
                         @else

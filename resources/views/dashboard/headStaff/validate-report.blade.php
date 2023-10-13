@@ -39,6 +39,13 @@
             <span class="text">Download XLS</span>
         </button>
     </div>
+    @if (session()->has('failed'))
+        <div class="alert alrt-danger" role="alert" id="alert">
+            <i class='bx bx-x-circle'></i>
+            {{ session('failed') }}
+            <i class='bx bx-x' id="icon" style="cursor: pointer" onclick="hideAlert()"></i>
+        </div>
+    @endif
     @if (session()->has('success'))
     <div class="alert alrt-success" role="alert" id="alert">
         <i class='bx bxs-check-circle'></i>
@@ -107,7 +114,7 @@
             <input type="hidden" name="test_id" value="{{ $test->id }}">
             <div>
                 <input type="checkbox" name="checkbox" value="1">
-                <label for="date_report">Already Checked</label>
+                <label for="date_report"><span style="font-style:italic">Check:</span> Daftar peserta dan hasil tes telah divalidasi</label>
             </div>
             <div>
                 <button style="cursor: pointer" type="submit" class="btn-upload" onclick="return getData()">Validate</button>

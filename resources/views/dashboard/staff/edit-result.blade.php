@@ -22,35 +22,32 @@
     <div class="head-title">
         <h1>Schedule Status</h1>
     </div>
-    @if (session()->has('success'))
-    <div class="alert alrt-success" role="alert" id="alert">
-        {{ session('success') }}
-        <i class='bx bx-x' id="icon" onclick="hideAlert()"></i>
+    @if (session()->has('failed'))
+    <div class="alert alrt-danger" role="alert" id="alert">
+        <i class='bx bx-x-circle'></i>
+        {{ session('failed') }}
+        <i class='bx bx-x' id="icon" style="cursor: pointer" onclick="hideAlert()"></i>
     </div>
     @endif
     <form action="{{ route('updateResult') }}" method="post" enctype="multipart/form-data">
         @csrf
+        <p style="margin-top: 20px"> Isi skor peserta yang telah dikonversi dan dihitung atau skor akhir dari setiap 
+            <span style="font-style: italic">section</span> pada soal tes.
+        <br>Dan unggah file sertifikat dengan ukuran maksimal <span style="font-weight: bold">5 MB</span></p>
+        
         <input type="hidden" name="id" value="{{ $data->id }}">
         <div class="row-4">
             <div class="col">
-                <select class="form-select" name="user_id" id="name">
-                    @foreach ($users as $user)
-                        <option value="{{ $user->user_id }}">{{  $user->name}}</option>
-                    @endforeach
-                </select>
-            </div>
-            <div class="col">
                 <label for="">Score</label>
-                <input type="number" name="skor" id="skor" value="{{ $data->skor}}" >
+                <input type="text" name="skor" id="skor" required value="{{ old('skor',$data->skor) }}">
+                @error('skor')
+                   <div class="invalid-feedback">
+                     {{  $message  }}
+                   </div>
+                @enderror
             </div>
-            <div class="col">
-                <select class="form-select" name="is_passed" id="is_passed">
-                    <option>Status</option>
-                    <option value="0">Failed</option>
-                    <option value="1">Success</option>
-                </select>
-            </div>
-            <div class="col-file">
+            <div class="col col-file">
+                <label for="">Certificate</label>
                 <input type="file" name="sertif_url" id="sertif_url" accept=".pdf">
             </div>
             <div class="col">

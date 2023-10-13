@@ -564,10 +564,11 @@ h6,
 
 table.schedule-show {
     box-sizing: border-box;
-    border: solid 2px black;
-    width: 100%;
+    background: blueviolet;
+    border: black;
+    width: 40rem;
     height: auto;
-    color: black;
+    color: white;
     text-align: center;
 }
 

@@ -28,12 +28,25 @@ class AuthController extends Controller
     {
         $validatedData = $request->validate([
             'name' =>'required','min:5','max:255',
-            'email'=> 'required','email:dns','unique:users',
+            'email'=> [
+                'required',
+                'email',
+                    function ($attribute, $value, $fail) {
+                        if(!strpos($value, '@') || !strpos($value, '.')){
+                            $fail('Alamat email tidak valid');
+                        }
+                        $allowedDomains = ['gmail.com', 'yahoo.com'];
+                        $domain = explode('@', $value)[1];
+                        if (!in_array($domain, $allowedDomains)) {
+                            $fail('Alamat email tidak ditemukan');
+                        }
+                    },
+                'unique:users'],
             'password'=>'required','min:5','max:255',
         ]);  
         
         $validatedData['role']='student';
-        // $validatedData['role']='admin';
+        //$validatedData['role']='admin';
 
         $validatedData['password'] = Hash::make($validatedData['password']);
 
@@ -57,7 +70,20 @@ class AuthController extends Controller
     {
         $validatedData = $request->validate([
         'name' =>'required','min:5','max:255',
-        'email'=> 'required','email:dns','unique:users',
+        'email'=> [
+            'required',
+            'email',
+                function ($attribute, $value, $fail) {
+                    if(!strpos($value, '@') || !strpos($value, '.')){
+                        $fail('Alamat email tidak valid');
+                    }
+                    $allowedDomains = ['gmail.com', 'yahoo.com'];
+                    $domain = explode('@', $value)[1];
+                    if (!in_array($domain, $allowedDomains)) {
+                        $fail('Alamat email tidak ditemukan');
+                    }
+                },
+            'unique:users'],
         'password'=>'required','min:5','max:255',
         ]);  
             
@@ -85,7 +111,20 @@ class AuthController extends Controller
     {
         $validatedData = $request->validate([
         'name' =>'required','min:5','max:255',
-        'email'=> 'required','email:dns','unique:users',
+        'email'=> [
+            'required',
+            'email',
+                function ($attribute, $value, $fail) {
+                    if(!strpos($value, '@') || !strpos($value, '.')){
+                        $fail('Alamat email tidak valid');
+                    }
+                    $allowedDomains = ['gmail.com', 'yahoo.com'];
+                    $domain = explode('@', $value)[1];
+                    if (!in_array($domain, $allowedDomains)) {
+                        $fail('Domain email tidak valid');
+                    }
+                },
+            'unique:users'],
         'password'=>'required','min:5','max:255',
         ]);  
             

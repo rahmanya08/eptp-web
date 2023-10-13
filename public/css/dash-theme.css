@@ -364,11 +364,11 @@ body {
 #content main .row .col .btn-add,
 #content main .row .col .btn-edit {
     height: 30px;
-    width: 50%;
+    width: 25%;
     padding: 0 16px;
     border-radius: 36px;
-    background: var(--yellow);
-    color: var(--purple);
+    background: var(--purple);
+    color: var(--yellow);
     display: flex; 
     justify-content: center;
     align-items: center;
@@ -394,7 +394,8 @@ body {
     font-weight: 500;
     cursor: pointer;
 }
-.col.check {
+.check {
+    flex-direction: row;
     width: 35%;
 }
 #content main .box-info {
@@ -409,6 +410,11 @@ body {
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     grid-gap: 0px;
     margin-top: 36px;
+}
+
+#content main .row-2 {
+    float: right;
+    width: 35%;
 }
 
 a.btn-add {
@@ -426,7 +432,8 @@ a.btn-add {
 #content main .col {
     box-sizing: border-box;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
+    flex-direction: column;
 }
 
 #content main .sett-box .text-box input,
@@ -436,8 +443,12 @@ a.btn-add {
     border: none;
     border-radius: 8px;
     padding: 8px;
-    width: 80%;
+    width: 50%;
     background: rgb(255 207 38);
+    margin-left: 20px;
+}
+
+#content main .col label {
     margin-left: 20px;
 }
 
@@ -813,7 +824,7 @@ input#date {
     .col button {
         box-sizing: border-box;
         border: none;
-        width: 30%;
+        width: 25%;
         background: #2b0053;
         border-radius: 52px;
         color: #ffcf26;
@@ -924,8 +935,8 @@ input::-webkit-file-upload-button{
 .save-btn {
     background-color: var(--purple);
     color: #fafafa;
-    padding: 15px 18px;
-    margin-right: 20%;
+    padding: 10px 15px;
+    margin-right: 23%;
     border: none;
     border-radius: 25px;
     cursor: pointer;
@@ -1345,4 +1356,117 @@ i.bx.bx-x-circle {
 .btn-back a {
     color: var(--purple);
     font-weight: 800;
+}
+
+.row-study {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+}
+
+.row-study .col{
+    width: 35%;
+}
+
+.row-study .col-btn {
+    width: 15%;
+    display: contents;
+    cursor: pointer;
+}
+
+span.add-new {
+    margin-left: 20px;
+    font-size: 14px;
+}
+
+i.bx.bxs-plus-circle {
+    font-size: 16px;
+    margin-top: 5px;
+    color: blue;
+    text-align: center;
+    cursor: pointer;
+}
+
+input#major {
+    margin-bottom: 30px;
+}
+
+a.link-study {
+    margin-left: 20px;
+    font-size: 12px;
+    text-decoration: underline;
+}
+
+button.new-add {
+    width: 7%;
+    border-radius: 4px;
+    display: flex;
+    position: relative;
+    bottom: 38px;
+    right: 67px;
+    align-items: center;
+    padding: 5px;
+}
+
+.check-pay {
+    margin-left: 20px;
+}
+
+button.verify-btn {
+    margin-top: 5px;
+}
+
+.before-score {
+    font-size: 10px;
+    color: red;
+    margin-left: 17px;
+}
+
+.attendance {
+    display: flex;
+    justify-content: space-between;
+    column-gap: 10px;
+}
+
+#score-text {
+    display: block;
+  }
+
+.attend {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 15px;
+    align-items: center;
+}
+
+
+.check.stand {
+    box-sizing: border-box;
+    background: var(--yellow);
+    border-radius: 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 90%;
+    margin-left: 20px;
+}
+
+.attend.stand {
+    box-sizing: border-box;
+    background: var(--yellow);
+    border-radius: 5px;
+    padding: 2px;
+    width: 215%;
+}
+
+.done {
+    width: 40%;
+    box-sizing: border-box;
+    background: var(--yellow);
+    display: flex;
+    justify-content: space-evenly;
+    border-radius: 5px;
 }

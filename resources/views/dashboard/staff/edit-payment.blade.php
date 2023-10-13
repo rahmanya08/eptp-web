@@ -22,14 +22,16 @@
     <div class="head-title">
         <h1>Payment Verification</h1>
     </div>
-
+    <p>Periksa bukti bayar kemudian check dibawah bukti bayar. Pastikan tanggal pembayaran sesuai! </p>
     <form action="{{ route('updateStatus') }}" method="post">
        @csrf
        <input type="hidden" name="id" value="{{ $data['id'] }}">
        <img src="{{ asset('storage/images/payments/'.$data->pay_url) }}" alt="" style="width: 40%">
-       <input type="checkbox" id="verify" name="verify" value="1" {{ $isChecked ? 'checked' : '' }}>
-       <label for="verify">Verification</label><br><br>
-       <button type="submit" style="cursor: pointer">Verified</button>                
+       <div class="check-pay">
+            <input type="checkbox" id="verify" name="verify" value="1" {{ $isChecked ? 'checked' : '' }}>
+            <label for="verify"><span style="font-style: italic">check verification</span> untuk menyetuji bukti bayar peserta</label><br><br>
+       </div>
+       <button type="submit" style="cursor: pointer">Verified</button>       
     </form>
  
 

@@ -6,28 +6,22 @@
     </a>
     <ul class="side-menu top">
         @can('admin')
-            <li class="active">
-                <a href="{{ route('indexAdmin') }} {{ Request::is('indexAdmin') ? 'active' : '' }}">
+            <li class="{{ request()->routeIs('indexAdmin') ? 'active' : '' }}">
+                <a href="{{ route('indexAdmin') }}">
                     <i class='bx bxs-dashboard'></i>
                     <span class="text">Dashboard</span>
                 </a>
             </li>
-            <li>
-                <a href="{{ route('user') }} {{ Request::is('user') ? 'active' : '' }}">
+            <li class="{{ request()->routeIs('user') ? 'active' : '' }}">
+                <a href="{{ route('user') }}">
                     <i class='bx bxs-user-detail'></i>
                     <span class="text">User Data</span>
                 </a>
             </li>
-            <li>
-                <a href="{{ route('staff') }} {{ Request::is('staff') ? 'active' : '' }}">
-                    <i class='bx bxs-briefcase'></i>
-                    <span class="text">Staff Data</span>
-                </a>
-            </li>
-            <li>
-                <a href="{{ route('participant') }} {{ Request::is('participant') ? 'active' : '' }}">
+            <li class="{{ request()->routeIs('createStudy') ? 'active' : '' }}">
+                <a href="{{ route('createStudy') }}">
                     <i class='bx bx-group'></i>
-                    <span class="text">Participant Data</span>
+                    <span class="text">Major Data</span>
                 </a>
             </li>
         @endcan
@@ -47,7 +41,7 @@
             <li class="{{ request()->routeIs('registrant') ? 'active' : '' }}">
                 <a href="{{ route('registrant') }}">
                     <i class='bx bxs-registered'></i>
-                    <span class="text">Registrantion Data</span>
+                    <span class="text">Registration Data</span>
                 </a>
             </li>
             <li class="{{ request()->routeIs('schedule') ? 'active' : '' }}">

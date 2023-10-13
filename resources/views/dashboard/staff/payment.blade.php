@@ -66,14 +66,19 @@
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $payment->name}}</td>
                         <td>{{ $payment->date_test }}</td>
-                        <td>{{ $payment->pay_url}}</td>
+                            @if ($payment->pay_url != null)
+                                <td>{{ $payment->pay_url}}</td>
+                            @else
+                                <td><span class="status In-Active">Unpaid</span></td>
+                            @endif
+                        
                             @if ($payment->is_payed == 1)
                                 <td><span class="status Active">{{ $payment->is_payed = 'Verified' }}</span></td>
                             @else
                             <td><span class="status In-Active">{{ $payment->is_payed = 'Unverified' }}</span></td>
                             @endif
                         <td>
-                            <a href={{"/menu-payment/edit/".$payment['id']}}>Verify</a>
+                            <a class="btn-edit" href={{"/menu-payment/edit/".$payment['id']}}>Verify</a>
                         </td>
                     </tr>
                     @endforeach

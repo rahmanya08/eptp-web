@@ -24,10 +24,18 @@
     <div class="head-title">
         <h1>Schedule Status</h1>
     </div>
+    @if (session()->has('failed'))
+        <div class="alert alrt-danger" role="alert" id="alert">
+            <i class='bx bx-x-circle'></i>
+            {{ session('failed') }}
+            <i class='bx bx-x' id="icon" style="cursor: pointer" onclick="hideAlert()"></i>
+        </div>
+    @endif
     @if (session()->has('success'))
         <div class="alert alrt-success" role="alert" id="alert">
+            <i class='bx bxs-check-circle'></i>
             {{ session('success') }}
-            <i class='bx bx-x' id="icon" onclick="hideAlert()"></i>
+            <i class='bx bx-x' id="icon" style="cursor: pointer" onclick="hideAlert()"></i>
         </div>
     @endif
     <form action="{{ route('updateSchedule') }}" method="post">
@@ -55,7 +63,7 @@
                     <option  value="{{ $test->id }}" {{$test->type_test == $test->id ? 'selected' : ''}}>{{ $test->type_test}}</option>
                 </select>
             </div>
-            <div class="col check">
+            <div class="check stand">
                 <input type="radio" id="status_test" name="status_test" value="1">
                 <label for="status_test">Expired</label>
             </div>

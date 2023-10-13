@@ -23,7 +23,7 @@ class HeadStaffController extends Controller
 
         $regist = DetailTest::count('participant_id');
         $payment = DetailTest::where('is_payed','1')->count('participant_id');
-        $schedule = Test::where('status_test','1')->count();
+        $schedule = Test::where('status_test','0')->count();
 
 
         $tb_schedule = Test::select('tests.date_test', 'tests.type_test', 'tests.status_test','users.name')
@@ -168,7 +168,7 @@ class HeadStaffController extends Controller
             $test->date_report = now()->toDateString();
             $test->report_validator = auth()->user()->id;
         } else {
-            $test->date_report = null;
+             return back()->with('failed', 'Check Done untuk melaporkan');
         }
     
         $test->save();

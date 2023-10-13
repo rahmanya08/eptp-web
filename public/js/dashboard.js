@@ -89,6 +89,17 @@ function exportToExcel(){
 	table2excel.export(document.querySelectorAll("table.table"));
 }
 
+// function exportToExcel() {
+//     try {
+//         var table2excel = new Table2Excel();
+//         table2excel.export(document.querySelectorAll("table.table"));
+//     } catch (error) {
+//         var errorMessage = document.getElementById("error-message");
+//         errorMessage.textContent = "Failed: " + error.message;
+//     }
+// }
+
+
 function hideAlert() {
     
     var alert = document.getElementById("alert");

@@ -290,3 +290,10 @@ i.bx.bx-x {
   display: block;
 }
 /* Alert */
+
+.invalid-feedback {
+  position: absolute;
+  color: red;
+  font-size: 14px;
+  font-weight: 500;
+}

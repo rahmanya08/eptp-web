@@ -55,7 +55,7 @@
     <form action="{{ route('updateValidate') }}" method="post" enctype="multipart/form-data">
         @csrf
         <input type="hidden" name="detailtests_id" value="{{ $test['id'] }}">
-        <div>
+        <div class="valid">
             <input type="checkbox" name="checkbox" value="1"{{ $test->date_validation ? 'checked' : '' }}>
             <label for="date_validation">Valid</label>
         </div>

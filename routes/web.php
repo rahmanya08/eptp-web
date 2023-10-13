@@ -10,9 +10,11 @@ use App\Http\Controllers\FIleController;
 use App\Http\Controllers\IdentityController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\HeadStaffController;
+use App\Http\Controllers\Major;
 use App\Http\Controllers\ResultController;
 use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\StaffController;
+use App\Http\Controllers\StudyProgramController;
 use App\Http\Middleware\isHeadStaff;
 use GuzzleHttp\Middleware;
 
@@ -121,6 +123,7 @@ Route::controller(ResultController::class)->group(function(){
    Route::get('/test-validation','testValidate')->name('testValidate')->middleware('participant');
 
    Route::get('/menu-result','result')->name('result')->middleware('staff');
+   Route::post('/menu-result','store')->name('store')->middleware('staff');
 
    Route::get('/menu-result/edit/{id}','editResult')->name('editResult')->middleware('staff');
    Route::post('/menu-result/edit','updateResult')->name('updateResult')->middleware('staff');
@@ -146,4 +149,14 @@ Route::controller(HeadStaffController::class)->group(function(){
 
    Route::get('/menu-participants/edit/{id}','editValidate')->name('editValidate')->middleware('headStaff');
    Route::post('/menu-participants/edit','updateValidate')->name('updateValidate')->middleware('headStaff');
+});
+
+Route::controller(StudyProgramController::class)->group(function(){
+
+   Route::get('/menu-study','index')->name('indexStudy')->middleware('admin');
+   Route::post('/menu-study-store','store')->name('storeStudy')->middleware('admin');
+
+   Route::get('/menu-major','create')->name('createStudy')->middleware('admin');
+   Route::post('/menu-major-store','storeMajor')->name('storeMajor')->middleware('admin');
+
 });

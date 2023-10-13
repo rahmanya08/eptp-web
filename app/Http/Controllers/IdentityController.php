@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DetailTest;
 use App\Models\Identity;
 use App\Models\Schedule;
+use App\Models\Major;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -15,13 +17,19 @@ class IdentityController extends Controller
 
         public function indexParticipant ()
         {
-            return view('dashboard.participant.index', [
-                'title' => 'Dashboard',
-                'identities' => Identity::select('image')
-                ->join('users', 'identities.user_id', '=', 'users.id')
-                ->where('user_id', auth()->user()->id)
-                ->get(),
-            ]);
+            $profile = Identity::select('image')
+            ->join('users', 'identities.user_id', '=', 'users.id')
+            ->where('user_id', auth()->user()->id)
+            ->get();
+
+            $user = auth()->user(); // Mengambil data user yang sedang login
+            $is_validate = DetailTest::where('participant_id', $user->id)->value('date_validation');
+
+            $is_register = DetailTest::where('participant_id', $user->id)->where('present', false)->value('registration');
+
+            $is_paid= DetailTest::where('participant_id', $user->id)->value('is_payed');
+
+            return view('dashboard.participant.index', compact('profile','is_validate','is_register','is_paid'));
         }
         
         public function participant ()
@@ -61,10 +69,16 @@ class IdentityController extends Controller
             ->join('users', 'identities.user_id', '=', 'users.id')
             ->where('identities.user_id', $id)
             ->get();
+
+            $studyPrograms = Major::select('study_programs.name_study','majors.major')
+            ->join('study_programs', 'study_programs.id','=','majors.study_program_id')
+            ->get();
+
             return view('dashboard.participant.identity-edit',[
                 'users' => User::all(),
                 'user'=>$user,
-                'data'=>$data
+                'data'=>$data,
+                'studyPrograms' =>  $studyPrograms
             ]);
         }   
 
@@ -76,7 +90,7 @@ class IdentityController extends Controller
             //dd($request->all());
             $validatedData = $request->validate([
                 
-                'image' => 'required','max:2048',
+                'image' => 'required|max:2048',
                 'gender'=>'required',
                 'birth_date' =>'required','date',
                 'identity_type'=>'required',
@@ -89,6 +103,12 @@ class IdentityController extends Controller
                 'address'=>'required','min:15','max:255'
             ]);  
 
+
+            $imageSize = $request->file('image')->getSize();
+            if($imageSize > 2048000) {
+                return redirect()->back()->withInput()->withErrors(['image' => 'Ukuran file foto harus kurang dari sama dengan 2MB.']);
+            }
+
             $validatedData['user_id'] = auth()->user()->id;
             if ($request->hasFile('image')) 
             {
@@ -99,8 +119,7 @@ class IdentityController extends Controller
 
                 $validatedData['image'] = $image_name;
             }
-
-
+            
             $record = Identity::find($request->id);
             //dd($request->all());
             if ($record) {

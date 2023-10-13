@@ -36,12 +36,53 @@
         </div>
     </div>
     @if (session()->has('success'))
-    <div class="alert alrt-success" role="alert" id="alert">
-        <i class='bx bxs-check-circle'></i>
-        {{ session('success') }}
-        <i class='bx bx-x' id="icon" onclick="hideAlert()"></i>
-    </div>
+        <div class="alert alrt-success" role="alert" id="alert">
+            <i class='bx bxs-check-circle'></i>
+            {{ session('success') }}
+            <i class='bx bx-x' id="icon" style="cursor: pointer" onclick="hideAlert()"></i>
+        </div>
     @endif
+    <form action="{{ route('result') }}" method="post">
+        @csrf
+        <div style="margin-top: 30px">
+            <p>Silahkan pilih tanggal tes yang telah selesai untuk menampilkan daftar peserta</p>
+            <p>Kemudian pilih peserta untuk melakukan check kehadiran peserta tes.</p>
+        </div>
+        <div class="row-4">
+            <div class="col">
+                <label for="">Date Test</label>
+                <select name="date_test" id="date_test">
+                    <option value="">Test Date</option>
+                    @foreach ($schedule as $data)
+                        <option>{{$data->date_test}}</option>
+                    @endforeach
+                </select> 
+            </div>
+            <div class="col">
+                <label for="">Participant List</label>
+                <select name="name" id="name">
+                    <option value="">Participant</option>
+                    @foreach ($list as $data)
+                        <option value="{{ $data->name }}" data-id="{{ $data->id }}">{{$data->name}}</option>
+                    @endforeach
+                </select> 
+            </div>
+            <input hidden type="text" name="id" id="idInput" value="">
+            <div class="check">
+                <label for="">Attendance</label>
+                <div class="attend stand">
+                    <input type="radio" name="present" id="1" value="1">
+                    <label for="1">Hadir</label>
+                    <input type="radio" name="present" id="0" value="0">
+                    <label for="0">Tidak Hadir</label>
+                </div>
+            </div>
+            <div class="col">
+                <button type="submit" onclick="showToast()" onclick="return getData()">Present</button>
+            </div>
+        </div>
+    </form>
+    {{-- Menampilkan Data Peserta yang telah hadir  --}}
     <div class="table-data">
         <div class="order">
             <div class="head">
@@ -68,12 +109,15 @@
                             <td>{{ $detailtest->skor }}</td>
                             <td>{{ $detailtest->sertif_url }}</td>
                             @if ($detailtest->is_passed == 1 )
-                                <td>{{ $detailtest->is_passed = 'Success'}}</td> 
+                                <td><span class="status Active">{{ $detailtest->is_passed = 'Success'}}</span></td> 
                             @else
-                                <td>{{ $detailtest->is_passed = 'Failed'}}</td>
+                                <td><span class="status In-Active">{{ $detailtest->is_passed = 'Failed'}}</span></td>
                             @endif
-
-                            <td><a href={{ "/menu-result/edit/".$detailtest['id']}}>Update</a></td>
+                            @if($detailtest->present == 1)
+                                <td><a class="btn-edit" href={{ "/menu-result/edit/".$detailtest['id']}}>Update</a></td>
+                            @else
+                                <td><span class="status In-Active">Untested</span></td>
+                            @endif
                         </tr> 
                         @endforeach
                 </tbody>
@@ -86,5 +130,11 @@
         
 @push('child-js')
     <script src="{{ asset('js/dashboard.js') }}"></script>
+    <script>
+        document.getElementById('name').addEventListener('change', function () {
+            var selectedId = this.options[this.selectedIndex].getAttribute('data-id');
+            document.getElementById('idInput').value = selectedId || '';
+        });
+    </script>
 @endpush
 

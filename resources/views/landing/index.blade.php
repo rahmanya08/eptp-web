@@ -403,24 +403,40 @@
                         <div class="tab-pane fade" id="tab-pane-2">
                             <div class="row g-4">
                                 <div class="col-md-6" style="min-height: 350px;">
-                                    <div class="position-relative h-100">
+                                    <div class="position-relative">
+                                        <p style="width: 40rem">Berikut adalah jadwal tes EPT-P yang tersedia, peserta dapat memilih jadwal tes. 
+                                            Pastikan anda mendaftar tes <span style="font-weight: bold">paling lambat H-2 </span>pelaksanaan tes.</p>
                                         <table class="schedule-show">
                                             <thead>
                                                 <tr>
                                                     <th>No</th>
-                                                    <th>Date</th>
-                                                    <th>Participant</th>
+                                                    <th>Date Test</th>
+                                                    <th>Time Test</th>
+                                                    <th>Quota</th>
+                                                    <th>Registered Participants</th>
+                                                    <th>Desc</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 @foreach ($schedules as $testDate)
                                                 <tr>
                                                     <td>{{ $loop->iteration }}</td>
-                                                    <td>{{ $testDate->date_test }}</td>
-                                                    @if ($testDate->detail_tests_count >= 24)
-                                                        <td style="color: red">Full</td>
+                                                    <td>{{ \Carbon\Carbon::parse($testDate->date_test)->format('d M Y')}}</td>
+                                                    <td>{{ \Carbon\Carbon::parse($testDate->time_test)->format('H:i')}}</td>
+                                                    <td>{{ $testDate->quota }}</td>
+                                                    @if ($testDate->detail_tests_count >= $testDate->quota)
+                                                    <td style="color: red">{{ $testDate->quota }}:Full</td>
                                                     @else
                                                         <td>{{ $testDate->detail_tests_count}}</td>
+                                                    @endif
+                                                    @if($testDate->date_test >=  \Carbon\Carbon::now()->addDay(3))
+                                                    {
+                                                        <td>Segera Mendaftar</td>
+                                                    }
+                                                    @else 
+                                                    {
+                                                        <td>Pendaftaran Ditutup</td>
+                                                    }
                                                     @endif
                                                 </tr>
                                                 @endforeach

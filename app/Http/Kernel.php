@@ -3,6 +3,8 @@
 namespace App\Http;
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
+use Illuminate\Console\Command;
+use Illuminate\Console\Scheduling\Schedule;
 
 class Kernel extends HttpKernel
 {
@@ -69,4 +71,13 @@ class Kernel extends HttpKernel
         'headStaff' => \App\Http\Middleware\IsHead::class
         
     ];
+
+    protected $commands = [
+        Commands\RegStatus::class,
+    ];
+
+    protected function schedule(Schedule $schedule)
+    {
+        $schedule->command('regstatus:update')->daily();
+    }
 }

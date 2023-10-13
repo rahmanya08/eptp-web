@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Test;
 use App\Models\Identity;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
 
 class ScheduleController extends Controller
@@ -13,7 +14,7 @@ class ScheduleController extends Controller
     //Function for display menu schedule include table data
     public function schedule ()
     {
-            $schedules = Test::select('users.name' ,'tests.id','tests.date_test', 'tests.time_test', 'tests.status_test', 'tests.type_test')
+            $schedules = Test::select('users.name' ,'tests.id','tests.date_test', 'tests.time_test', 'tests.status_test', 'tests.type_test', 'tests.quota')
             ->join('users', 'tests.staff_id', '=', 'users.id')
             ->orderBy('id', 'desc')
             ->get();
@@ -32,11 +33,18 @@ class ScheduleController extends Controller
         $validatedData = $request->validate([
          'date_test' => 'required|date',
          'time_test' => 'required',
-         'type_test' => 'required'
+         'type_test' => 'required',
+         'quota'=> 'required'
         ]);  
 
+        $testDate = Carbon::parse($request->input('date_test'));
+        $today = Carbon::today();
+
+        if ($testDate->isPast()) {
+            return redirect('/menu-schedule')->with('failed', 'The Date Has Passed!');
+        }
+
         $validatedData['staff_id'] = auth()->user()->id;
-        $testDate = $request->input('date_test');
         $existSchedule = Test::where('date_test',$testDate)->first();
         
         if ($existSchedule) {
@@ -67,10 +75,22 @@ class ScheduleController extends Controller
    {
        //dd($request->all());
        $data = Test::find($request->id);
-       $data->status_test = $request->status_test;
-       $data->save();
+       $status_test = $request->status_test;
+       if (!$data) {
 
-       return redirect('/menu-schedule')->with('success', 'Status Changed');
-   }
+            return redirect('/menu-schedule')->with('failed', 'Data not found');
+
+       }else if ($status_test === null) {
+
+            return back()->with('failed', 'Please select a status');
+
+       }else{
+
+           $data->status_test = $status_test;
+           $data->save();
+           return redirect('/menu-schedule')->with('success', 'Status Changed');
+
+       }
+    }
 
 }

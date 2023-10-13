@@ -38,6 +38,13 @@
             </ul>
         </div>
     </div>
+    @if (session()->has('failed'))
+        <div class="alert alrt-danger" role="alert" id="alert">
+            <i class='bx bx-x-circle'></i>
+            {{ session('failed') }}
+            <i class='bx bx-x' id="icon" style="cursor: pointer" onclick="hideAlert()"></i>
+        </div>
+    @endif
     @if (session()->has('success'))
     <div class="alert alrt-success" role="alert" id="alert">
         <i class='bx bxs-check-circle'></i>
@@ -47,8 +54,11 @@
     @endif
     <form class="report-box" action="{{ route('reportStaff') }}" method="post">
         @csrf
+        <p style="margin-top: 10px">Laporkan hasil tes dengan memilih jadwal tes yang telah selesai dan <span style="font-style: italic">see detail</span>
+        untuk melihat daftar peserta.</p>
         <div class="row">
             <div class="col">
+                <label for="">Test Date</label>
                 <select name="date_test" id="date_test">
                         <option value="">Select Test Date</option>
                         @foreach ($tests as $test)
@@ -56,9 +66,12 @@
                         @endforeach
                 </select>
             </div>
-            <div class="col check">
-                <input type="checkbox" name="report" id="done" value="1">
-                <label for="report">Done</label>
+            <div style="width: 50%">
+                <label for="">Result Reported</label>
+                <div class="done">
+                    <input type="checkbox" name="report" id="done" value="1">
+                    <label for=""><span style="font-style: italic">Done</span></label>
+                </div>
             </div>
             <div class="col">
                 <button type="submit" style="cursor: pointer">Report</button>

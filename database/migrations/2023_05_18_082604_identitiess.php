@@ -21,12 +21,12 @@ return new class extends Migration
             $table->enum('gender',['Male','Female']);
             $table->date('birth_date');
             $table->enum('identity_type',['KTP','KTM'])->nullable();
-            $table->string('identity_num')->unique();
-            $table->enum('category',['Student', 'Employee', 'Public'])->nullable();
-            $table->string('major')->nullable();
-            $table->string('study_program')->nullable();
-            $table->string('semester')->nullable();
-            $table->string('phone')->unique();
+            $table->string('identity_num',20)->unique();
+            $table->enum('category',['Student','Employee','Public'])->nullable();
+            $table->string('major',50)->nullable();
+            $table->string('study_program',50)->nullable();
+            $table->string('semester',15)->nullable();
+            $table->string('phone',15)->unique();
             $table->string('address');
             $table->enum('position',['Head Staff','Staff'])->nullable();
             $table->timestamps();

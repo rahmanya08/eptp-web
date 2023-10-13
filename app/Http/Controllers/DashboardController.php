@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Identity;
 use App\Models\Test;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\User;
 
@@ -30,7 +31,7 @@ class DashboardController extends Controller
         }])
         ->withCount('detail_tests')
         ->where('status_test', false)
-        ->get(['date_test', 'detail_tests_count']);
+        ->get(['date_test','date_test','time_test','quota', 'detail_tests_count']);
 
         return view('landing.index',compact('schedules'));
     }

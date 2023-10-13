@@ -20,7 +20,7 @@ class StaffController extends Controller
         ->get();
 
         $regist = DetailTest::count('participant_id');
-        $schedule = Test::where('status_test','1')->count();
+        $schedule = Test::where('status_test', 0)->count();
         
         return view('dashboard.staff.index', compact('profile','regist','schedule'));
     }
@@ -168,12 +168,21 @@ class StaffController extends Controller
         $dateTestId = $request->input('date_test');
         $selectedTest = Test::find($dateTestId);
 
-        if ($selectedTest) {
-            $selectedTest->report = true;
-            $selectedTest->save();
+        if(empty($dateTestId)) {
+            return back()->with('failed', 'Pilih tanggal tes terlebih dahulu.');
+        }else{
+            if($selectedTest) {
+                if ($request->has('report')) {
+                    $selectedTest->report = true;
+                    $selectedTest->save();
+                    return back()->with('success', 'Already Report!');
+                } else {
+                    return back()->with('failed', 'Check Done untuk melaporkan');
+                }
+            }else{
+                return back()->with('failed', 'Check Done untuk melaporkan');
+            }
         }
-
-        return redirect('/menu-report-staff')->with('success', 'Already Report!');
     }
 
 }

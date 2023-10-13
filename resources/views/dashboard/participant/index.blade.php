@@ -7,9 +7,9 @@
 @endpush
 
 @push('profile')
-    @foreach ($identities as $identity)
-        @if ($identity->image != null)
-            <img src="{{ asset('storage/images/users/'.$identity->image) }}">
+    @foreach ($profile as $img)
+        @if ($img->image != null)
+            <img src="{{ asset('storage/images/users/'.$img->image) }}">
         @else
             <img src="{{ asset('img/nopic.png') }}" alt="" id="profile">
         @endif
@@ -35,12 +35,23 @@
             </ul>
         </div>
     </div>
+
     <ul class="box-info">
         <li>
             <i class='bx bxs-download'></i>
             <span class="text">
                 <h3>Test Card</h3>
-                <a href="{{ route('testcard') }}" class="btn-download">Download</a>
+                @if ($is_validate !== null)
+                    <a href="{{route('testcard') }}" class="btn-download">Download</a>
+                @elseif ($is_register !== null && $is_paid !==null )
+                    <p style="font-size: 12px; color: var(--yellow);">Head Staff Validation
+                    <br>Please wait until this sentences being <span style="font-weight: bold">Download Link</span></p>
+                @elseif ($is_paid !==null)
+                    <p style="font-size: 12px; color: var(--yellow);">Payment Verification
+                    <br>Please wait until this sentences being <span style="font-weight: bold">Waiting for Validation</span></p>
+                @else
+                    <p style="font-size: 12px; color: var(--yellow);">Follow The Registration Rule</span></p>
+                @endif
             </span>
         </li>
     </ul>

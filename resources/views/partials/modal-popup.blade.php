@@ -14,12 +14,10 @@
             <i class='bx bxs-check-circle'></i>
         </div>
         <div class="title">
-            Success
+            Thank for Register!
         </div>
         <div class="desc">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-            Deserunt reprehenderit non, voluptatum ipsa ut fuga esse possimus minus, 
-            voluptas illum reiciendis ab.
+            <p>{{ $message }}</p>
         </div>
         <div class="redirect-btn">
             <a href="{{ route('indexParticipant') }}" id="redirect-popup-btn">

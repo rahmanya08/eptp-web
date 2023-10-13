@@ -126,9 +126,7 @@
                             <label for="status">Category</label>
                             @if ($user->user_identity && $user->user_identity->category)
                                 <select name="category">
-                                    <option value="{{ $user->user_identity->category }}" {{ $user->user_identity->position == $user->user_identity->id ? 'selected' : ''}}>{{ $user->user_identity->category }}</option>       
-                                    {{-- <option value="2">Staff</option>
-                                    <option value="1">Head Staff</option> --}}
+                                    <option value="{{ $user->user_identity->category }}" {{ $user->user_identity->category == $user->user_identity->id ? 'selected' : ''}}>{{ $user->user_identity->category }}</option>    
                                 </select>
                             @else
                                 <select name="category" id="roleSelect">
@@ -142,30 +140,29 @@
                     </div>
                     <div class="row-right">
                         <div class="col-right">
-                            <div class="input-warp">
-                                <div class="input-warp hidden student-fields">
-                                    <select name="major" aria-label="Default select example">
-                                        <option selected>Major</option>
-                                        <option value="T. Infromatika">T. Infromatika</option>
-                                        <option value="T. Listrik">T. Listrik</option>
-                                        <option value="T. Elektro">T. Elektro</option>
-                                        <option value="T. Mesin">T. Mesin</option>
-                                        <option value="T. Lingkungan">T. Lingkungan</option>
-                                        <option value="Agroindustri">Agroindustri</option>
-                                    </select>
-                                </div>
+                            <div class="input-warp hidden student-fields">
+                                <select name="study_program">
+                                    <option selected>Study Program</option>
+                                    <option value="T.Informatika">T.Informatika</option>
+                                    <option value="T.Mesin">T.Mesin</option>
+                                    <option value="T.Linkungan">T.Linkungan</option>
+                                    <option value="T.Listrik">T.Listrik</option>
+                                    <option value="T.Elektro">T.Elektro</option>
+                                    <option value="Agroindustri">Agroindustri</option>
+                                </select>
                             </div>
                         </div>
                         <div class="col-right">
                             <div class="input-warp">
                                 <div class="input-warp hidden student-fields">
-                                    <select name="study_program"  aria-label="Default select example">
-                                        <option selected>Study Program</option>
+                                    <select name="major">
+                                        <option selected>Major</option>
                                         <option value="D3-TI">D3-TI</option>
-                                        <option value="D3-TL">D3-TL</option>
-                                        <option value="D3-TE">D3-TE</option>
                                         <option value="D3-TM">D3-TM</option>
                                         <option value="D4-TPPL">D4-TPPL</option>
+                                        <option value="D3-TL">D3-TL</option>
+                                        <option value="D3-TE">D3-TE</option>
+                                        <option value="D4-PPA">D4-PPA</option>
                                     </select>
                                 </div>
                             </div>

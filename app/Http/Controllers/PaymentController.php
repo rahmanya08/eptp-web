@@ -11,6 +11,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Symfony\Contracts\Service\Attribute\Required;
+use App\Notifications\TestApplicantWhatsApp;
 
 class PaymentController extends Controller
 {
@@ -32,7 +33,7 @@ class PaymentController extends Controller
 
     public function create()
     {
-        $schedules = Test::select('tests.id','tests.date_test')->get();
+
         /**
          * SELECT id, date_test
          * FROM tests
@@ -49,19 +50,57 @@ class PaymentController extends Controller
          *      WHERE tests.id = detail_tests.test_id
          * )
          */
-        $capactiy = Test::whereHas('detail_tests', function ($query) {
-            $query->groupBy('test_id')->havingRaw('COUNT(*) < 16')->where('tests.status_test', false);
-        })
-        ->orWhereDoesntHave('detail_tests')
-        ->where('tests.status_test', false)
-        ->pluck('date_test', 'id');
         
+        /** $capactiy = Test::whereHas('detail_tests', function ($query) use ($quota) {
+            *     $query->groupBy('test_id')->havingRaw('COUNT(*) < ?', [$quota])->where('tests.status_test', false);
+            * })
+            * ->orWhereDoesntHave('detail_tests')
+            * ->where('tests.status_test', false)
+            * ->pluck('date_test','time_test', 'id');
+        */
+        // $capacity = Test::where(function ($query) use ($quota, $nextDay, $minimumAllowedDate) {
+        //     $query->WhereDate('tests.date_test', '>=', $minimumAllowedDate);
+        //     $query->whereDate('tests.date_test','!=', $nextDay); 
+        //     $query->where(function ($query) use ($quota) {
+        //         $query->whereHas('detail_tests', function ($query) use ($quota) {
+        //             $query->groupBy('test_id')
+        //                 ->havingRaw('COUNT(*) < ?', [$quota])
+        //                 ->where('tests.status_test', false)
+        //                 ->where('detail_tests.reg_status',true)
+        //                 ->whereNotNull('pay_url');
+        //         })->orWhereDoesntHave('detail_tests');
+        //     })
+        //     ->where('tests.status_test', false)
+        //     ->pluck('tests.date_test', 'tests.id');
+        // });
 
+        $schedules = Test::select('tests.id','tests.date_test')->get();
+        $quota     = Test::select('quota')->value('quota');
+        
+        $today = now()->toDateString();
+        $nextDay = now()->addDay()->toDateString();        
+        $minimumAllowedDate = now()->addDays(3)->toDateString();
+
+        if ($quota !== null) {
+           $capacity = Test::whereHas('detail_tests', function ($query) use ($quota) {
+                 $query->groupBy('test_id')->havingRaw('COUNT(*) < ?', [$quota])
+                 ->where('tests.status_test', false);
+             })
+             ->orWhereDoesntHave('detail_tests')
+             ->where('tests.status_test', false)
+             ->whereDate('tests.date_test', '>=', $minimumAllowedDate)
+             ->whereDate('tests.date_test','!=', $nextDay)
+             ->pluck('date_test','id');
+        } else {
+            return redirect('/dashboard-participant')->with('failed', 'There is no schedule');
+        }
+        
         $profile = Identity::select('image')
             ->join('users', 'identities.user_id', '=', 'users.id')
             ->where('user_id', auth()->user()->id)
             ->get();
-        return view('dashboard.participant.test-form ', compact('schedules','profile','capactiy'));
+
+        return view('dashboard.participant.test-form ', compact('schedules','profile','capacity'));
     }
 
 
@@ -79,8 +118,9 @@ class PaymentController extends Controller
     {
         $id = Auth::user()->id;
 
-        $data = DetailTest::select('detail_tests.registration' , 'users.name','detail_tests.participant_id', 'detail_tests.date_validation',
-        'tests.type_test', 'tests.date_test' ,'tests.staff_id')
+        $data = DetailTest::select('detail_tests.registration', 'detail_tests.created_at', 'users.name',
+        'detail_tests.participant_id', 'detail_tests.date_validation','tests.type_test', 'tests.date_test', 'detail_tests.is_payed',
+        'detail_tests.reg_status','detail_tests.due_date','tests.staff_id')
         ->join('tests','detail_tests.test_id', '=', 'tests.id')
         ->join('users','detail_tests.participant_id','=', 'users.id')
         ->orderBy('date_validation')
@@ -90,7 +130,24 @@ class PaymentController extends Controller
         ->join('users', 'identities.user_id', '=', 'users.id')
         ->where('user_id', auth()->user()->id)
         ->get();
-        return view('dashboard.registrant', compact('data','profile'));
+
+        $listparticipant = DetailTest::select('detail_tests.registration', 'detail_tests.created_at', 'users.name',
+        'detail_tests.participant_id', 'detail_tests.date_validation','tests.type_test', 'tests.date_test', 'detail_tests.is_payed',
+        'detail_tests.reg_status','detail_tests.due_date', 'detail_tests.reg_date','tests.staff_id')
+        ->join('tests','detail_tests.test_id', '=', 'tests.id')
+        ->join('users','detail_tests.participant_id','=', 'users.id')
+        ->get();
+        
+        foreach ($listparticipant as $peserta){
+            $reg_date = Carbon::parse($peserta->reg_date);
+            $due_date = Carbon::parse($peserta->due_date); 
+            if ($due_date >= $reg_date->addHours(24)) {
+                $peserta->reg_status = false;
+                $peserta->save();
+            }
+        }
+
+        return view('dashboard.registrant', ['pesertaList' => $listparticipant] ,compact('data','profile'));
     }
 
 
@@ -139,17 +196,26 @@ class PaymentController extends Controller
 
         // Calculate the next registration number
         $nextNumber = ($latestDetailTest ? ($latestDetailTest->id + 1) : 1);
-
+        
+        //Date Now
+        $currentDate = Carbon::now();
         // Format the registration number
         $registrationNumber = $currentYear . $currentMonth . str_pad($nextNumber, 6, '0', STR_PAD_LEFT);
         $validatedData = $request->validate([
-            'pay_url' =>'required','min:5','max:255',
+            'pay_url' =>  'min:5','max:255',
             'test_id' =>  'required'
         ]);        
 
         $validatedData['registration'] = $registrationNumber;
         $validatedData['participant_id'] = auth()->user()->id;
-
+        $validatedData['reg_date'] = $currentDate;
+        if ('pay_url' !== null) {
+            $validatedData['due_date'] = $currentDate->addHours(24);
+        } else {
+            $validatedData['due_date'] = null;
+        }
+        
+        
         if ($request->hasFile('pay_url')) 
         {
             $destination_path = 'public/images/payments';
@@ -165,6 +231,7 @@ class PaymentController extends Controller
 
         $existingRegistration = DetailTest::where('participant_id', $id)
             ->where('test_id', $testDate)
+            ->whereNotNull('pay_url')
             ->first();
 
         $didnoTest = DetailTest::join('tests','detail_tests.test_id','=','tests.id') 
@@ -172,23 +239,47 @@ class PaymentController extends Controller
             ->where('tests.status_test', false)
             ->first();
 
-        if ($existingRegistration) {
-            
-            return redirect('/menu-test')->with('failed', "You Have Already Registered!");
-        }
-        else
-        {
-            if ($didnoTest) {
-                return redirect('/menu-test')->with('failed', "Do Your Test First!");
-            } else {
-                
-                DetailTest::create($validatedData);
-                //return redirect('/test-card')->with('success', 'Thank you! Please Waiting fo Verify');
-                return redirect('/test-validation');
-            }
-        }
+        $updatePay = DetailTest::where('participant_id', $id)
+        ->where('test_id', $testDate)
+        ->where('pay_url', null)
+        ->first();
 
+        $staffNumber = Identity::select('phone')
+            ->where('position', 'staff');
+        
+        $paymentDeadline = Carbon::now()->addHours(24);
+        $uploadedPayment = $request->hasFile('pay_url');
+        $message = 'Pendaftaran berhasil. Pembayaran telah diterima. 
+        Anda dapat mengunduh kartu tes yang disertai tanda tangan Kepala UPT Bahasa';
+
+        if ($existingRegistration) {
+            return redirect('/menu-test')->with('failed', "You Have Already Registered!");
+        }else{
+            if($updatePay){
+                $updatePay->update($validatedData);
+            }else{
+            if($didnoTest){
+                return redirect('/menu-test')->with('failed', "Did Your Test First!");
+            }else{
+                DetailTest::create($validatedData);
+                if($uploadedPayment){
+                    $message;
+                }else{
+                    $message = 'Silakan unggah bukti pembayaran sebelum ' . $paymentDeadline->format('Y-m-d H:i') . '.';
+                }
+              }
+            }   
+            return view('partials.modal-popup',  compact('message'));
+        }
     }
+
+    public function sendWhatsAppNotif(Request $request)
+    {
+        $user = User::find(1);
+        return response()->json(['message'=>'WhatsApp notification sent successfully.']);
+    }
+
+
 
     /*Edit Status Payment*/
     public function editStatus($id)
@@ -210,10 +301,24 @@ class PaymentController extends Controller
         //dd($request->all());
 
         $data = DetailTest::find($request->id);
-        $data->is_payed = $request->verify;
-        $data->save();
+       
+        if (!$data) {
+            return redirect()->back()->with('failed', 'There is No Prove of Payment');
+        }
+    
+        $isChecked = $request->has('verify');
+        if ($isChecked) {
+            $data->is_payed = $request->verify;
+            $data->save();
+            return redirect('/menu-payment')->with('success', 'Payment verified!');
+        } else {
+            $data->date_validation = null;
+            $data->validator = null;
+            return redirect()->back()->with('failed', 'Check the CheckBox Fisrt!');
+        }
+        
 
-        return redirect('/menu-payment')->with('success', 'Payment verified!');
+        
     }
 
 }

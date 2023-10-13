@@ -2,9 +2,12 @@
 
 namespace App\Providers;
 
+use App\Channels\Messages\WhatsAppMessage;
 use App\Models\User;
+use App\Channels\WhatsAppChannel;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
+use Twilio\Rest\Client;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -35,6 +38,12 @@ class AppServiceProvider extends ServiceProvider
 
         Gate::define('student', function(User $user){
             return $user->role === 'student';
+         });
+
+         $this->app->when(WhatsAppChannel::class)
+         ->needs(Twilio::class)
+         ->give(function(){
+            return new Client(config('services.twilio.whatsapp.sid'), config('services.twilio.whatsapp.token'));
          });
 
     }

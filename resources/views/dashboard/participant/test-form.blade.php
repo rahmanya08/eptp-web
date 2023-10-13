@@ -52,19 +52,23 @@
     <form action="{{ route('create') }}" method="post" enctype="multipart/form-data">
         @csrf
         {{-- <h3 style="margin-top:10px">Choose your schedule test!</h3> --}}
-        <p style="margin-left: 5px">Please make a payment 
+        <p style="margin-top: 10px">Please make a payment 
             to the account number in the name of PNC (098765433) 
             and upload the proof in the column below.</p>
-        <div class="test-part">
-            <label for="schedule" class="form-label">Choose Schedule & Upload Proof of Payment</label>           
-            <select class="form-select" name="test_id" id="schedule">
-                @foreach ($capactiy as $date => $date_test)
-                    <option value="{{$date}}">{{\Carbon\Carbon::parse($date_test)->format('l, F d, Y')}}</option>
-                @endforeach
-            </select>
-        </div>
-        <div class="payment-part">
-            <input type="file" name="pay_url" id="pay_url" accept="image/jpg,image/png,image/jpeg" />
+        <p>Peserta dapat melakukan pembayaran dengan nomor rekening diatas sebesar <span style="font-weight: bold">Rp.100.000</span></p>
+        <div class="row">
+            <div class="col">
+                <label for="">Silahkan Pilih Jadwal Tes</label>
+                <select class="form-select" name="test_id" id="schedule">
+                    @foreach ($capacity as $date => $date_test)
+                        <option value="{{$date}}">{{\Carbon\Carbon::parse($date_test)->format('l, F d, Y')}}</option>
+                    @endforeach 
+                </select>
+            </div>
+            <div class="col">
+                <label for="">Unggah Bukti Bayar</label>
+                <input type="file" name="pay_url" id="pay_url" accept="image/jpg,image/png,image/jpeg" />
+            </div>
         </div>
         <button type="submit" class="save-btn" onclick="return getData()">Submit</button>
     </form>

@@ -14,6 +14,7 @@ class Test extends Model
         'date_test',
         'time_test',
         'type_test',
+        'quota',
         'status_test',
         'report',
         'date_report',
